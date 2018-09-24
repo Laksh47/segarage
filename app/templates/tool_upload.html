@@ -1,0 +1,80 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <h1>SE Garage, upload tool</h1>
+    <form action="" method="post" enctype="multipart/form-data" novalidate>
+        {{ form.hidden_tag() }}
+        <p>
+            {{ form.toolname.label }}<br>
+            {{ form.toolname() }}
+            {% for error in form.toolname.errors %}
+              <span style="color: red;">[{{ error }}]</span>
+            {% endfor %}
+        </p>
+        <p>
+            {{ form.datatype.label }}<br>
+            {{ form.datatype(size=32) }}
+            {% for error in form.datatype.errors %}
+              <span style="color: red;">[{{ error }}]</span>
+            {% endfor %}
+        </p>
+        <p>
+            {{ form.papername.label }}<br>
+            {{ form.papername(size=32) }}
+            {% for error in form.papername.errors %}
+              <span style="color: red;">[{{ error }}]</span>
+            {% endfor %}
+        </p>
+        <p>
+            {{ form.authorname.label }}<br>
+            {{ form.authorname(size=32) }}
+            {% for error in form.authorname.errors %}
+              <span style="color: red;">[{{ error }}]</span>
+            {% endfor %}
+        </p>
+        <p>
+            {{ form.authoremail.label }}<br>
+            {{ form.authoremail(size=32) }}
+            {% for error in form.authoremail.errors %}
+              <span style="color: red;">[{{ error }}]</span>
+            {% endfor %}
+        </p>
+        <p>
+            {{ form.linktopdf.label }}<br>
+            {{ form.linktopdf(size=32) }}
+            {% for error in form.linktopdf.errors %}
+              <span style="color: red;">[{{ error }}]</span>
+            {% endfor %}
+        </p>
+        <p>
+            {{ form.linktoarchive.label }}<br>
+            {{ form.linktoarchive(size=32) }}
+            {% for error in form.linktoarchive.errors %}
+              <span style="color: red;">[{{ error }}]</span>
+            {% endfor %}
+        </p>
+        <p>
+            {{ form.linktoreadme.label }}<br>
+            {{ form.linktoreadme(size=32) }}
+            {% for error in form.linktoreadme.errors %}
+              <span style="color: red;">[{{ error }}]</span>
+            {% endfor %}
+        </p>
+        <p>
+            {{ form.linktodemo.label }}<br>
+            {{ form.linktodemo(size=32) }}
+            {% for error in form.linktodemo.errors %}
+              <span style="color: red;">[{{ error }}]</span>
+            {% endfor %}
+        </p>
+        <p>
+            {{ form.bibtex.label }}<br>
+            {{ form.bibtex(size=32) }}
+            {% for error in form.bibtex.errors %}
+              <span style="color: red;">[{{ error }}]</span>
+            {% endfor %}
+        </p>
+        {{ form.file }}
+        <p>{{ form.upload() }}</p>
+    </form>
+{% endblock %}
