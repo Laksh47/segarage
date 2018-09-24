@@ -1,0 +1,14 @@
+pip install Flask
+pip install flask-wtf
+
+. venv/bin/activate
+
+export FLASK_APP=segarage.py
+
+pip install flask-sqlalchemy
+
+pip install flask-migrate
+
+
+
+flask db init

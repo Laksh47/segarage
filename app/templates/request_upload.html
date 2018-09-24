@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <h1>Request to upload Tool</h1>
+    <form action="" method="post" novalidate>
+        {{ form.hidden_tag() }}
+        <p>
+            {{ form.authorname.label }}<br>
+            {{ form.authorname(size=32) }}
+            {% for error in form.authorname.errors %}
+            	<span style="color: red;">[{{ error }}]</span>
+            {% endfor %}
+        </p>
+        <p>
+            {{ form.papername.label }}<br>
+            {{ form.papername(size=32) }}
+            {% for error in form.papername.errors %}
+            	<span style="color: red;">[{{ error }}]</span>
+            {% endfor %}
+        </p>
+        <p>{{ form.request_upload() }}</p>
+    </form>
+{% endblock %}
