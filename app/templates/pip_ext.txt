@@ -1,5 +1,0 @@
-pip install Flask
-pip install flask-wtf
-
-export FLASK_APP=segarage.py
-
