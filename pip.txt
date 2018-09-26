@@ -1,6 +1,8 @@
 pip install Flask
 pip install flask-wtf
 
+pip install virtualenv
+virtualenv venv
 . venv/bin/activate
 
 export FLASK_APP=segarage.py
