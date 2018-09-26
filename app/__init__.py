@@ -14,4 +14,4 @@ migrate = Migrate(app, db)
 
 mail = Mail(app)
 
-from app import routes, models
+from app import routes, models, errors

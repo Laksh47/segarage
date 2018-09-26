@@ -1,6 +1,7 @@
 from flask import render_template, flash, redirect, url_for
 from app import app
 from app.forms import requestToolUpload, toolUpload
+from app.utils import *
 
 @app.route('/')
 @app.route('/index')
@@ -12,14 +13,29 @@ def index():
 def request_upload():
   form = requestToolUpload()
   if form.validate_on_submit():
-    flash('Collected the data {} {}'.format(form.authorname.data, form.papername.data))
+    token = get_email_token(form.authoremail.data, form.papername.data)
+
+    text_body=render_template('email/link_to_upload.txt', token=token)
+    html_body=render_template('email/link_to_upload.html', token=token)
+
+    send_email('Link to upload tool', app.config['ADMIN'], ['scrawler16.1@gmail.com'], text_body, html_body)
+
+    flash('Link to upload the tool has been sent to {} for the paper {}'.format(form.authoremail.data, form.papername.data))
     return redirect(url_for('index'))
   return render_template('request_upload.html', title='Request to upload Tool', form=form)
 
-@app.route('/tool_upload', methods=['GET', 'POST'])
-def tool_upload():
+@app.route('/tool_upload/<token>', methods=['GET', 'POST'])
+def tool_upload(token):
+
+  payload = verify_email_token(token)
+  if not payload:
+    return redirect(url_for('index'))
+
   form = toolUpload()
+  form.authoremail.data = payload['authoremail']
+
   if form.validate_on_submit():
     flash('Tool submission success')
     return redirect(url_for('index'))
-  return render_template('tool_upload.html', title='Upload Tool', form=form)
+    
+  return render_template('tool_upload.html', title="Upload your tool here", form=form)

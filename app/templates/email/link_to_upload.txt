@@ -1,0 +1,11 @@
+Dear Scholar,
+
+To upload your tool click on the following link:
+
+{{ url_for('tool_upload', token=token, _external=True) }}
+
+If you have not requested a tool upload simply ignore this message.
+
+Sincerely,
+
+SE Garage Team
