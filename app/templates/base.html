@@ -1,25 +1,45 @@
 <html>
     <head>
-      <title>Welcome to SE Garage</title>
+      <title>SE Garage</title>
+      <!-- Latest compiled and minified CSS -->
+      <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
+      <!-- Optional theme -->
+      <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+
+      <meta name="viewport" content = "width=device-width, initial-scale=1.0">
+
     </head>
     <body>
-        <div>
-        	<a href="{{ url_for('index') }}">Home</a>
-        	<a href="{{ url_for('request_upload') }}">Request Upload</a>
+      <div class="container">
+        <div class="header clearfix">
+          <nav>
+            <ul class="nav nav-pills pull-left">
+              <li role="presentation" {%- if request.path == "/index" %} class="active" {% endif %}><a href="{{ url_for('index') }}">Home</a></li>
+              <li role="presentation" {%- if request.path == "/request_upload" %} class="active" {% endif %}><a href="{{ url_for('request_upload') }}">Request Upload</a></li>
+            </ul>
+          </nav>
           <!--<a href="{{ url_for('index') }}">Tool Upload</a>-->
         </div>
-        <hr>
 
         {% with messages = get_flashed_messages() %}
         {% if messages %}
-        <ul>
             {% for message in messages %}
-            <li>{{ message }}</li>
+              <div class="alert alert-info">
+                <strong>{{ message }} </strong>
+              </div>
             {% endfor %}
-        </ul>
         {% endif %}
         {% endwith %}
         
-        {% block content %}{% endblock %}
+        <!-- <h1>Welcome to SE Garage</h1> -->
+        <div class="jumbotron">
+          {% block content %}{% endblock %}
+        </div>
+
+        <footer class="footer">
+            <p>&copy; University of Waterloo</p>
+        </footer>
+      </div>
     </body>
 </html>
