@@ -1,6 +1,8 @@
 from flask import render_template, flash, redirect, url_for
 from app import app
+from app import db
 from app.forms import requestToolUpload, toolUpload
+from app.models import Paper
 from app.utils import *
 
 @app.route('/')
@@ -24,6 +26,8 @@ def request_upload():
     return redirect(url_for('index'))
   return render_template('request_upload.html', title='Request to upload Tool', form=form)
 
+
+
 @app.route('/tool_upload/<token>', methods=['GET', 'POST'])
 def tool_upload(token):
 
@@ -35,6 +39,10 @@ def tool_upload(token):
   form.authoremail.data = payload['authoremail']
 
   if form.validate_on_submit():
+    paper = Paper(paper_name=form.papername.data, author_name=form.authorname.data, author_email=form.authoremail.data, tool_name=form.toolname.data, tool_format=form.toolformat.data, link_to_pdf=form.linktopdf.data, link_to_archive=form.linktoarchive.data, link_to_readme=form.linktoreadme.data, link_to_demo=form.linktodemo.data, bibtex=form.bibtex.data)
+
+    db.session.add(paper)
+    db.session.commit()
     flash('Tool submission success')
     return redirect(url_for('index'))
     

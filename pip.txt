@@ -23,6 +23,9 @@ export MAIL_USERNAME=<your-gmail-username>
 export MAIL_PASSWORD=<your-gmail-password>
 
 
-
-
 flask db init
+flask db migrate
+
+flask db migrate -m "papers table"
+flask db upgrade
+

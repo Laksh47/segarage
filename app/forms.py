@@ -12,7 +12,7 @@ class requestToolUpload(FlaskForm):
 
 class toolUpload(FlaskForm):
   toolname = StringField('Tool name:')
-  datatype = StringField('What are you uploading? SourceCode/Docker/VM/Binary..?', validators=[DataRequired()])
+  toolformat = StringField('What are you uploading? SourceCode/Docker/VM/Binary..?', validators=[DataRequired()])
 
   papername = StringField('Paper Name:', validators=[DataRequired()])
   authorname = StringField('Author Name:')

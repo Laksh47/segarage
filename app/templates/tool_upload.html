@@ -12,9 +12,9 @@
             {% endfor %}
         </p>
         <p>
-            {{ form.datatype.label }}<br>
-            {{ form.datatype(size=32) }}
-            {% for error in form.datatype.errors %}
+            {{ form.toolformat.label }}<br>
+            {{ form.toolformat(size=32) }}
+            {% for error in form.toolformat.errors %}
               <span style="color: red;">[{{ error }}]</span>
             {% endfor %}
         </p>
