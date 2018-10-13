@@ -4,6 +4,9 @@ from app import db
 from app.forms import requestToolUpload, toolUpload
 from app.models import Paper
 from app.utils import *
+from werkzeug.utils import secure_filename
+
+import os
 
 @app.route('/')
 @app.route('/index')
@@ -39,11 +42,22 @@ def tool_upload(token):
   form.authoremail.data = payload['authoremail']
 
   if form.validate_on_submit():
-    paper = Paper(paper_name=form.papername.data, author_name=form.authorname.data, author_email=form.authoremail.data, tool_name=form.toolname.data, tool_format=form.toolformat.data, link_to_pdf=form.linktopdf.data, link_to_archive=form.linktoarchive.data, link_to_readme=form.linktoreadme.data, link_to_demo=form.linktodemo.data, bibtex=form.bibtex.data)
+    paper = Paper(paper_name=form.papername.data, author_name=form.authorname.data, author_email=form.authoremail.data, tool_name=form.toolname.data, tool_format=form.toolformat.data, link_to_pdf=form.linktopdf.data, link_to_archive=form.linktoarchive.data, link_to_demo=form.linktodemo.data, bibtex=form.bibtex.data)
 
     db.session.add(paper)
+    db.session.flush()
+
+    filename = secure_filename(form.readme_file.data.filename)
+    filepath = app.config['UPLOAD_FOLDER'] + '/{}/'.format(paper.id)
+
+    if not os.path.exists(os.path.dirname(filepath)):
+      os.makedirs(os.path.dirname(filepath))
+
+    form.readme_file.data.save(filepath + filename)
+
     db.session.commit()
-    flash('Tool submission success')
+    flash('Tool submission success {}'.format(paper.id))
+
     return redirect(url_for('index'))
     
   return render_template('tool_upload.html', title="Upload your tool here", form=form)

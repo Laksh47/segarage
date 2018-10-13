@@ -9,9 +9,10 @@ class Paper(db.Model):
     tool_format = db.Column(db.String(64))
     link_to_pdf = db.Column(db.String(250))
     link_to_archive = db.Column(db.String(250))
-    link_to_readme = db.Column(db.String(250))
     link_to_demo = db.Column(db.String(250))
     bibtex = db.Column(db.Text)
+
+    file_urls = db.Column(db.Text)
 
     created_at  = db.Column(db.DateTime,  default=db.func.current_timestamp())
     updated_at = db.Column(db.DateTime,  default=db.func.current_timestamp(),

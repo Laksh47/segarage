@@ -20,3 +20,5 @@ class Config(object):
     ADMIN = 'scrawler16.1@gmail.com'
 
     SECRET_KEY = os.environ.get('SECRET_KEY') or 'haha segarage secangku'
+
+    UPLOAD_FOLDER = '/home/larumuga/workspace/segarage/uploads'

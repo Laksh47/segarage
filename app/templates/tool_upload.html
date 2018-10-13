@@ -54,13 +54,6 @@
             {% endfor %}
         </p>
         <p>
-            {{ form.linktoreadme.label }}<br>
-            {{ form.linktoreadme(size=32) }}
-            {% for error in form.linktoreadme.errors %}
-              <span style="color: red;">[{{ error }}]</span>
-            {% endfor %}
-        </p>
-        <p>
             {{ form.linktodemo.label }}<br>
             {{ form.linktodemo(size=32) }}
             {% for error in form.linktodemo.errors %}
@@ -74,7 +67,16 @@
               <span style="color: red;">[{{ error }}]</span>
             {% endfor %}
         </p>
-        {{ form.file }}
+        {{ 'Upload Readme/instructions file' }}
+        {{ form.readme_file }}
+        <!-- {{ form.readme_file.data.filename }} -->
+        <br>
+        {{ 'Upload scripts/source code' }}
+        {{ form.scripts_file }}
+        <br>
+        {{ 'Upload all in one zip file' }}
+        {{ form.all_in_one_file }}
+        <br>
         <p>{{ form.upload() }}</p>
     </form>
 {% endblock %}
