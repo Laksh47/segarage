@@ -12,7 +12,7 @@ import os
 @app.route('/index')
 
 def index():
-  return render_template('index.html', greeting="What part of your research you want to offer the SE community, Tool/Scripts/Framework/Others?")
+  return render_template('index.html', greeting="You can upload your tool by clicking the above 'Request Upload' button")
 
 @app.route('/request_upload', methods=['GET', 'POST'])
 def request_upload():
