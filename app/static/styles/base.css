@@ -7,3 +7,9 @@ label {
 .form-control {
 	width: 50%;
 }
+
+
+/* overall css */
+.header {
+  padding: 5px 0px 5px 0px;
+}
