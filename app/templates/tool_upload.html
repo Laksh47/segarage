@@ -77,6 +77,9 @@
         {{ 'Upload all in one zip file' }}
         {{ form.all_in_one_file }}
         <br>
+        <div class="form-group">
+            {{ form.recaptcha }}
+        </div>
         <p>{{ form.upload(class_='btn btn-success') }}</p>
     </form>
 {% endblock %}

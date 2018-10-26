@@ -1,4 +1,4 @@
-from flask_wtf import FlaskForm
+from flask_wtf import FlaskForm, RecaptchaField
 from flask_wtf.file import FileField
 from wtforms import StringField, PasswordField, BooleanField, SubmitField, TextAreaField
 from wtforms.validators import DataRequired
@@ -8,6 +8,7 @@ class requestToolUpload(FlaskForm):
   papername = StringField('Paper Name:', validators=[DataRequired()])
   # password = PasswordField('Password', validators=[DataRequired()])
   # remember_me = BooleanField('Remember Me')
+  recaptcha = RecaptchaField()
   request_upload = SubmitField('Need to upload tool for the paper')
 
 class toolUpload(FlaskForm):
@@ -28,4 +29,5 @@ class toolUpload(FlaskForm):
   scripts_file = FileField()
   all_in_one_file = FileField()
 
+  recaptcha = RecaptchaField()
   upload = SubmitField('Upload')
