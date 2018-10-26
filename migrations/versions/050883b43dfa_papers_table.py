@@ -1,8 +1,8 @@
-"""empty message
+"""papers table
 
-Revision ID: ced5419238d3
+Revision ID: 050883b43dfa
 Revises: 
-Create Date: 2018-10-08 15:19:50.251729
+Create Date: 2018-10-25 16:15:09.257317
 
 """
 from alembic import op
@@ -10,7 +10,7 @@ import sqlalchemy as sa
 
 
 # revision identifiers, used by Alembic.
-revision = 'ced5419238d3'
+revision = '050883b43dfa'
 down_revision = None
 branch_labels = None
 depends_on = None
@@ -24,11 +24,12 @@ def upgrade():
     sa.Column('paper_name', sa.Text(), nullable=True),
     sa.Column('author_email', sa.String(length=120), nullable=True),
     sa.Column('tool_name', sa.String(length=200), nullable=True),
+    sa.Column('tool_format', sa.String(length=64), nullable=True),
     sa.Column('link_to_pdf', sa.String(length=250), nullable=True),
     sa.Column('link_to_archive', sa.String(length=250), nullable=True),
-    sa.Column('link_to_readme', sa.String(length=250), nullable=True),
     sa.Column('link_to_demo', sa.String(length=250), nullable=True),
     sa.Column('bibtex', sa.Text(), nullable=True),
+    sa.Column('file_urls', sa.Text(), nullable=True),
     sa.Column('created_at', sa.DateTime(), nullable=True),
     sa.Column('updated_at', sa.DateTime(), nullable=True),
     sa.PrimaryKeyConstraint('id')

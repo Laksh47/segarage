@@ -1,6 +1,6 @@
 from flask_wtf import FlaskForm
 from flask_wtf.file import FileField
-from wtforms import StringField, PasswordField, BooleanField, SubmitField
+from wtforms import StringField, PasswordField, BooleanField, SubmitField, TextAreaField
 from wtforms.validators import DataRequired
 
 class requestToolUpload(FlaskForm):
@@ -22,7 +22,7 @@ class toolUpload(FlaskForm):
   linktoarchive = StringField('Link to archive (ACM/IEEE/peerJ etc.,):', validators=[DataRequired()])
   linktodemo = StringField('Link to Demo/Website, if any:')
 
-  bibtex = StringField('BibTex citation code:', validators=[DataRequired()])
+  bibtex = TextAreaField('BibTex citation code:', validators=[DataRequired()])
 
   readme_file = FileField()
   scripts_file = FileField()
