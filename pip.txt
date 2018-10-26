@@ -1,13 +1,13 @@
-pip install Flask
-pip install flask-wtf
+python3 -m venv venv
+source venv/bin/activate
 
-pip install virtualenv
-virtualenv venv
-. venv/bin/activate
+pip install flask
+pip install flask-wtf
 
 export FLASK_APP=segarage.py
 
 pip install flask-sqlalchemy
+pip install mysqlclient
 
 pip install flask-migrate
 
@@ -26,6 +26,6 @@ export MAIL_PASSWORD=<your-gmail-password>
 flask db init
 flask db migrate
 
-flask db migrate -m "papers table"
+flask db migrate -m "papers table" (delete the latest migration file if its first time)
 flask db upgrade
 
