@@ -11,14 +11,14 @@
               <span style="color: red;">[{{ error }}]</span>
             {% endfor %}
         </div>
-        <div class="form-group">
+        <div class="form-group required">
             {{ form.toolformat.label }}
             {{ form.toolformat(size=32, class_='form-control') }}
             {% for error in form.toolformat.errors %}
               <span style="color: red;">[{{ error }}]</span>
             {% endfor %}
         </div>
-        <div class="form-group">
+        <div class="form-group required">
             {{ form.papername.label }}
             {{ form.papername(size=32, class_='form-control') }}
             {% for error in form.papername.errors %}
@@ -32,7 +32,7 @@
               <span style="color: red;">[{{ error }}]</span>
             {% endfor %}
         </div>
-        <div class="form-group">
+        <div class="form-group required">
             {{ form.authoremail.label }}
             {{ form.authoremail(size=32, class_='form-control') }}
             {% for error in form.authoremail.errors %}
@@ -46,7 +46,7 @@
               <span style="color: red;">[{{ error }}]</span>
             {% endfor %}
         </div>
-        <div class="form-group">
+        <div class="form-group required">
             {{ form.linktoarchive.label }}
             {{ form.linktoarchive(size=32, class_='form-control') }}
             {% for error in form.linktoarchive.errors %}
@@ -60,25 +60,40 @@
               <span style="color: red;">[{{ error }}]</span>
             {% endfor %}
         </div>
-        <div class="form-group">
+        <div class="form-group required">
             {{ form.bibtex.label }}
             {{ form.bibtex(size=32, class_='form-control') }}
             {% for error in form.bibtex.errors %}
               <span style="color: red;">[{{ error }}]</span>
             {% endfor %}
         </div>
-        {{ 'Upload Readme/instructions file' }}
-        {{ form.readme_file }}
+        <div class="form-group required">
+            {{ form.readme_file.label }}
+            {{ form.readme_file }}
+            {% for error in form.readme_file.errors %}
+              <span style="color: red;">[{{ error }}]</span>
+            {% endfor %}
+        </div>
         <!-- {{ form.readme_file.data.filename }} -->
-        <br>
-        {{ 'Upload scripts/source code' }}
-        {{ form.scripts_file }}
-        <br>
-        {{ 'Upload all in one zip file' }}
-        {{ form.all_in_one_file }}
-        <br>
+        <!-- <br> -->
+        <div class="form-group">
+            {{ form.scripts_file.label }}
+            {{ form.scripts_file }}
+        </div>
+        <!-- <br> -->
+        <div class="form-group required">
+            {{ form.all_in_one_file.label }}
+            {{ form.all_in_one_file }}
+            {% for error in form.all_in_one_file.errors %}
+              <span style="color: red;">[{{ error }}]</span>
+            {% endfor %}
+        </div>
+        <!-- <br> -->
         <div class="form-group">
             {{ form.recaptcha }}
+            {% for error in form.recaptcha.errors %}
+              <span style="color: red;">[{{ error }}]</span>
+            {% endfor %}
         </div>
         <p>{{ form.upload(class_='btn btn-success') }}</p>
     </form>
