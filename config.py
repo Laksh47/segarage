@@ -21,7 +21,7 @@ class Config(object):
 
     SECRET_KEY = os.environ.get('SECRET_KEY') or 'haha segarage secangku'
 
-    UPLOAD_FOLDER = '/Users/lakshmanan/Desktop/Repositories/segarage/uploads'
+    UPLOAD_FOLDER = os.environ.get('UPLOAD_FOLDER') or '/Users/lakshmanan/Desktop/Repositories/segarage/uploads'
 
 
     RECAPTCHA_PUBLIC_KEY = os.environ.get('RECAPTCHA_PUBLIC_KEY')

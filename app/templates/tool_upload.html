@@ -79,6 +79,9 @@
         <div class="form-group">
             {{ form.scripts_file.label }}
             {{ form.scripts_file }}
+            {% for error in form.scripts_file.errors %}
+              <span style="color: red;">[{{ error }}]</span>
+            {% endfor %}
         </div>
         <!-- <br> -->
         <div class="form-group required">

@@ -4,13 +4,9 @@ from app import db
 from app.forms import requestToolUpload, toolUpload
 from app.models import Paper
 from app.utils import *
-from werkzeug.utils import secure_filename
-
-import os
 
 @app.route('/')
 @app.route('/index')
-
 def index():
   return render_template('index.html', greeting="You can upload your tool by clicking the above 'Request Upload' button")
 
@@ -29,8 +25,6 @@ def request_upload():
     return redirect(url_for('index'))
   return render_template('request_upload.html', title='Request to upload Tool', form=form)
 
-
-
 @app.route('/tool_upload/<token>', methods=['GET', 'POST'])
 def tool_upload(token):
 
@@ -47,13 +41,17 @@ def tool_upload(token):
     db.session.add(paper)
     db.session.flush()
 
-    filename = secure_filename(form.readme_file.data.filename)
-    filepath = app.config['UPLOAD_FOLDER'] + '/{}/'.format(paper.id)
+    ## Readme file upload
+    if form.readme_file.data:
+      save_file(form.readme_file, paper.id)
 
-    if not os.path.exists(os.path.dirname(filepath)):
-      os.makedirs(os.path.dirname(filepath))
+    ## All in one zip upload
+    if form.all_in_one_file.data:
+      save_file(form.all_in_one_file, paper.id)
 
-    form.readme_file.data.save(filepath + filename)
+    ## source upload
+    if form.scripts_file.data:
+      save_file(form.scripts_file, paper.id)
 
     db.session.commit()
     flash('Tool submission success {}'.format(paper.id))
