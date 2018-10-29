@@ -1,4 +1,10 @@
 /* Bootstrap styles overridden here */
+
+.nav.nav-pills.pull-left {
+  font-size: 18px;
+  margin: 5px 0;
+}
+
 label {
 	font-size: 20px;
 	font-weight: 400;
