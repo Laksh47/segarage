@@ -31,6 +31,11 @@ th, td {
 	padding: 5px;
 }
 
+td li {
+  list-style: none;
+  margin: 5px;
+}
+
 /* Flask paginate CSS */
 .pagination-page-info {
   padding: .6em;
@@ -38,12 +43,12 @@ th, td {
   width: 40em;
   margin: .5em;
   margin-left: 0;
-  font-size: 12px;
+  font-size: 18px;
 }
 .pagination-page-info b {
   color: black;
-  background: #6aa6ed;
+  background: #b7c5d6;
   padding-left: 2px;
   padding: .1em .25em;
-  font-size: 150%;
+  font-size: 18px;
 }
