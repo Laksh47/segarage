@@ -74,8 +74,6 @@
               <span style="color: red;">[{{ error }}]</span>
             {% endfor %}
         </div>
-        <!-- {{ form.readme_file.data.filename }} -->
-        <!-- <br> -->
         <div class="form-group">
             {{ form.scripts_file.label }}
             {{ form.scripts_file }}
@@ -83,7 +81,6 @@
               <span style="color: red;">[{{ error }}]</span>
             {% endfor %}
         </div>
-        <!-- <br> -->
         <div class="form-group required">
             {{ form.all_in_one_file.label }}
             {{ form.all_in_one_file }}
@@ -91,13 +88,13 @@
               <span style="color: red;">[{{ error }}]</span>
             {% endfor %}
         </div>
-        <!-- <br> -->
         <div class="form-group">
             {{ form.recaptcha }}
             {% for error in form.recaptcha.errors %}
               <span style="color: red;">[{{ error }}]</span>
             {% endfor %}
         </div>
+       
         <p>{{ form.upload(class_='btn btn-success') }}</p>
     </form>
 {% endblock %}

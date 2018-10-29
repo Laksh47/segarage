@@ -41,17 +41,38 @@ def tool_upload(token):
     db.session.add(paper)
     db.session.flush()
 
+    filenames = ""
+
     ## Readme file upload
     if form.readme_file.data:
       save_file(form.readme_file, paper.id)
+      filenames = secure_filename(form.readme_file.data.filename) + ";"
+    else:
+      filenames = "None;"
+      print("None shouldn't get stored ideally (readme)")
+
 
     ## All in one zip upload
     if form.all_in_one_file.data:
       save_file(form.all_in_one_file, paper.id)
+      filenames = filenames + secure_filename(form.all_in_one_file.data.filename) + ";"
+    else:
+      filenames = filenames + "None;"
+      print("None shouldn't get stored ideally (tool)")
+
 
     ## source upload
     if form.scripts_file.data:
       save_file(form.scripts_file, paper.id)
+      filenames = filenames + secure_filename(form.scripts_file.data.filename)
+    else:
+      filenames = filenames + "None"
+
+    print("Uploaded files below for paper: {}".format(paper.id))
+    print(filenames)
+
+    paper.file_urls = filenames
+    db.session.flush()
 
     db.session.commit()
     flash('Tool submission success {}'.format(paper.id))
