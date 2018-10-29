@@ -19,6 +19,7 @@
             <ul class="nav nav-pills pull-left">
               <li role="presentation" {%- if request.path == "/index" %} class="active" {% endif %}><a href="{{ url_for('index') }}">Home</a></li>
               <li role="presentation" {%- if request.path == "/request_upload" %} class="active" {% endif %}><a href="{{ url_for('request_upload') }}">Request Upload</a></li>
+              <li role="presentation" {%- if request.path == "/papers" %} class="active" {% endif %}><a href="{{ url_for('papers') }}">Papers</a></li>
             </ul>
           </nav>
           <!--<a href="{{ url_for('index') }}">Tool Upload</a>-->

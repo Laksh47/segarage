@@ -29,3 +29,5 @@ flask db migrate
 flask db migrate -m "papers table" (delete the latest migration file if its first time)
 flask db upgrade
 
+pip install flask-paginate
+

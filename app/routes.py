@@ -1,4 +1,6 @@
-from flask import render_template, flash, redirect, url_for, send_from_directory
+from flask import render_template, flash, redirect, url_for, send_from_directory, request
+from flask_paginate import Pagination, get_page_parameter
+
 from app import app
 from app import db
 from app.forms import requestToolUpload, toolUpload
@@ -88,3 +90,17 @@ def downloads(id, filename):
   print("Filename: {}".format(filename))
   print("Dir: {}".format(app.config['UPLOAD_FOLDER'] + "/{}".format(id)))
   return send_from_directory(app.config['UPLOAD_FOLDER'] + "/{}".format(id), filename, as_attachment=True)
+
+@app.route('/papers')
+def papers():
+  search = False
+  q = request.args.get('q')
+  if q:
+    search = True
+  page = request.args.get(get_page_parameter(), type=int, default=1)
+
+  papers = Paper.query.all()
+  print('Total number of papers: {}'.format(len(papers)))
+  pagination = Pagination(page=page, total=len(papers), search=search, record_name='papers')
+
+  return render_template('papers.html', papers=papers, pagination=pagination)

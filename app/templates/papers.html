@@ -1,0 +1,45 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<h3> Functionality under development </h3>
+
+{{ pagination.info }}
+{{ pagination.links }}
+	<table>
+	  <thead>
+	    <tr>
+	      <th>Paper name</th>
+	      <th>Contact Email</th>
+	      <th>Tool name</th>
+	      <th>Link to archive</th>
+	      <th>Bibtex</th>
+	      <th>Downloads available</th>
+	    </tr>
+	  </thead>
+	  <tbody>
+	    {% for paper in papers %}
+	      <tr>
+	        <td>{{ paper.paper_name }}</td>
+	        <td>{{ paper.author_email }}</td>
+	        <td>{{ paper.tool_name }}</td>
+	        <td>{{ paper.link_to_archive }}</td>
+	        <td>{{ paper.bibtext }}</td>
+	        <td>
+	        	{% if paper.file_urls != None %}
+		        	{% set files = paper.file_urls.split(';') %}
+		        	{% for file in files %}
+		        		{% if file != 'None' %}
+									<li><a href="/downloads/{{ paper.id }}/{{file}}">{{ file }}</a></li>
+		        		{% endif %}
+							{% endfor %}
+						{% endif %}
+					</td>
+	      </tr>
+	    {% endfor %}
+	  </tbody>
+	</table>
+
+{{ pagination.links }}
+
+{% endblock %}
