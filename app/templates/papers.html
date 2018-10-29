@@ -24,7 +24,7 @@
 	        <td>{{ paper.author_email }}</td>
 	        <td>{{ paper.tool_name }}</td>
 	        <td>{{ paper.link_to_archive }}</td>
-	        <td>{{ paper.bibtext }}</td>
+	        <td>{{ paper.bibtex }}</td>
 	        <td>
 	        	{% if paper.file_urls != None %}
 		        	{% set files = paper.file_urls.split(';') %}
