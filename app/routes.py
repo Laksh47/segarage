@@ -1,4 +1,4 @@
-from flask import render_template, flash, redirect, url_for
+from flask import render_template, flash, redirect, url_for, send_from_directory
 from app import app
 from app import db
 from app.forms import requestToolUpload, toolUpload
@@ -80,3 +80,11 @@ def tool_upload(token):
     return redirect(url_for('index'))
     
   return render_template('tool_upload.html', title="Upload your tool here", form=form)
+
+
+@app.route('/downloads/<id>/<filename>', methods=['GET', 'POST'])
+def downloads(id, filename):
+  print("Resource id: {}".format(id))
+  print("Filename: {}".format(filename))
+  print("Dir: {}".format(app.config['UPLOAD_FOLDER'] + "/{}".format(id)))
+  return send_from_directory(app.config['UPLOAD_FOLDER'] + "/{}".format(id), filename, as_attachment=True)
