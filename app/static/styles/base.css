@@ -26,6 +26,10 @@ label {
   padding: 5px 0px 5px 0px;
 }
 
+.footer {
+  margin: 20px 0 50px 0;
+}
+
 th, td {
 	border: 1px solid;
 	padding: 5px;

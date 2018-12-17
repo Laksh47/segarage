@@ -38,7 +38,7 @@ def tool_upload(token):
   form.authoremail.data = payload['authoremail']
 
   if form.validate_on_submit():
-    paper = Paper(paper_name=form.papername.data, author_name=form.authorname.data, author_email=form.authoremail.data, tool_name=form.toolname.data, tool_format=form.toolformat.data, link_to_pdf=form.linktopdf.data, link_to_archive=form.linktoarchive.data, link_to_demo=form.linktodemo.data, bibtex=form.bibtex.data)
+    paper = Paper(paper_name=form.papername.data, author_name=form.authorname.data, author_email=form.authoremail.data, tool_name=form.toolname.data, link_to_pdf=form.linktopdf.data, link_to_archive=form.linktoarchive.data, link_to_tool_webpage=form.linktotoolwebpage.data, link_to_demo=form.linktodemo.data, bibtex=form.bibtex.data, tags=form.tags.data)
 
     db.session.add(paper)
     db.session.flush()
@@ -54,10 +54,10 @@ def tool_upload(token):
       print("None shouldn't get stored ideally (readme)")
 
 
-    ## All in one zip upload
-    if form.all_in_one_file.data:
-      save_file(form.all_in_one_file, paper.id)
-      filenames = filenames + secure_filename(form.all_in_one_file.data.filename) + ";"
+    ## Binary zip upload
+    if form.binary_file.data:
+      save_file(form.binary_file, paper.id)
+      filenames = filenames + secure_filename(form.binary_file.data.filename) + ";"
     else:
       filenames = filenames + "None;"
       print("None shouldn't get stored ideally (tool)")

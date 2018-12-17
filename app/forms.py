@@ -7,7 +7,7 @@ from app.utils import allowed_file_readme, allowed_file_tool
 
 def txt_file_check(form, field):
   if field.data and not allowed_file_readme(field.data.filename):
-    raise ValidationError('Read me file format not supported (supported: txt, pdf, docx)')
+    raise ValidationError('Read me file format not supported (supported: md, txt, pdf, docx)')
 
 def zip_file_check(form, field):
   if field.data and not allowed_file_tool(field.data.filename):
@@ -16,28 +16,28 @@ def zip_file_check(form, field):
 class requestToolUpload(FlaskForm):
   authoremail = StringField('Contact author Email', validators=[DataRequired(), Email('Please enter valid email address')])
   papername = StringField('Paper Name', validators=[DataRequired()])
-  # password = PasswordField('Password', validators=[DataRequired()])
-  # remember_me = BooleanField('Remember Me')
+
   recaptcha = RecaptchaField()
   request_upload = SubmitField('Need to upload tool for the paper')
 
 class toolUpload(FlaskForm):
   toolname = StringField('Tool name')
-  toolformat = StringField('What are you uploading? VM/Binary/..?', validators=[DataRequired()])
 
-  papername = StringField('Paper Name', validators=[DataRequired()])
-  authorname = StringField('Author Name')
+  papername = StringField('Paper Title', validators=[DataRequired()])
+  authorname = StringField('Contact author Name')
   authoremail = StringField('Contact author Email', validators=[DataRequired(), Email('Please enter valid email address')])
 
-  linktopdf = StringField('Link to preprint or public pdf version')
-  linktoarchive = StringField('Link to archive (ACM/IEEE/peerJ etc.,)', validators=[DataRequired()])
-  linktodemo = StringField('Link to Demo/Website, if any')
+  linktopdf = StringField('Link to publicly available version of the paper')
+  linktoarchive = StringField('Link to published version (ACM/IEEE/peerJ etc.,)', validators=[DataRequired()])
+  linktotoolwebpage = StringField('Link to tool webpage')
+  linktodemo = StringField('Link to demo (youtube)')
 
-  bibtex = TextAreaField('BibTex citation code', validators=[DataRequired()])
+  bibtex = TextAreaField('BibTex entry', validators=[DataRequired()])
 
-  readme_file = FileField('Upload Readme/instructions file', validators=[DataRequired(), txt_file_check])
-  scripts_file = FileField('Upload scripts/source code zip (optional)', validators=[zip_file_check])
-  all_in_one_file = FileField('Upload final version of the tool (zipped)', validators=[DataRequired(), zip_file_check])
+  readme_file = FileField('Upload Readme or instructions file', validators=[DataRequired(), txt_file_check])
+  scripts_file = FileField('Upload source code (optional)', validators=[zip_file_check])
+  binary_file = FileField('Upload final version of the tool (binary)', validators=[DataRequired(), zip_file_check])
 
-  recaptcha = RecaptchaField()
+  tags = StringField('Tags', validators=[DataRequired()])
+
   upload = SubmitField('Upload')

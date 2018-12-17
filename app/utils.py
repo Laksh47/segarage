@@ -6,7 +6,7 @@ from time import time
 import jwt
 import os
 
-ALLOWED_EXTENSIONS_TEXT = set(['txt', 'pdf'])
+ALLOWED_EXTENSIONS_TEXT = set(['txt', 'pdf', 'md'])
 
 ALLOWED_EXTENSIONS_TOOL = set(['zip'])
 
