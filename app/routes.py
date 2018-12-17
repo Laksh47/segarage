@@ -4,7 +4,7 @@ from flask_paginate import Pagination, get_page_parameter
 from app import app
 from app import db
 from app.forms import requestToolUpload, toolUpload
-from app.models import Paper
+from app.models import Paper, Tag
 from app.utils import *
 
 @app.route('/')
@@ -38,7 +38,15 @@ def tool_upload(token):
   form.authoremail.data = payload['authoremail']
 
   if form.validate_on_submit():
-    paper = Paper(paper_name=form.papername.data, author_name=form.authorname.data, author_email=form.authoremail.data, tool_name=form.toolname.data, link_to_pdf=form.linktopdf.data, link_to_archive=form.linktoarchive.data, link_to_tool_webpage=form.linktotoolwebpage.data, link_to_demo=form.linktodemo.data, bibtex=form.bibtex.data, tags=form.tags.data)
+    paper = Paper(paper_name=form.papername.data, author_name=form.authorname.data, author_email=form.authoremail.data, tool_name=form.toolname.data, link_to_pdf=form.linktopdf.data, link_to_archive=form.linktoarchive.data, link_to_tool_webpage=form.linktotoolwebpage.data, link_to_demo=form.linktodemo.data, bibtex=form.bibtex.data)
+
+    print(form.tags.data)
+
+    for tag in form.tags.data.split(","):
+      tag_obj = db.session.query(Tag).filter(Tag.tagname==tag.strip()).first()
+      if tag_obj is None:
+        tag_obj = Tag(tagname=tag.strip())
+      paper.tags.append(tag_obj)
 
     db.session.add(paper)
     db.session.flush()
