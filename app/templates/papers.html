@@ -26,14 +26,11 @@
 	        <td>{{ paper.link_to_archive }}</td>
 	        <td>{{ paper.bibtex }}</td>
 	        <td>
-	        	{% if paper.file_urls != None %}
-		        	{% set files = paper.file_urls.split(';') %}
-		        	{% for file in files %}
-		        		{% if file != 'None' %}
-									<li><a href="/downloads/{{ paper.id }}/{{file}}">{{ file }}</a></li>
-		        		{% endif %}
-							{% endfor %}
-						{% endif %}
+	        	{% for file in paper.files %}
+	        		{% if file != 'None' %}
+								<li><a href="/downloads/{{ paper.id }}/{{file.filename}}">{{ file.filename }}</a></li>
+	        		{% endif %}
+						{% endfor %}
 					</td>
 	      </tr>
 	    {% endfor %}

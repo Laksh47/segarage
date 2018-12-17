@@ -4,7 +4,7 @@ from flask_paginate import Pagination, get_page_parameter
 from app import app
 from app import db
 from app.forms import requestToolUpload, toolUpload
-from app.models import Paper, Tag
+from app.models import Paper, Tag, File
 from app.utils import *
 
 @app.route('/')
@@ -51,39 +51,40 @@ def tool_upload(token):
     db.session.add(paper)
     db.session.flush()
 
-    filenames = ""
+    filenames = []
 
     ## Readme file upload
     if form.readme_file.data:
       save_file(form.readme_file, paper.id)
-      filenames = secure_filename(form.readme_file.data.filename) + ";"
-    else:
-      filenames = "None;"
-      print("None shouldn't get stored ideally (readme)")
+      filenames.append(secure_filename(form.readme_file.data.filename))
+    # else:
+    #   filenames = "None;"
+    #   print("None shouldn't get stored ideally (readme)")
 
 
     ## Binary zip upload
     if form.binary_file.data:
       save_file(form.binary_file, paper.id)
-      filenames = filenames + secure_filename(form.binary_file.data.filename) + ";"
-    else:
-      filenames = filenames + "None;"
-      print("None shouldn't get stored ideally (tool)")
+      filenames.append(secure_filename(form.binary_file.data.filename))
+    # else:
+    #   filenames = filenames + "None;"
+    #   print("None shouldn't get stored ideally (tool)")
 
 
     ## source upload
     if form.scripts_file.data:
       save_file(form.scripts_file, paper.id)
-      filenames = filenames + secure_filename(form.scripts_file.data.filename)
-    else:
-      filenames = filenames + "None"
+      filenames.append(secure_filename(form.scripts_file.data.filename))
+    # else:
+    #   filenames = filenames + "None"
 
     print("Uploaded files below for paper: {}".format(paper.id))
     print(filenames)
 
-    paper.file_urls = filenames
-    db.session.flush()
+    for filename in filenames:
+      paper.files.append(File(filename=filename))
 
+    db.session.flush()
     db.session.commit()
     flash('Tool submission success {}'.format(paper.id))
 
