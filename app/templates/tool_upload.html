@@ -67,33 +67,30 @@
               <span style="color: red;">[{{ error }}]</span>
             {% endfor %}
         </div>
-        <div class="form-group required">
-            {{ form.readme_file.label }}
-            {{ form.readme_file }}
-            {% for error in form.readme_file.errors %}
+        <div class="form-group required custom_upload">
+            {{ form.all_files.label }}
+            <div class="wrap-file"><div class="circle"></div> {{ form.all_files }}</div>
+            {% for error in form.all_files.errors %}
               <span style="color: red;">[{{ error }}]</span>
             {% endfor %}
         </div>
-        <div class="form-group">
-            {{ form.scripts_file.label }}
-            {{ form.scripts_file }}
-            {% for error in form.scripts_file.errors %}
-              <span style="color: red;">[{{ error }}]</span>
-            {% endfor %}
-        </div>
-        <div class="form-group required">
-            {{ form.binary_file.label }}
-            {{ form.binary_file }}
-            {% for error in form.binary_file.errors %}
-              <span style="color: red;">[{{ error }}]</span>
-            {% endfor %}
-        </div>
+        
        
         <p>{{ form.upload(class_='btn btn-success') }}</p>
     </form>
 
     <script type="text/javascript">
-        $('#tags').tagsInput();
-        $('.tagsinput').addClass('form-control');
+        $(document).ready(function() {
+            $('#tags').tagsInput();
+            $('.tagsinput').addClass('form-control');
+
+
+            $('.custom_upload').on('click', '.wrap-file .circle', function() {
+                console.log('clicked plus');
+                $('.custom_upload').append('<div class="wrap-file"><div class="circle"></div> <input id="all_files" name="all_files" type="file" multiple></div>');
+            })
+
+            // $('.')
+        });
     </script>
 {% endblock %}

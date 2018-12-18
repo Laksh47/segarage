@@ -36,10 +36,10 @@ def verify_email_token(token):
   return payload
 
 def save_file(field, paper_id):
-  filename = secure_filename(field.data.filename)
+  filename = secure_filename(field.filename)
   filepath = app.config['UPLOAD_FOLDER'] + '/{}/'.format(paper_id)
 
   if not os.path.exists(os.path.dirname(filepath)):
     os.makedirs(os.path.dirname(filepath))
 
-  field.data.save(filepath + filename)
+  field.save(filepath + filename)

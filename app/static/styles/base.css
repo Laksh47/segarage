@@ -20,6 +20,57 @@ label {
   vertical-align: middle;
 }
 
+/* Flask paginate CSS */
+.pagination-page-info {
+  padding: .6em;
+  padding-left: 0;
+  width: 40em;
+  margin: .5em;
+  margin-left: 0;
+  font-size: 18px;
+}
+.pagination-page-info b {
+  color: black;
+  background: #b7c5d6;
+  padding-left: 2px;
+  padding: .1em .25em;
+  font-size: 18px;
+}
+
+/* Plus sign css */
+.circle {
+  border-radius: 50%;
+  width: 25px;
+  height: 25px;
+  background-color: rgb(44, 108, 128);
+  position: relative;
+  display: inline-block;
+  vertical-align: sub;
+}
+.circle::after {
+  content: " ";
+  position: absolute;
+  display: block;
+  background-color: #fff;
+  height: 2px;
+  margin-top: -5px;
+  top: 62%;
+  left: 5px;
+  right: 5px;
+  z-index: 9;
+}
+.circle::before {
+  content: " ";
+  position: absolute;
+  display: block;
+  background-color: #fff;
+  width: 2px;
+  margin-left: -5px;
+  left: 66%;
+  top: 5px;
+  bottom: 5px;
+  z-index: 9;
+}
 
 /* overall css */
 .header {
@@ -40,19 +91,7 @@ td li {
   margin: 5px;
 }
 
-/* Flask paginate CSS */
-.pagination-page-info {
-  padding: .6em;
-  padding-left: 0;
-  width: 40em;
-  margin: .5em;
-  margin-left: 0;
-  font-size: 18px;
-}
-.pagination-page-info b {
-  color: black;
-  background: #b7c5d6;
-  padding-left: 2px;
-  padding: .1em .25em;
-  font-size: 18px;
+input[type=file] {
+  display: inline-block;
+  vertical-align: super;
 }

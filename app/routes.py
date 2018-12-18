@@ -53,30 +53,12 @@ def tool_upload(token):
 
     filenames = []
 
-    ## Readme file upload
-    if form.readme_file.data:
-      save_file(form.readme_file, paper.id)
-      filenames.append(secure_filename(form.readme_file.data.filename))
-    # else:
-    #   filenames = "None;"
-    #   print("None shouldn't get stored ideally (readme)")
+    print("Files...:")
+    print(form.all_files.data)
 
-
-    ## Binary zip upload
-    if form.binary_file.data:
-      save_file(form.binary_file, paper.id)
-      filenames.append(secure_filename(form.binary_file.data.filename))
-    # else:
-    #   filenames = filenames + "None;"
-    #   print("None shouldn't get stored ideally (tool)")
-
-
-    ## source upload
-    if form.scripts_file.data:
-      save_file(form.scripts_file, paper.id)
-      filenames.append(secure_filename(form.scripts_file.data.filename))
-    # else:
-    #   filenames = filenames + "None"
+    for file in form.all_files.data:
+      save_file(file, paper.id)
+      filenames.append(secure_filename(file.filename))
 
     print("Uploaded files below for paper: {}".format(paper.id))
     print(filenames)

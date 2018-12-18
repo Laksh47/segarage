@@ -1,6 +1,6 @@
 from flask_wtf import FlaskForm, RecaptchaField
 from flask_wtf.file import FileField
-from wtforms import StringField, PasswordField, BooleanField, SubmitField, TextAreaField
+from wtforms import StringField, PasswordField, BooleanField, SubmitField, TextAreaField, MultipleFileField
 from wtforms.validators import InputRequired, DataRequired, Email, ValidationError
 
 from app.utils import allowed_file_readme, allowed_file_tool
@@ -34,9 +34,11 @@ class toolUpload(FlaskForm):
 
   bibtex = TextAreaField('BibTex entry', validators=[DataRequired()])
 
-  readme_file = FileField('Upload Readme or instructions file', validators=[DataRequired(), txt_file_check])
-  scripts_file = FileField('Upload source code (optional)', validators=[zip_file_check])
-  binary_file = FileField('Upload final version of the tool (binary)', validators=[DataRequired(), zip_file_check])
+  # readme_file = FileField('Upload Readme or instructions file', validators=[DataRequired(), txt_file_check])
+  # scripts_file = FileField('Upload source code (optional)', validators=[zip_file_check])
+  # binary_file = FileField('Upload final version of the tool (binary)', validators=[DataRequired(), zip_file_check])
+
+  all_files = MultipleFileField('Upload your files (readme, binary, script etc.,)', validators=[DataRequired()])
 
   tags = StringField('Tags', validators=[DataRequired()])
 
