@@ -52,19 +52,23 @@ def tool_upload(token):
     db.session.flush()
 
     filenames = []
+    filetypes = form.file_types.data.split(',')
 
     print("Files...:")
     print(form.all_files.data)
+    print("Dropdown..")
+    print(form.file_types.data)
 
     for file in form.all_files.data:
-      save_file(file, paper.id)
-      filenames.append(secure_filename(file.filename))
+      if not isinstance(file, str):
+        save_file(file, paper.id)
+        filenames.append(secure_filename(file.filename))
 
     print("Uploaded files below for paper: {}".format(paper.id))
     print(filenames)
 
-    for filename in filenames:
-      paper.files.append(File(filename=filename))
+    for filename, filetype in zip(filenames, filetypes):
+      paper.files.append(File(filename=filename, filetype=filetype))
 
     db.session.flush()
     db.session.commit()

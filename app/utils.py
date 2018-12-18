@@ -6,15 +6,11 @@ from time import time
 import jwt
 import os
 
-ALLOWED_EXTENSIONS_TEXT = set(['txt', 'pdf', 'md'])
+ALLOWED_EXTENSIONS_FILES = set(['txt', 'pdf', 'md', 'zip', 'tar', 'gz'])
+FILETYPE_CHOICES = ['Binary', 'Scripts (Source code)', 'Readme', 'Other']
 
-ALLOWED_EXTENSIONS_TOOL = set(['zip'])
-
-def allowed_file_readme(filename):
-  return '.' in filename and filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS_TEXT
-
-def allowed_file_tool(filename):
-  return '.' in filename and filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS_TOOL
+def allowed_files(filename):
+  return '.' in filename and filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS_FILES
 
 def send_email(subject, sender, recipients, text_body, html_body):
   msg = Message(subject, sender=sender, recipients=recipients)

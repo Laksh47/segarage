@@ -1,17 +1,17 @@
 from flask_wtf import FlaskForm, RecaptchaField
 from flask_wtf.file import FileField
-from wtforms import StringField, PasswordField, BooleanField, SubmitField, TextAreaField, MultipleFileField
+from wtforms import StringField, PasswordField, BooleanField, SubmitField, TextAreaField, MultipleFileField, SelectField
 from wtforms.validators import InputRequired, DataRequired, Email, ValidationError
 
-from app.utils import allowed_file_readme, allowed_file_tool
+from app.utils import allowed_files, FILETYPE_CHOICES
 
-def txt_file_check(form, field):
-  if field.data and not allowed_file_readme(field.data.filename):
-    raise ValidationError('Read me file format not supported (supported: md, txt, pdf, docx)')
-
-def zip_file_check(form, field):
-  if field.data and not allowed_file_tool(field.data.filename):
-    raise ValidationError('Format not supported (supported: zip, gz, rar)')
+def file_validation(form, field):
+  if field.data:
+    for file in field.data:
+      if isinstance(file, str):
+        continue
+      if not allowed_files(file.filename):
+        raise ValidationError('File format not supported (supported: md, txt, pdf, docx, zip, gz, rar)')
 
 class requestToolUpload(FlaskForm):
   authoremail = StringField('Contact author Email', validators=[DataRequired(), Email('Please enter valid email address')])
@@ -38,7 +38,11 @@ class toolUpload(FlaskForm):
   # scripts_file = FileField('Upload source code (optional)', validators=[zip_file_check])
   # binary_file = FileField('Upload final version of the tool (binary)', validators=[DataRequired(), zip_file_check])
 
-  all_files = MultipleFileField('Upload your files (readme, binary, script etc.,)', validators=[DataRequired()])
+  choices = [(item, item) for item in FILETYPE_CHOICES]
+  dropdown_choices = SelectField(choices=choices)
+  file_types = StringField()
+
+  all_files = MultipleFileField('Upload your files (readme, binary, script etc.,)', validators=[DataRequired(), file_validation])
 
   tags = StringField('Tags', validators=[DataRequired()])
 

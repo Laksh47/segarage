@@ -2,7 +2,7 @@
 
 {% block content %}
     <h3>SE Garage, upload tool</h3>
-    <form action="" method="post" enctype="multipart/form-data" novalidate>
+    <form action="" id="upload_form" method="post" enctype="multipart/form-data" novalidate>
         {{ form.hidden_tag() }}
         <div class="form-group">
             {{ form.toolname.label }}
@@ -69,7 +69,12 @@
         </div>
         <div class="form-group required custom_upload">
             {{ form.all_files.label }}
-            <div class="wrap-file"><div class="circle"></div> {{ form.all_files }}</div>
+            <div class="wrap-file">
+                <div class="circle"></div>
+                <div class="custom_dropdown">{{form.dropdown_choices}}</div> 
+                {{ form.all_files }}
+            </div>
+            {{ form.file_types }}
             {% for error in form.all_files.errors %}
               <span style="color: red;">[{{ error }}]</span>
             {% endfor %}
@@ -84,13 +89,32 @@
             $('#tags').tagsInput();
             $('.tagsinput').addClass('form-control');
 
-
+            // code to add more files not more than 5 attachments
+            $('#all_files').removeAttr('multiple')
             $('.custom_upload').on('click', '.wrap-file .circle', function() {
                 console.log('clicked plus');
-                $('.custom_upload').append('<div class="wrap-file"><div class="circle"></div> <input id="all_files" name="all_files" type="file" multiple></div>');
+                if($('.wrap-file').size() < 5) {
+                    var element = '<div class="wrap-file"><div class="circle"></div> <div class="custom_dropdown"><select id="dropdown_choices" name="dropdown_choices"><option value="Binary">Binary</option><option value="Scripts (Source code)">Scripts (Source code)</option><option value="Readme">Readme</option></select></div> <input id="all_files" name="all_files" type="file"></div>'
+                
+                    $('.custom_upload').append(element);
+                }
             })
 
-            // $('.')
+            // code to update each uploaded file types
+            $('#file_types').hide();
+            $('.custom_upload').on('change', '.wrap-file .custom_dropdown #dropdown_choices, .wrap-file #all_files', function() {
+                console.log('file select or dropdown changed')
+                var arr = []
+                $('.custom_dropdown #dropdown_choices').each(function() {
+                    var file_selected = $(this).closest('.custom_dropdown').next().val();
+                    if(file_selected) {
+                        arr.push($(this).val())
+                    }
+                })
+                values = arr.join(',')
+                console.log(values)
+                $('.custom_upload #file_types').val(values)
+            })
         });
     </script>
 {% endblock %}
