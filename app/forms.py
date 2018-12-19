@@ -42,7 +42,7 @@ class toolUpload(FlaskForm):
   dropdown_choices = SelectField(choices=choices)
   file_types = StringField()
 
-  all_files = MultipleFileField('Upload your files (readme, binary, script etc.,)', validators=[DataRequired(), file_validation])
+  all_files = MultipleFileField('Upload your files (readme, binary, script etc.,)', validators=[DataRequired(), InputRequired(), file_validation])
 
   tags = StringField('Tags', validators=[DataRequired()])
 
