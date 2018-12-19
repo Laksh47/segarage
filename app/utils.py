@@ -39,3 +39,11 @@ def save_file(field, paper_id):
     os.makedirs(os.path.dirname(filepath))
 
   field.save(filepath + filename)
+
+def file_validation(form, field):
+  if field.data:
+    for file in field.data:
+      if isinstance(file, str):
+        continue
+      if not allowed_files(file.filename):
+        raise ValidationError('File format not supported (supported: md, txt, pdf, docx, zip, gz, rar)')

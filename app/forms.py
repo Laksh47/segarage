@@ -3,15 +3,7 @@ from flask_wtf.file import FileField
 from wtforms import StringField, PasswordField, BooleanField, SubmitField, TextAreaField, MultipleFileField, SelectField
 from wtforms.validators import InputRequired, DataRequired, Email, ValidationError
 
-from app.utils import allowed_files, FILETYPE_CHOICES
-
-def file_validation(form, field):
-  if field.data:
-    for file in field.data:
-      if isinstance(file, str):
-        continue
-      if not allowed_files(file.filename):
-        raise ValidationError('File format not supported (supported: md, txt, pdf, docx, zip, gz, rar)')
+from app.utils import FILETYPE_CHOICES, file_validation
 
 class requestToolUpload(FlaskForm):
   authoremail = StringField('Contact author Email', validators=[DataRequired(), Email('Please enter valid email address')])
