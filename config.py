@@ -31,4 +31,4 @@ class Config(object):
     MAX_CONTENT_LENGTH = 25 * 1024 * 1024 * 1024
     # MAX_CONTENT_LENGTH = 30 * 1024
 
-    POSTS_PER_PAGE = 10
+    PER_PAGE = 7

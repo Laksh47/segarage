@@ -1,5 +1,5 @@
 from flask import render_template, flash, redirect, url_for, send_from_directory, request
-from flask_paginate import Pagination, get_page_parameter
+from flask_paginate import Pagination, get_page_parameter, get_page_args
 
 from app import app
 from app import db
@@ -89,21 +89,30 @@ def downloads(id, filename):
 @app.route('/papers')
 def papers():
   search = False
-  q = request.args.get('q')
-  if q:
-    search = True
-  page = request.args.get(get_page_parameter(), type=int, default=1)
 
   papers = Paper.query.all()
   print('Total number of papers: {}'.format(len(papers)))
 
-  end = app.config['POSTS_PER_PAGE'] * page
-  start = (end - app.config['POSTS_PER_PAGE'])
-  paginated_papers = papers[start:end]
+  page, per_page, offset = get_page_args(per_page_parameter="PER_PAGE")
+  paginated_papers = Paper.query.limit(per_page).offset(offset)
 
-  pagination = Pagination(page=page, total=len(papers), search=search, record_name='papers', per_page=app.config['POSTS_PER_PAGE'])
+  pagination = Pagination(page=page, per_page=per_page, total=len(papers), record_name='papers',format_total=True, format_number=True)
+  # print(pagination.__dict__)
+  
+  return render_template('papers.html', papers=paginated_papers, pagination=pagination, per_page=per_page)
 
-  return render_template('papers.html', papers=paginated_papers, pagination=pagination)
+  # q = request.args.get('q')
+  # if q:
+  #   search = True
+  # page = request.args.get(get_page_parameter(), type=int, default=1)
+
+  # end = app.config['PER_PAGE'] * page
+  # start = (end - app.config['PER_PAGE'])
+  # paginated_papers = papers[start:end]
+
+  # pagination = Pagination(page=page, total=len(papers), search=search, record_name='papers', per_page=app.config['PER_PAGE'])
+
+  # return render_template('papers.html', papers=paginated_papers, pagination=pagination)
 
 # @app.route('/papers/<id>')
 # def specific_paper(id):
