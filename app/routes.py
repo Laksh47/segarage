@@ -7,6 +7,8 @@ from app.forms import requestToolUpload, toolUpload
 from app.models import Paper, Tag, File
 from app.utils import *
 
+from sqlalchemy import func
+
 @app.route('/')
 @app.route('/index')
 def index():
@@ -90,13 +92,15 @@ def downloads(id, filename):
 def papers():
   search = False
 
-  papers = Paper.query.all()
-  print('Total number of papers: {}'.format(len(papers)))
+  # papers = Paper.query.all()
+  # print('Total number of papers: {}'.format(len(papers)))
 
   page, per_page, offset = get_page_args(per_page_parameter="PER_PAGE")
   paginated_papers = Paper.query.limit(per_page).offset(offset)
 
-  pagination = Pagination(page=page, per_page=per_page, total=len(papers), record_name='papers',format_total=True, format_number=True)
+  count = db.session.query(func.count(Paper.id)).scalar()
+
+  pagination = Pagination(page=page, per_page=per_page, total=count, record_name='papers',format_total=True, format_number=True)
   # print(pagination.__dict__)
 
   return render_template('papers.html', papers=paginated_papers, pagination=pagination, per_page=per_page)
