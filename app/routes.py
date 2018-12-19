@@ -96,6 +96,15 @@ def papers():
 
   papers = Paper.query.all()
   print('Total number of papers: {}'.format(len(papers)))
-  pagination = Pagination(page=page, total=len(papers), search=search, record_name='papers')
 
-  return render_template('papers.html', papers=papers, pagination=pagination)
+  end = app.config['POSTS_PER_PAGE'] * page
+  start = (end - app.config['POSTS_PER_PAGE'])
+  paginated_papers = papers[start:end]
+
+  pagination = Pagination(page=page, total=len(papers), search=search, record_name='papers', per_page=app.config['POSTS_PER_PAGE'])
+
+  return render_template('papers.html', papers=paginated_papers, pagination=pagination)
+
+# @app.route('/papers/<id>')
+# def specific_paper(id):
+#   print("{}".format(id))

@@ -30,3 +30,5 @@ class Config(object):
     # Limit for file uploads set to 25 GB
     MAX_CONTENT_LENGTH = 25 * 1024 * 1024 * 1024
     # MAX_CONTENT_LENGTH = 30 * 1024
+
+    POSTS_PER_PAGE = 10
