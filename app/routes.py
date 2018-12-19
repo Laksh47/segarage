@@ -98,7 +98,7 @@ def papers():
 
   pagination = Pagination(page=page, per_page=per_page, total=len(papers), record_name='papers',format_total=True, format_number=True)
   # print(pagination.__dict__)
-  
+
   return render_template('papers.html', papers=paginated_papers, pagination=pagination, per_page=per_page)
 
   # q = request.args.get('q')
@@ -114,6 +114,11 @@ def papers():
 
   # return render_template('papers.html', papers=paginated_papers, pagination=pagination)
 
-# @app.route('/papers/<id>')
-# def specific_paper(id):
-#   print("{}".format(id))
+@app.route('/papers/<id>', methods=['GET'])
+def specific_paper(id):
+  print("paper id: {}".format(id))
+  paper = Paper.query.get(id)
+  if paper == None:
+    return render_template('404.html')
+  print(paper.__dict__)
+  return render_template('specific_paper.html', paper=paper)

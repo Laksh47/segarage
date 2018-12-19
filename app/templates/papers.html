@@ -14,7 +14,7 @@
 	      <th>Tool name</th>
 	      <th>Link to archive</th>
 	      <th>Bibtex</th>
-	      <th>Downloads available</th>
+	      <th>More details</th>
 	      <th>Tags</th>
 	    </tr>
 	  </thead>
@@ -27,11 +27,7 @@
 	        <td>{{ paper.link_to_archive }}</td>
 	        <td>{{ paper.bibtex }}</td>
 	        <td>
-	        	{% for file in paper.files %}
-	        		{% if file != 'None' %}
-	        			<li><a href="/downloads/{{ paper.id }}/{{file.filename}}">{{ file.filename }}</a></li>
-	        		{% endif %}
-	        	{% endfor %}
+	        	<a href="/papers/{{ paper.id }}"> Click for more </a>
 					</td>
 					<td>
 						{% for tag in paper.tags %}

@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h3> {{ paper.paper_name }} </h3>
+<p> contact author email: <b> {{ paper.author_email }} </b> </p>
+
+<h5>Uploaded artifacts are available here</h5>
+<ul>
+{% for file in paper.files %}
+	{% if file != 'None' %}
+		<li>{{ file.filetype }}: <a href="/downloads/{{ paper.id }}/{{file.filename}}">{{ file.filename }}</a></li>
+	{% endif %}
+{% endfor %}
+</ul>
+
+<b>Cite the paper if you use the artifact</b>
+{{ paper.bibtex }}
+<br>
+
+{% endblock %}
