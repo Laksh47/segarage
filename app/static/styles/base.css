@@ -28,13 +28,27 @@ label {
   margin: .5em;
   margin-left: 0;
   font-size: 18px;
+  padding-bottom: 0;
+  margin-bottom: 0;
 }
+
 .pagination-page-info b {
   color: black;
   background: #b7c5d6;
   padding-left: 2px;
   padding: .1em .25em;
   font-size: 18px;
+}
+
+.pagination ul {
+	padding: 0;
+  margin: 5px 0;
+}
+
+.pagination ul li {
+  display: inline-block;
+  margin: 0px 10px;
+  font-size: 20px;
 }
 
 /* Plus sign css */
