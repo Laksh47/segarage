@@ -5,6 +5,10 @@ from wtforms.validators import InputRequired, DataRequired, Email, ValidationErr
 
 from app.utils import FILETYPE_CHOICES, file_validation
 
+class searchPapers(FlaskForm):
+  search_string = StringField('Search for papers', validators=[DataRequired()])
+  search_button = SubmitField('Search papers')
+
 class requestToolUpload(FlaskForm):
   authoremail = StringField('Contact author Email', validators=[DataRequired(), Email('Please enter valid email address')])
   papername = StringField('Paper Name', validators=[DataRequired()])

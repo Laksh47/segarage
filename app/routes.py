@@ -1,13 +1,17 @@
-from flask import render_template, flash, redirect, url_for, send_from_directory, request
+from flask import render_template, flash, redirect, url_for, send_from_directory, request, g
 from flask_paginate import Pagination, get_page_parameter, get_page_args
 
 from app import app
 from app import db
-from app.forms import requestToolUpload, toolUpload
+from app.forms import requestToolUpload, toolUpload, searchPapers
 from app.models import Paper, Tag, File
 from app.utils import *
 
 from sqlalchemy import func
+
+@app.before_request
+def before_request():
+  g.search_form = searchPapers()
 
 @app.route('/')
 @app.route('/index')
@@ -126,3 +130,9 @@ def specific_paper(id):
     return render_template('404.html')
   print(paper.__dict__)
   return render_template('specific_paper.html', paper=paper)
+
+
+@app.route('/search', methods=['GET', 'POST'])
+def search():
+  print(g.search_form.search_string)
+  return render_template('search_results.html')
