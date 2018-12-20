@@ -5,6 +5,10 @@
   margin: 5px 0;
 }
 
+.nav-pills>li+li {
+  margin-left: 5px;
+}
+
 label {
 	font-size: 20px;
 	font-weight: 400;
@@ -22,6 +26,15 @@ form {
   content: ' *';
   color: red;
   vertical-align: middle;
+}
+
+ul.nav.nav-pills.inline-middle a {
+  background-color: #c1c0c0;
+  color: white;
+}
+
+ul.nav.nav-pills.inline-middle .active a, ul.nav.nav-pills.inline-middle a:hover {
+  background-color: black;
 }
 
 /* Flask paginate CSS */
