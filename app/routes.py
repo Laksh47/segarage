@@ -11,6 +11,7 @@ from sqlalchemy import func
 
 @app.before_request
 def before_request():
+  # db.session.commit()
   g.search_form = searchPapers()
 
 @app.route('/')
@@ -55,15 +56,19 @@ def tool_upload(token):
       paper.tags.append(tag_obj)
 
     db.session.add(paper)
+    # print("##### added objects ####")
+    # print(db.session.new)
     db.session.flush()
+    # print("##### added objects after flush ####")
+    # print(db.session.new)
 
     filenames = []
     filetypes = form.file_types.data.split(',')
 
-    print("Files...:")
-    print(form.all_files.data)
-    print("Dropdown..")
-    print(form.file_types.data)
+    # print("Files...:")
+    # print(form.all_files.data)
+    # print("Dropdown..")
+    # print(form.file_types.data)
 
     for file in form.all_files.data:
       if not isinstance(file, str):
@@ -109,19 +114,6 @@ def papers():
 
   return render_template('papers.html', papers=paginated_papers, pagination=pagination, per_page=per_page)
 
-  # q = request.args.get('q')
-  # if q:
-  #   search = True
-  # page = request.args.get(get_page_parameter(), type=int, default=1)
-
-  # end = app.config['PER_PAGE'] * page
-  # start = (end - app.config['PER_PAGE'])
-  # paginated_papers = papers[start:end]
-
-  # pagination = Pagination(page=page, total=len(papers), search=search, record_name='papers', per_page=app.config['PER_PAGE'])
-
-  # return render_template('papers.html', papers=paginated_papers, pagination=pagination)
-
 @app.route('/papers/<id>', methods=['GET'])
 def specific_paper(id):
   print("paper id: {}".format(id))
@@ -134,5 +126,24 @@ def specific_paper(id):
 
 @app.route('/search', methods=['GET', 'POST'])
 def search():
-  print(g.search_form.search_string)
-  return render_template('search_results.html')
+
+  if request.args.get('q'):
+    g.search_form.q.data = request.args.get('q')
+
+  q = g.search_form.q.data if g.search_form.q.data else None
+
+  if q is None:
+    return render_template('404.html')
+
+  print("query: {}".format(q))
+
+  page = request.args.get('page', 1, type=int)
+  per_page = app.config['PER_PAGE']
+
+  paginated_papers, total = Paper.search(q, page, per_page)
+
+  href="search?q={}".format(q) + '&page={0}' ##customizing to include search query parameter
+  pagination = Pagination(href=href, page=page, per_page=per_page, total=total, record_name='papers',format_total=True, format_number=True)
+  print(pagination.__dict__)
+
+  return render_template('papers.html', papers=paginated_papers, pagination=pagination, per_page=per_page)

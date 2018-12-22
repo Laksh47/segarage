@@ -32,3 +32,5 @@ class Config(object):
     # MAX_CONTENT_LENGTH = 30 * 1024
 
     PER_PAGE = 7
+
+    ELASTICSEARCH_URL = os.environ.get('ELASTICSEARCH_URL')

@@ -1,3 +1,4 @@
+from flask import request
 from flask_wtf import FlaskForm, RecaptchaField
 from flask_wtf.file import FileField
 from wtforms import StringField, PasswordField, BooleanField, SubmitField, TextAreaField, MultipleFileField, SelectField
@@ -6,8 +7,15 @@ from wtforms.validators import InputRequired, DataRequired, Email, ValidationErr
 from app.utils import FILETYPE_CHOICES, file_validation
 
 class searchPapers(FlaskForm):
-  search_string = StringField('Search for papers', validators=[DataRequired()])
+  q = StringField('Search for papers', validators=[DataRequired()])
   search_button = SubmitField('Search papers')
+
+  # def __init__(self, *args, **kwargs):
+  #   if 'formdata' not in kwargs:
+  #     kwargs['formdata'] = request.args
+  #   if 'csrf_enabled' not in kwargs:
+  #     kwargs['csrf_enabled'] = False
+  #   super(searchPapers, self).__init__(*args, **kwargs)
 
 class requestToolUpload(FlaskForm):
   authoremail = StringField('Contact author Email', validators=[DataRequired(), Email('Please enter valid email address')])
