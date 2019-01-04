@@ -1,0 +1,11 @@
+Dear Scholar,
+
+Your have recently endorsed/revoked/upvoted an artifact from SE Garage, to verify your action please click the following link:
+
+{{ url_for('verify_comment', token=token, _external=True) }}
+
+Your action will not be made public unless you verify it.
+
+Sincerely,
+
+SE Garage Team

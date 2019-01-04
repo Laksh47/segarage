@@ -1,0 +1,12 @@
+<p>Dear Scholar,</p>
+<p>
+   Your have recently endorsed/revoked/upvoted an artifact from SE Garage, to verify your action please click the following link:
+    <a href="{{ url_for('verify_comment', token=token, _external=True) }}">
+        click here
+    </a>.
+</p>
+<p>Alternatively, you can paste the following link in your browser's address bar:</p>
+<p>{{ url_for('verify_comment', token=token, _external=True) }}</p>
+<p>Your action will not be made public unless you verify it.</p>
+<p>Sincerely,</p>
+<p>SE Garage Team</p>

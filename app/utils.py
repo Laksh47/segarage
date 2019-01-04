@@ -24,6 +24,10 @@ def get_email_token(authoremail, papername, expires_in=6000):
     {'authoremail': authoremail, 'papername': papername, 'exp': time() + expires_in},
     app.config['SECRET_KEY'], algorithm='HS256').decode('utf-8')
 
+def get_email_token_comment(payload):
+  # payload['exp'] = time() + expires_in
+  return jwt.encode(payload, app.config['SECRET_KEY'], algorithm='HS256').decode('utf-8')
+
 def verify_email_token(token):
   try:
     payload = jwt.decode(token, app.config['SECRET_KEY'], algorithms=['HS256'])

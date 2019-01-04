@@ -1,10 +1,17 @@
 from flask import request
 from flask_wtf import FlaskForm, RecaptchaField
 from flask_wtf.file import FileField
-from wtforms import StringField, PasswordField, BooleanField, SubmitField, TextAreaField, MultipleFileField, SelectField
+from wtforms import StringField, PasswordField, BooleanField, SubmitField, TextAreaField, MultipleFileField, SelectField, BooleanField
 from wtforms.validators import InputRequired, DataRequired, Email, ValidationError
 
 from app.utils import FILETYPE_CHOICES, file_validation
+
+class endorsePaper(FlaskForm):
+  commenter_email = StringField('Email', validators=[DataRequired(), Email('Please enter valid email address')])
+  comment = TextAreaField('Feedback for the artifacts', validators=[DataRequired()])
+  upvote = BooleanField("Upvote this artifact!")
+  recaptcha = RecaptchaField()
+  submit =  SubmitField('Submit')
 
 class searchPapers(FlaskForm):
   q = StringField('Search for papers', validators=[DataRequired()])

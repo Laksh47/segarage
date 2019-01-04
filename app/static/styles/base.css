@@ -142,3 +142,13 @@ td li {
 .searchbar-wrap {
 	text-align: right;
 }
+
+.feedback_form {
+	background-color: white;
+  padding: 30px;
+  margin: 10px 0px;
+}
+
+.loading {
+	display: none;
+}

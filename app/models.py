@@ -94,6 +94,15 @@ class File(db.Model):
     filetype = db.Column(db.String(50))
     paper_id = db.Column(db.Integer, db.ForeignKey('papers.id'))
 
+class Comment(db.Model):
+    __tablename__ = "comments"
+    id = db.Column(db.Integer, primary_key=True)
+    comment_by_email = db.Column(db.String(120))
+    comment = db.Column(db.Text)
+    upvoted = db.Column(db.Boolean)
+    verified = db.Column(db.Integer)
+    paper_id = db.Column(db.Integer, db.ForeignKey('papers.id'))
+
 class Paper(SearchableMixin, db.Model):
     __tablename__ = "papers"
     __searchable__ = ['paper_name'] #determines which fields should be made full-text search ex: ['author_name', 'paper_name', 'tool_name', 'tags']
@@ -111,6 +120,7 @@ class Paper(SearchableMixin, db.Model):
 
     files = db.relationship("File")
     tags = db.relationship("Tag", secondary=paper_tag_association)
+
 
     created_at  = db.Column(db.DateTime,  default=db.func.current_timestamp())
     updated_at = db.Column(db.DateTime,  default=db.func.current_timestamp(),

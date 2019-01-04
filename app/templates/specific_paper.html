@@ -17,4 +17,75 @@
 {{ paper.bibtex }}
 <br>
 
+<form action="{{ url_for('add_comment', id=paper.id) }}" method="post" class="feedback_form">
+  {{ form.hidden_tag() }}
+  <div class="form-group required">
+      {{ form.commenter_email.label }}
+      {{ form.commenter_email(size=32, class_='form-control') }}
+      {% for error in form.commenter_email.errors %}
+        <span style="color: red;">[{{ error }}]</span>
+      {% endfor %}
+  </div>
+  <div class="form-group required">
+      {{ form.comment.label }}
+      {{ form.comment(size=32, class_='form-control') }}
+      {% for error in form.comment.errors %}
+        <span style="color: red;">[{{ error }}]</span>
+      {% endfor %}
+  </div>
+  <div class="form-group">
+      {{ form.upvote() }}
+      {{ form.upvote.label }}
+  </div>
+  <div class="form-group">
+      {{ form.recaptcha }}
+      {% for error in form.recaptcha.errors %}
+          <span style="color: red;">[{{ error }}]</span>
+      {% endfor %}
+  </div>
+  <div class="form-group">{{ form.submit(class_='btn btn-success') }}</div>
+
+  <div class="loading">
+		<img src="{{ url_for('static',filename='assets/roll.gif') }}" />
+	</div>
+
+  <div class="form_submission_msg">
+  </div>
+</form>
+
+<script>
+  $(document).ready(function() {
+    $('.feedback_form').submit(function (e) {
+      $('.loading').show();
+      $('.form-group').hide();
+
+      var url = "{{ url_for('add_comment', id=paper.id) }}"; // send the form data here.
+      $.ajax({
+        type: "POST",
+        url: url,
+        data: $('form').serialize(), // serializes the form's elements.
+        success: function (result) {
+          console.log(result)  // display the returned data in the console.
+          $('.loading').hide();
+          $('.form_submission_msg').text(result.data.message)
+        },
+        failure: function (error) {
+          $('.loading').hide();
+          $('.form_submission_msg').text(error.data.custom_msg)
+        }
+      });
+      e.preventDefault(); // block the traditional submission of the form.
+      console.log('inside ajax');
+    });
+    // Inject our CSRF token into our AJAX request.
+    $.ajaxSetup({
+      beforeSend: function(xhr, settings) {
+        if (!/^(GET|HEAD|OPTIONS|TRACE)$/i.test(settings.type) && !this.crossDomain) {
+            xhr.setRequestHeader("X-CSRFToken", "{{ form.csrf_token._value() }}")
+        }
+      }
+    })
+  });
+</script>
+
 {% endblock %}
