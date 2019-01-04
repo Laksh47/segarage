@@ -17,13 +17,6 @@ class searchPapers(FlaskForm):
   q = StringField('Search for papers', validators=[DataRequired()])
   search_button = SubmitField('Search papers')
 
-  # def __init__(self, *args, **kwargs):
-  #   if 'formdata' not in kwargs:
-  #     kwargs['formdata'] = request.args
-  #   if 'csrf_enabled' not in kwargs:
-  #     kwargs['csrf_enabled'] = False
-  #   super(searchPapers, self).__init__(*args, **kwargs)
-
 class requestToolUpload(FlaskForm):
   authoremail = StringField('Contact author Email', validators=[DataRequired(), Email('Please enter valid email address')])
   papername = StringField('Paper Name', validators=[DataRequired()])
@@ -44,10 +37,7 @@ class toolUpload(FlaskForm):
   linktodemo = StringField('Link to demo (youtube)')
 
   bibtex = TextAreaField('BibTex entry', validators=[DataRequired()])
-
-  # readme_file = FileField('Upload Readme or instructions file', validators=[DataRequired(), txt_file_check])
-  # scripts_file = FileField('Upload source code (optional)', validators=[zip_file_check])
-  # binary_file = FileField('Upload final version of the tool (binary)', validators=[DataRequired(), zip_file_check])
+  description = TextAreaField('A short description on the Paper/Artifact', validators=[DataRequired()])
 
   choices = [(item, item) for item in FILETYPE_CHOICES]
   dropdown_choices = SelectField(choices=choices)

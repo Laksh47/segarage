@@ -111,6 +111,8 @@ class Paper(SearchableMixin, db.Model):
     author_name = db.Column(db.String(64))
     paper_name = db.Column(db.Text)
     author_email = db.Column(db.String(120))
+    description = db.Column(db.Text)
+    visibility = db.Column(db.Boolean)
     tool_name = db.Column(db.String(200))
     link_to_pdf = db.Column(db.String(250))
     link_to_archive = db.Column(db.String(250))
