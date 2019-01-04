@@ -54,12 +54,22 @@ def file_validation(form, field):
 
 
 ##### elasticsearch utils
+def tags_obj_to_str(tags_array):
+  tags_str = ""
+  for tag in tags_array:
+    tags_str += " " + tag.tagname
+  return tags_str
+
 def add_to_index(index, model):
   if not app.elasticsearch:
     return
   payload = {}
+
   for field in model.__searchable__:
-    payload[field] = getattr(model, field)
+    if field == 'tags':
+      payload[field] = tags_obj_to_str(getattr(model, field))
+    else:
+      payload[field] = getattr(model, field)
     app.elasticsearch.index(index=index, doc_type=index, id=model.id, body=payload)
 
 def remove_from_index(index, model):

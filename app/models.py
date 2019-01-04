@@ -105,7 +105,7 @@ class Comment(db.Model):
 
 class Paper(SearchableMixin, db.Model):
     __tablename__ = "papers"
-    __searchable__ = ['paper_name'] #determines which fields should be made full-text search ex: ['author_name', 'paper_name', 'tool_name', 'tags']
+    __searchable__ = ['paper_name', 'description', 'tool_name', 'tags'] #fields that should be made full-text search ex: ['paper_name']
 
     id = db.Column(db.Integer, primary_key=True)
     author_name = db.Column(db.String(64))
