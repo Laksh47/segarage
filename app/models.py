@@ -100,7 +100,7 @@ class Comment(db.Model):
     comment_by_email = db.Column(db.String(120))
     comment = db.Column(db.Text)
     upvoted = db.Column(db.Boolean)
-    verified = db.Column(db.Integer)
+    verified = db.Column(db.Boolean, default=False)
     paper_id = db.Column(db.Integer, db.ForeignKey('papers.id'))
 
 class Paper(SearchableMixin, db.Model):
@@ -112,7 +112,7 @@ class Paper(SearchableMixin, db.Model):
     paper_name = db.Column(db.Text)
     author_email = db.Column(db.String(120))
     description = db.Column(db.Text)
-    visibility = db.Column(db.Boolean)
+    visibility = db.Column(db.Boolean, default=True)
     tool_name = db.Column(db.String(200))
     link_to_pdf = db.Column(db.String(250))
     link_to_archive = db.Column(db.String(250))
