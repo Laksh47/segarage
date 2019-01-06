@@ -3,7 +3,7 @@ from flask_paginate import Pagination, get_page_parameter, get_page_args
 
 from app import app
 from app import db
-from app.forms import requestToolUpload, toolUpload, searchPapers, endorsePaper, editButton
+from app.forms import requestToolUpload, toolUpload, searchPapers, endorsePaper, editButton, toolUpdate
 from app.models import Paper, Tag, File, Comment
 from app.utils import *
 
@@ -13,8 +13,7 @@ from sqlalchemy import func
 def before_request():
   g.search_form = searchPapers()
 
-
-
+### Index page
 @app.route('/')
 @app.route('/index')
 def index():
@@ -22,6 +21,7 @@ def index():
 
 
 
+### Requesting tool upload and uploading artifacts
 @app.route('/request_upload', methods=['GET', 'POST'])
 def request_upload():
   form = requestToolUpload()
@@ -38,13 +38,12 @@ def request_upload():
     return redirect(url_for('index'))
   return render_template('request_upload.html', title='Request to upload Tool', form=form)
 
-
-
 @app.route('/tool_upload/<token>', methods=['GET', 'POST'])
 def tool_upload(token):
 
   payload = verify_email_token(token)
   if not payload:
+    flash('Link expired, try again')
     return redirect(url_for('index'))
 
   form = toolUpload()
@@ -88,6 +87,7 @@ def tool_upload(token):
 
 
 
+### Downloading Artifacts from papers
 @app.route('/downloads/<id>/<filename>', methods=['GET', 'POST'])
 def downloads(id, filename):
   print("Resource id: {}".format(id))
@@ -97,6 +97,7 @@ def downloads(id, filename):
 
 
 
+### Browsing through papers and looking up a specific paper
 @app.route('/papers')
 def papers():
   search = False
@@ -113,8 +114,6 @@ def papers():
 
   return render_template('papers.html', papers=paginated_papers, pagination=pagination, per_page=per_page)
 
-
-
 @app.route('/papers/<id>', methods=['GET'])
 def specific_paper(id):
   print("paper id: {}".format(id))
@@ -127,6 +126,7 @@ def specific_paper(id):
 
 
 
+### Adding and verification of comments
 @app.route('/papers/<id>/comments', methods=['POST'])
 def add_comment(id):
   print("paper id: {}".format(id))
@@ -151,8 +151,6 @@ def add_comment(id):
     data = {'errors': endorse_form.errors, 'custom_msg': "Bad request for form submission reload the page and try again"}
   return jsonify(data=data), 400
 
-
-
 @app.route('/verify_comment/<token>')
 def verify_comment(token):
   payload = verify_email_token(token)
@@ -176,6 +174,7 @@ def verify_comment(token):
 
 
 
+### Searching the papers
 @app.route('/search', methods=['GET', 'POST'])
 def search():
 
@@ -202,6 +201,7 @@ def search():
 
 
 
+#### Editing the paper information: Requesting, accessing, updating
 @app.route('/request_update/<id>', methods=['POST'])
 def request_update(id):
   print("paper id: {}".format(id))
@@ -219,12 +219,64 @@ def request_update(id):
   return redirect(url_for('specific_paper', id=id))
 
 
-
-@app.route('/update_tool/<token>', methods=['GET', 'POST'])
+@app.route('/update_tool/<token>', methods=['GET'])
 def update_tool(token):
   payload = verify_email_token(token)
   if not payload:
+    flash('Link expired, try again')
     return redirect(url_for('index'))
 
-  print("paper id: {}".format(payload['paper_id']))
-  return render_template('edit_paper.html')
+  paper = Paper.query.get(payload['paper_id'])
+  form = toolUpdate()
+
+  form.toolname.data = paper.tool_name
+  form.papername.data = paper.paper_name
+  form.authorname.data = paper.author_name
+  form.authoremail.data = paper.author_email
+  form.description.data = paper.description
+  form.bibtex.data = paper.bibtex
+  form.tags.data = tags_obj_to_str(paper.tags, ", ")
+  form.linktopdf.data = paper.link_to_pdf
+  form.linktodemo.data = paper.link_to_demo
+  form.linktotoolwebpage.data = paper.link_to_tool_webpage
+  form.linktoarchive.data = paper.link_to_archive
+
+  return render_template('tool_update.html', title="Update your tool here", form=form)
+
+
+@app.route('/update_tool/<token>', methods=['POST'])
+def update_tool_submit(token):
+  print("I am here!!!!")
+  payload = verify_email_token(token)
+  if not payload:
+    flash('Link expired, try again')
+    return redirect(url_for('index'))
+
+  paper = Paper.query.get(payload['paper_id'])
+  form = toolUpdate()
+  if form.validate_on_submit():
+    paper.tool_name = form.toolname.data
+    paper.paper_name = form.papername.data
+    paper.author_name = form.authorname.data
+    paper.author_email = form.authoremail.data
+    paper.description = form.description.data
+    paper.bibtex = form.bibtex.data
+    paper.link_to_pdf = form.linktopdf.data
+    paper.link_to_demo = form.linktodemo.data
+    paper.link_to_tool_webpage = form.linktotoolwebpage.data
+    paper.link_to_archive = form.linktoarchive.data
+
+    paper.tags = []
+
+    for tag in form.tags.data.split(","):
+      tag_obj = db.session.query(Tag).filter(Tag.tagname==tag.strip()).first()
+      if tag_obj is None:
+        tag_obj = Tag(tagname=tag.strip())
+      paper.tags.append(tag_obj)
+
+    db.session.flush()
+    db.session.commit()
+    flash('Tool information update successfully')
+    return render_template('index.html')
+
+  return render_template('tool_update.html', title="Update your tool here", form=form)

@@ -51,3 +51,22 @@ class toolUpload(FlaskForm):
   tags = StringField('Tags', validators=[DataRequired()])
 
   upload = SubmitField('Upload')
+
+class toolUpdate(FlaskForm):
+  toolname = StringField('Tool name')
+
+  papername = StringField('Paper Title', validators=[DataRequired()])
+  authorname = StringField('Contact author Name')
+  authoremail = StringField('Contact author Email', validators=[DataRequired(), Email('Please enter valid email address')])
+
+  linktopdf = StringField('Link to publicly available version of the paper')
+  linktoarchive = StringField('Link to published version (ACM/IEEE/peerJ etc.,)', validators=[DataRequired()])
+  linktotoolwebpage = StringField('Link to tool webpage')
+  linktodemo = StringField('Link to demo (youtube)')
+
+  bibtex = TextAreaField('BibTex entry', validators=[DataRequired()])
+  description = TextAreaField('A short description on the Paper/Artifact', validators=[DataRequired()])
+
+  tags = StringField('Tags', validators=[DataRequired()])
+
+  update = SubmitField('Update information')

@@ -51,13 +51,15 @@ def file_validation(form, field):
       if not allowed_files(file.filename):
         raise ValidationError('File format not supported (supported: md, txt, pdf, docx, zip, gz, rar)')
 
-
-##### elasticsearch utils
-def tags_obj_to_str(tags_array):
+def tags_obj_to_str(tags_array, delimiter=" "):
   tags_str = ""
   for tag in tags_array:
-    tags_str += " " + tag.tagname
+    if tags_str != "":
+      tags_str += delimiter
+    tags_str += tag.tagname
   return tags_str
+
+##### elasticsearch utils
 
 def add_to_index(index, model):
   if not app.elasticsearch:
