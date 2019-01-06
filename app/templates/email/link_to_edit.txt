@@ -1,0 +1,11 @@
+Dear Scholar,
+
+To update your Tool/Artifact information, click on the following link:
+
+{{ url_for('update_tool', token=token, _external=True) }}
+
+If you have not requested a tool upload simply ignore this message.
+
+Sincerely,
+
+SE Garage Team

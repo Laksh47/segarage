@@ -19,10 +19,9 @@ def send_email(subject, sender, recipients, text_body, html_body):
   print("in send mail fn")
   mail.send(msg)
 
-def get_email_token(authoremail, papername, expires_in=6000):
-  return jwt.encode(
-    {'authoremail': authoremail, 'papername': papername, 'exp': time() + expires_in},
-    app.config['SECRET_KEY'], algorithm='HS256').decode('utf-8')
+def get_email_token(payload, expires_in=6000):
+  payload['exp'] = time() + expires_in
+  return jwt.encode(payload, app.config['SECRET_KEY'], algorithm='HS256').decode('utf-8')
 
 def get_email_token_comment(payload):
   # payload['exp'] = time() + expires_in

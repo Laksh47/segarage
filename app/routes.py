@@ -3,7 +3,7 @@ from flask_paginate import Pagination, get_page_parameter, get_page_args
 
 from app import app
 from app import db
-from app.forms import requestToolUpload, toolUpload, searchPapers, endorsePaper
+from app.forms import requestToolUpload, toolUpload, searchPapers, endorsePaper, editButton
 from app.models import Paper, Tag, File, Comment
 from app.utils import *
 
@@ -26,7 +26,8 @@ def index():
 def request_upload():
   form = requestToolUpload()
   if form.validate_on_submit():
-    token = get_email_token(form.authoremail.data, form.papername.data)
+    payload = { 'authoremail': form.authoremail.data, 'papername': form.papername.data }
+    token = get_email_token(payload)
 
     text_body=render_template('email/link_to_upload.txt', token=token)
     html_body=render_template('email/link_to_upload.html', token=token)
@@ -121,7 +122,8 @@ def specific_paper(id):
   if paper == None:
     return render_template('404.html')
   endorse_form = endorsePaper()
-  return render_template('specific_paper.html', paper=paper, form=endorse_form)
+  edit_button = editButton()
+  return render_template('specific_paper.html', paper=paper, form=endorse_form, edit_button=edit_button)
 
 
 
@@ -173,6 +175,7 @@ def verify_comment(token):
   return redirect(url_for('index'))
 
 
+
 @app.route('/search', methods=['GET', 'POST'])
 def search():
 
@@ -196,3 +199,32 @@ def search():
   print(pagination.__dict__)
 
   return render_template('papers.html', papers=paginated_papers, pagination=pagination, per_page=per_page)
+
+
+
+@app.route('/request_update/<id>', methods=['POST'])
+def request_update(id):
+  print("paper id: {}".format(id))
+  paper = Paper.query.get(id)
+  contact_email = paper.author_email
+
+  payload = { 'paper_id': id }
+  token = get_email_token(payload)
+  text_body=render_template('email/link_to_edit.txt', token=token)
+  html_body=render_template('email/link_to_edit.html', token=token)
+
+  send_email('Link to update tool/artifact information', app.config['ADMIN'], ['scrawler16.1@gmail.com'], text_body, html_body)
+  flash('Link to edit/update the artifact information is sent to the contact author, check email')
+
+  return redirect(url_for('specific_paper', id=id))
+
+
+
+@app.route('/update_tool/<token>', methods=['GET', 'POST'])
+def update_tool(token):
+  payload = verify_email_token(token)
+  if not payload:
+    return redirect(url_for('index'))
+
+  print("paper id: {}".format(payload['paper_id']))
+  return render_template('edit_paper.html')

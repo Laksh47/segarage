@@ -6,6 +6,9 @@ from wtforms.validators import InputRequired, DataRequired, Email, ValidationErr
 
 from app.utils import FILETYPE_CHOICES, file_validation
 
+class editButton(FlaskForm):
+  submit = SubmitField('Edit/Update')
+
 class endorsePaper(FlaskForm):
   commenter_email = StringField('Email', validators=[DataRequired(), Email('Please enter valid email address')])
   comment = TextAreaField('Feedback for the artifacts', validators=[DataRequired()])

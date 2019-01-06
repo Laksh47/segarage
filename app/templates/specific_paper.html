@@ -1,6 +1,11 @@
 {% extends "base.html" %}
 
 {% block content %}
+<form action="{{ url_for('request_update', id=paper.id) }}" method="post">
+  {{ edit_button.hidden_tag() }}
+  <div class="form-group"> {{ edit_button.submit(class_='btn btn-success') }} </div>
+</form>
+
 <h3> {{ paper.paper_name }} </h3>
 <p> contact author email: <b> {{ paper.author_email }} </b> </p>
 
