@@ -123,6 +123,8 @@ class Paper(SearchableMixin, db.Model):
     files = db.relationship("File")
     tags = db.relationship("Tag", secondary=paper_tag_association)
 
+    view_count = db.Column(db.Integer, default=0)
+    download_count = db.Column(db.Integer, default=0)
 
     created_at  = db.Column(db.DateTime,  default=db.func.current_timestamp())
     updated_at = db.Column(db.DateTime,  default=db.func.current_timestamp(),

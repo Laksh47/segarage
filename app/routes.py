@@ -1,4 +1,4 @@
-from flask import render_template, flash, redirect, url_for, send_from_directory, request, g, jsonify
+from flask import render_template, flash, redirect, url_for, send_from_directory, request, g, jsonify, session
 from flask_paginate import Pagination, get_page_parameter, get_page_args
 
 from app import app
@@ -91,6 +91,20 @@ def tool_upload(token):
 @app.route('/downloads/<id>/<filename>', methods=['GET', 'POST'])
 def downloads(id, filename):
   print("Resource id: {}".format(id))
+
+  paper = Paper.query.get(id)
+  if paper == None:
+    return render_template('404.html')
+
+  ### Updating paper download count based on session this logic might need to be re-designed
+  if 'downloaded' not in session:
+    session['downloaded'] = True
+    if not paper.download_count:
+      paper.download_count = 0
+    paper.download_count += 1
+    db.session.flush()
+    db.session.commit()
+
   print("Filename: {}".format(filename))
   print("Dir: {}".format(app.config['UPLOAD_FOLDER'] + "/{}".format(id)))
   return send_from_directory(app.config['UPLOAD_FOLDER'] + "/{}".format(id), filename, as_attachment=True)
@@ -120,6 +134,17 @@ def specific_paper(id):
   paper = Paper.query.get(id)
   if paper == None:
     return render_template('404.html')
+
+
+  ### Updating paper view count based on session this logic might need to be re-designed
+  if 'visited' not in session:
+    session['visited'] = True
+    if not paper.view_count:
+      paper.view_count = 0
+    paper.view_count += 1
+    db.session.flush()
+    db.session.commit()
+
   endorse_form = endorsePaper()
   edit_button = editButton()
   return render_template('specific_paper.html', paper=paper, form=endorse_form, edit_button=edit_button)
