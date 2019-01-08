@@ -6,38 +6,18 @@
 
 {{ pagination.info }}
 {{ pagination.links }}
-	<table>
-	  <thead>
-	    <tr>
-	      <th>Paper name</th>
-	      <th>Contact Email</th>
-	      <th>Tool name</th>
-	      <th>Link to archive</th>
-	      <th>Bibtex</th>
-	      <th>More details</th>
-	      <th>Tags</th>
-	    </tr>
-	  </thead>
-	  <tbody>
-	    {% for paper in papers %}
-	      <tr>
-	        <td>{{ paper.paper_name }}</td>
-	        <td>{{ paper.author_email }}</td>
-	        <td>{{ paper.tool_name }}</td>
-	        <td>{{ paper.link_to_archive }}</td>
-	        <td>{{ paper.bibtex }}</td>
-	        <td>
-	        	<a href="/papers/{{ paper.id }}"> Click for more </a>
-					</td>
-					<td>
-						{% for tag in paper.tags %}
-							<li>{{ tag.tagname }}</li>
-						{% endfor %}
-					</td>
-	      </tr>
-	    {% endfor %}
-	  </tbody>
-	</table>
+	<div class="papers">
+		{% for paper in papers %}
+			<div class="specific_paper">
+				<a class="paper_link" href="/papers/{{ paper.id }}">
+						<div>{{ paper.paper_name }}</div>
+						<div>{{ paper.tool_name }}</div>
+						<div>{{ paper.author_email }}</div>
+						<div>{{ paper.link_to_archive }}</div>
+				</a>
+			</div>
+		{% endfor %}
+	</div>
 
 {{ pagination.links }}
 

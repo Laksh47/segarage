@@ -152,3 +152,35 @@ td li {
 .loading {
 	display: none;
 }
+
+/* Paper browsing app store UI */
+.papers {
+  display: flex;
+  flex-flow: row wrap;
+}
+
+.specific_paper {
+  border: 1px solid black;
+  border-radius: 5px;
+  padding: 15px;
+  font-size: 20px;
+  cursor: pointer;
+  flex-grow: 1;
+  margin: 7px;
+  width: 300px;
+  height: 165px;
+}
+
+.specific_paper div {
+  text-overflow: ellipsis;
+  overflow: hidden;
+  width: 100%;
+}
+
+.specific_paper a.paper_link {
+	color: #545353;
+}
+
+.specific_paper a.paper_link:hover {
+  text-decoration: none;
+}
