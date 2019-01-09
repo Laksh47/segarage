@@ -147,7 +147,7 @@ def specific_paper(id):
 
   endorse_form = endorsePaper()
   edit_button = editButton()
-  return render_template('specific_paper.html', paper=paper, form=endorse_form, edit_button=edit_button)
+  return render_template('specific_paper.html', paper=paper, form=endorse_form, edit_button=edit_button, tags=tags_obj_to_str(paper.tags, ", "))
 
 
 

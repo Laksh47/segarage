@@ -160,7 +160,7 @@ td li {
 }
 
 .specific_paper {
-  border: 1px solid black;
+  border: 2px solid #d1dae2;
   border-radius: 5px;
   padding: 15px;
   font-size: 20px;
@@ -169,6 +169,7 @@ td li {
   margin: 7px;
   width: 300px;
   height: 165px;
+  background-color: #d1dae2;
 }
 
 .specific_paper div {
@@ -182,5 +183,43 @@ td li {
 }
 
 .specific_paper a.paper_link:hover {
-  text-decoration: none;
+	text-decoration: none;
+}
+
+.specific_paper:hover, .specific_paper:hover a.paper_link {
+  color: #1a1b1a;
+  border-color: black;
+}
+
+/* Table in specific paper page */
+.paper_info h3 {
+	text-align: center;
+}
+
+.edit_button {
+	text-align: right;
+}
+
+.paper_info table, .paper_info th, .paper_info td {
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  padding: 15px;
+  font-size: 18px;
+}
+
+.paper_info table ul {
+	padding: 0;
+	margin: 0;
+}
+
+.paper_info table {
+	margin: 0px auto;
+}
+
+.feedback_form_wrap {
+	margin-top: 25px;
+}
+
+.feedback_form_wrap h3 {
+	text-align: center;
 }
