@@ -63,6 +63,7 @@
         <div class="form-group required">
             {{ form.bibtex.label }}
             {{ form.bibtex(size=32, class_='form-control') }}
+            <div class="modal_btn">Show sample</div>
             {% for error in form.bibtex.errors %}
               <span style="color: red;">[{{ error }}]</span>
             {% endfor %}
@@ -90,6 +91,28 @@
        
         <p>{{ form.upload(class_='btn btn-success') }}</p>
     </form>
+
+    <!-- The Modal -->
+    <div class="modal">
+
+      <!-- Modal content -->
+      <div class="modal_content">
+        <span class="close">&times;</span>
+        <div class="modal_text"><p>@article{author_username,</p>
+              <p class="tab">title={Paper title},</p>
+              <p class="tab">author={Lastname, Firstname and Lastname, Firstname},</p>
+              <p class="tab">journal={Journal name},</p>
+              <p class="tab">volume={3},</p>
+              <p class="tab">number={1},</p>
+              <p class="tab">pages={170--177},</p>
+              <p class="tab">year={2010},</p>
+              <p class="tab">publisher={publisher name}</p>
+            }
+        </div>
+      </div>
+
+    </div>
+
 
     <script type="text/javascript">
         $(document).ready(function() {
@@ -122,6 +145,22 @@
                 console.log(values)
                 $('.custom_upload #file_types').val(values)
             })
+
+            //code for modal show/hide
+            $('.modal_btn').on('click', function() {
+                $('.modal').show();
+            })
+
+            $('span.close').on('click', function() {
+                $('#modal').hide();
+            })
+
+            $(window).on('click', function(event) {
+                if(event.target.className == "modal") {
+                    $('.modal').hide();
+                }
+            })
+
         });
     </script>
 {% endblock %}

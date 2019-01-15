@@ -43,7 +43,7 @@ def tool_upload(token):
 
   payload = verify_email_token(token)
   if not payload:
-    flash('Link expired, try again')
+    flash('Link expired or invalid, try again')
     return redirect(url_for('index'))
 
   form = toolUpload()
