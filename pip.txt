@@ -31,3 +31,5 @@ flask db upgrade
 
 pip install flask-paginate
 
+pip install flask_limiter
+

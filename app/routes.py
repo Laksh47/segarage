@@ -9,9 +9,23 @@ from app.utils import *
 
 from sqlalchemy import func
 
+from flask_limiter import Limiter
+from flask_limiter.util import get_remote_address
+
+## API rate limiter, currently set to 60 calls per minute and 3 calls per second
+limiter = Limiter(
+  app,
+  key_func=get_remote_address,
+  default_limits=["60 per minute", "3 per second"],
+)
+
+
+
 @app.before_request
 def before_request():
   g.search_form = searchPapers()
+
+
 
 ### Index page
 @app.route('/')
