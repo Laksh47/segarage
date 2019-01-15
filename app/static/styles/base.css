@@ -10,16 +10,20 @@
 }
 
 label {
-	font-size: 20px;
-	font-weight: 400;
+  font-size: 20px;
+  font-weight: 400;
 }
 
 form {
-	margin: 0;
+  margin: 0;
 }
 
 .form-control {
-	width: 50%;
+  width: 50%;
+}
+
+textarea.form-control {
+  min-height: 175px;
 }
 
 .form-group.required label:after {
@@ -58,7 +62,7 @@ ul.nav.nav-pills.inline-middle .active a, ul.nav.nav-pills.inline-middle a:hover
 }
 
 .pagination ul {
-	padding: 0;
+  padding: 0;
   margin: 5px 0;
 }
 
@@ -114,14 +118,14 @@ ul.nav.nav-pills.inline-middle .active a, ul.nav.nav-pills.inline-middle a:hover
 }
 
 .inline-middle {
-	display: inline-block;
-	vertical-align: middle;
-	width: 49.5%;
+  display: inline-block;
+  vertical-align: middle;
+  width: 49.5%;
 }
 
 th, td {
-	border: 1px solid;
-	padding: 5px;
+  border: 1px solid;
+  padding: 5px;
 }
 
 td li {
@@ -140,17 +144,17 @@ td li {
 }
 
 .searchbar-wrap {
-	text-align: right;
+  text-align: right;
 }
 
 .feedback_form {
-	background-color: white;
+  background-color: white;
   padding: 30px;
   margin: 10px 0px;
 }
 
 .loading {
-	display: none;
+  display: none;
 }
 
 /* Paper browsing app store UI */
@@ -179,11 +183,11 @@ td li {
 }
 
 .specific_paper a.paper_link {
-	color: #545353;
+  color: #545353;
 }
 
 .specific_paper a.paper_link:hover {
-	text-decoration: none;
+  text-decoration: none;
 }
 
 .specific_paper:hover, .specific_paper:hover a.paper_link {
@@ -193,11 +197,11 @@ td li {
 
 /* Table in specific paper page */
 .paper_info h3 {
-	text-align: center;
+  text-align: center;
 }
 
 .edit_button {
-	text-align: right;
+  text-align: right;
 }
 
 .paper_info table, .paper_info th, .paper_info td {
@@ -208,20 +212,20 @@ td li {
 }
 
 .paper_info table ul {
-	padding: 0;
-	margin: 0;
+  padding: 0;
+  margin: 0;
 }
 
 .paper_info table {
-	margin: 0px auto;
+  margin: 0px auto;
 }
 
 .feedback_form_wrap {
-	margin-top: 25px;
+  margin-top: 25px;
 }
 
 .feedback_form_wrap h3 {
-	text-align: center;
+  text-align: center;
 }
 
 .modal_btn {
@@ -241,10 +245,19 @@ td li {
 }
 
 .modal_text p {
-	margin-bottom: 3px;
+  margin-bottom: 3px;
 }
 .modal_text p.tab {
-	margin-left: 50px;
+  margin-left: 50px;
+}
+
+.clipboard_copy {
+  text-align: right;
+  margin-top: 5px;
+}
+
+.clipboard_copy button {
+  border-radius: 4px;
 }
 
 /* The Modal (background) taken and modified from w3 schools */

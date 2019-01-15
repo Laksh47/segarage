@@ -109,6 +109,10 @@
               <p class="tab">publisher={publisher name}</p>
             }
         </div>
+        <div class="clipboard_copy">
+            <span class="message"></span>
+            <button class="copy_button"">copy to clipboard</button>
+        </div>
       </div>
 
     </div>
@@ -118,6 +122,18 @@
         $(document).ready(function() {
             $('#tags').tagsInput();
             $('.tagsinput').addClass('form-control');
+
+            // Clipboard copy functionality
+            $('.copy_button').on('click', function() {
+                var $temp = $("<textarea>");
+                $("body").append($temp);
+                var text = '@article{author_username,\r\ttitle={Paper title},\r\tauthor={Lastname, Firstname and Lastname, Firstname},\r\tjournal={Journal name},\r\tvolume={3},\r\tnumber={1},\r\tpages={170--177},\r\tyear={2010},\r\tpublisher={publisher name}\r}'
+                //$('.modal_text').text().replace(/},/g, '\n')
+                $temp.val(text).select();
+                document.execCommand("copy");
+                $temp.remove();
+                $('.clipboard_copy .message').text('copied')
+            })
 
             // code to add more files not more than 5 attachments
             $('#all_files').removeAttr('multiple')
@@ -148,6 +164,7 @@
 
             //code for modal show/hide
             $('.modal_btn').on('click', function() {
+                $('.clipboard_copy .message').text('')
                 $('.modal').show();
             })
 
