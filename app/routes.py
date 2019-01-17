@@ -8,6 +8,7 @@ from app.models import Paper, Tag, File, Comment
 from app.utils import *
 
 from sqlalchemy import func
+from os import path
 
 from flask_limiter import Limiter
 from flask_limiter.util import get_remote_address
@@ -110,17 +111,23 @@ def downloads(id, filename):
   if paper == None:
     return render_template('404.html')
 
+  filepath = "{}/{}/{}".format(app.config['UPLOAD_FOLDER'], id, filename)
+  if not path.exists(filepath):
+    return render_template('404.html')
+
+  session_download_key = 'downloaded_{}'.format(paper.id)
+
   ### Updating paper download count based on session this logic might need to be re-designed
-  if 'downloaded' not in session:
-    session['downloaded'] = True
-    if not paper.download_count:
-      paper.download_count = 0
+  if session_download_key not in session:
+    session[session_download_key] = True
+
     paper.download_count += 1
     db.session.flush()
     db.session.commit()
 
-  print("Filename: {}".format(filename))
-  print("Dir: {}".format(app.config['UPLOAD_FOLDER'] + "/{}".format(id)))
+  # print("Filename: {}".format(filename))
+  # print("Dir: {}".format(app.config['UPLOAD_FOLDER'] + "/{}".format(id)))
+
   return send_from_directory(app.config['UPLOAD_FOLDER'] + "/{}".format(id), filename, as_attachment=True)
 
 
@@ -152,8 +159,7 @@ def specific_paper(id):
   ### Updating paper view count based on session this logic might need to be re-designed
   if 'visited' not in session:
     session['visited'] = True
-    if not paper.view_count:
-      paper.view_count = 0
+
     paper.view_count += 1
     db.session.flush()
     db.session.commit()

@@ -1,4 +1,5 @@
 import os
+from datetime import timedelta
 
 basedir = os.path.abspath(os.path.dirname(__file__))
 
@@ -34,3 +35,5 @@ class Config(object):
     PER_PAGE = 7
 
     ELASTICSEARCH_URL = os.environ.get('ELASTICSEARCH_URL')
+
+    PERMANENT_SESSION_LIFETIME =  timedelta(days=1)
