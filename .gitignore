@@ -111,3 +111,4 @@ uploads/
 *.zip
 
 migrations/versions/
+migrations/

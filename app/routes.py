@@ -144,7 +144,6 @@ def papers():
 
 @app.route('/papers/<id>', methods=['GET'])
 def specific_paper(id):
-  print("paper id: {}".format(id))
   paper = Paper.query.get(id)
   if paper == None:
     return render_template('404.html')
@@ -161,7 +160,12 @@ def specific_paper(id):
 
   endorse_form = endorsePaper()
   edit_button = editButton()
-  return render_template('specific_paper.html', paper=paper, form=endorse_form, edit_button=edit_button, tags=tags_obj_to_str(paper.tags, ", "))
+
+  query_obj = paper.comments.filter(Comment.verified==1)
+  comments = query_obj.all()
+  upvotes = query_obj.filter(Comment.upvoted==1).count()
+
+  return render_template('specific_paper.html', paper=paper, form=endorse_form, edit_button=edit_button, tags=tags_obj_to_str(paper.tags, ", "), comments=comments, upvotes=upvotes)
 
 
 
@@ -174,7 +178,8 @@ def add_comment(id):
   if endorse_form.validate_on_submit():
     print(endorse_form.__dict__)
     upvoted = 1 if endorse_form.upvote.data else 0
-    comment = Comment(comment_by_email=endorse_form.commenter_email.data, comment=endorse_form.comment.data, upvoted=upvoted, verified=0, paper_id=id)
+    commenter_name = endorse_form.commenter_name.data if endorse_form.commenter_name.data else 'Anonymous'
+    comment = Comment(commenter_name=commenter_name, commenter_email=endorse_form.commenter_email.data, comment=endorse_form.comment.data, upvoted=upvoted, verified=0, paper_id=id)
     db.session.add(comment)
     db.session.flush()
 
@@ -187,7 +192,7 @@ def add_comment(id):
     db.session.commit()
 
     return jsonify(data={'message': 'Submission successfully added, waiting for email verification from {}'.format(endorse_form.commenter_email.data)})
-    data = {'errors': endorse_form.errors, 'custom_msg': "Bad request for form submission reload the page and try again"}
+  data = {'errors': endorse_form.errors, 'custom_msg': "Bad request for form submission reload the page and try again"}
   return jsonify(data=data), 400
 
 @app.route('/verify_comment/<token>')

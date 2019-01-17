@@ -1,12 +1,35 @@
 {% extends "base.html" %}
 
 {% block content %}
-<form action="{{ url_for('request_update', id=paper.id) }}" method="post">
-  {{ edit_button.hidden_tag() }}
-  <div class="form-group edit_button"> {{ edit_button.submit(class_='btn btn-success') }} </div>
-</form>
 
 <div class="paper_info">
+  <div class="counts">
+    <div class="custom_column">
+      <div class="count">
+        {{ paper.download_count }}
+      </div>
+      <div class="">
+        Downloads
+      </div>
+    </div>
+    <div class="custom_column">
+      <div class="count">
+        {{ paper.view_count }}
+      </div>
+      <div class="">
+        Views
+      </div>
+    </div>
+    <div class="custom_column">
+      <div class="count">
+        {{ upvotes }}
+      </div>
+      <div class="">
+        Upvotes
+      </div>
+    </div>
+ 
+  </div>
   <h3>{{ paper.paper_name }}</h3>
 
   <table>
@@ -63,17 +86,43 @@
     </td>
   </tr>
   </table>
+  <form action="{{ url_for('request_update', id=paper.id) }}" method="post">
+    {{ edit_button.hidden_tag() }}
+    <div class="form-group edit_button"> {{ edit_button.submit(class_='btn') }} </div>
+  </form>
+</div>
+<div class="comments">
+  <h3>Comments</h3>
+  {% for comment in comments %}
+    <div class="comment-wrap">
+      <div class="comment">
+        {{ comment.comment }}
+      </div>
+      <div class="comment_by">
+        commented by {{ comment.commenter_name }}
+      </div>
+    </div>    
+  {% endfor %}
 </div>
 
 <div class="feedback_form_wrap">
   <h3>Your feedback would be appreciated!</h3>
 
   <form action="{{ url_for('add_comment', id=paper.id) }}" method="post" class="feedback_form">
+    <div class="form_submission_msg">
+    </div>
     {{ form.hidden_tag() }}
     <div class="form-group required">
         {{ form.commenter_email.label }}
         {{ form.commenter_email(size=32, class_='form-control') }}
         {% for error in form.commenter_email.errors %}
+          <span style="color: red;">[{{ error }}]</span>
+        {% endfor %}
+    </div>
+    <div class="form-group">
+        {{ form.commenter_name.label }}
+        {{ form.commenter_name(size=32, class_='form-control') }}
+        {% for error in form.commenter_name.errors %}
           <span style="color: red;">[{{ error }}]</span>
         {% endfor %}
     </div>
@@ -100,14 +149,14 @@
       <img src="{{ url_for('static',filename='assets/roll.gif') }}" />
     </div>
 
-    <div class="form_submission_msg">
-    </div>
   </form>
 </div>
+
 
 <script>
   $(document).ready(function() {
     $('.feedback_form').submit(function (e) {
+      $('.form_submission_msg').text('')
       $('.loading').show();
       $('.form-group').hide();
 
@@ -121,9 +170,24 @@
           $('.loading').hide();
           $('.form_submission_msg').text(result.data.message)
         },
-        failure: function (error) {
+        error: function (error) {
           $('.loading').hide();
-          $('.form_submission_msg').text(error.data.custom_msg)
+          $('.form-group').show();
+          $('.form_submission_msg').text(error.responseJSON.data.custom_msg)
+
+          var errors = error.responseJSON.data.errors
+          var keys = Object.keys(errors)
+          $('.ajax_errors').remove()
+          for (var index in keys){
+            key = keys[index]
+            id = `#${key}`
+            if(key == 'recaptcha') {
+              id = '.g-recaptcha'
+            }
+            msg = errors[key]
+            $(id).closest('.form-group').append(`<span class="ajax_errors" style="color: red;">${msg}</span>`)
+          }
+
         }
       });
       e.preventDefault(); // block the traditional submission of the form.

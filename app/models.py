@@ -97,10 +97,11 @@ class File(db.Model):
 class Comment(db.Model):
     __tablename__ = "comments"
     id = db.Column(db.Integer, primary_key=True)
-    comment_by_email = db.Column(db.String(120))
+    commenter_email = db.Column(db.String(120))
+    commenter_name = db.Column(db.String(120), default="Anonymous", nullable=False)
     comment = db.Column(db.Text)
     upvoted = db.Column(db.Boolean)
-    verified = db.Column(db.Boolean, default=False)
+    verified = db.Column(db.Boolean, default=0, nullable=False)
     paper_id = db.Column(db.Integer, db.ForeignKey('papers.id'))
 
 class Paper(SearchableMixin, db.Model):
@@ -112,7 +113,7 @@ class Paper(SearchableMixin, db.Model):
     paper_name = db.Column(db.Text)
     author_email = db.Column(db.String(120))
     description = db.Column(db.Text)
-    visibility = db.Column(db.Boolean, default=True)
+    visibility = db.Column(db.Boolean, default=1, nullable=False)
     tool_name = db.Column(db.String(200))
     link_to_pdf = db.Column(db.String(250))
     link_to_archive = db.Column(db.String(250))
@@ -122,9 +123,10 @@ class Paper(SearchableMixin, db.Model):
 
     files = db.relationship("File")
     tags = db.relationship("Tag", secondary=paper_tag_association)
+    comments = db.relationship("Comment", lazy='dynamic')
 
-    view_count = db.Column(db.Integer, default=0)
-    download_count = db.Column(db.Integer, default=0)
+    view_count = db.Column(db.Integer, default=0, nullable=False)
+    download_count = db.Column(db.Integer, default=0, nullable=False)
 
     created_at  = db.Column(db.DateTime,  default=db.func.current_timestamp())
     updated_at = db.Column(db.DateTime,  default=db.func.current_timestamp(),

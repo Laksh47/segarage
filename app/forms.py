@@ -7,10 +7,11 @@ from wtforms.validators import InputRequired, DataRequired, Email, ValidationErr
 from app.utils import FILETYPE_CHOICES, file_validation
 
 class editButton(FlaskForm):
-  submit = SubmitField('Edit/Update')
+  submit = SubmitField('Edit/Update paper details')
 
 class endorsePaper(FlaskForm):
   commenter_email = StringField('Email', validators=[DataRequired(), Email('Please enter valid email address')])
+  commenter_name = StringField('Name (optional)')
   comment = TextAreaField('Feedback for the artifacts', validators=[DataRequired()])
   upvote = BooleanField("Upvote this artifact!")
   recaptcha = RecaptchaField()

@@ -1,5 +1,9 @@
 /* Bootstrap styles overridden here */
 
+body {
+  font-size: 20px;
+}
+
 .nav.nav-pills.pull-left {
   font-size: 18px;
   margin: 5px 0;
@@ -147,14 +151,42 @@ td li {
   text-align: right;
 }
 
+
+/* AJAX form */
+
+.feedback_form_wrap {
+  margin: 25px auto 0 auto;
+  width: 70%;
+}
+
+.feedback_form_wrap h3 {
+  text-align: center;
+}
+
+.form_submission_msg {
+  font-size: 20px;
+  text-align: center;
+  margin-bottom: 25px;
+  color: #b789b7;
+}
+
 .feedback_form {
   background-color: white;
   padding: 30px;
   margin: 10px 0px;
 }
 
+.feedback_form .form-control {
+  width: 100%;
+}
+
 .loading {
   display: none;
+  text-align: center;
+}
+
+.loading img {
+  width: 10%;
 }
 
 /* Paper browsing app store UI */
@@ -170,7 +202,7 @@ td li {
   font-size: 20px;
   cursor: pointer;
   flex-grow: 1;
-  margin: 7px;
+  margin: 7px 7px 7px 0;
   width: 300px;
   height: 165px;
   background-color: #d1dae2;
@@ -198,10 +230,13 @@ td li {
 /* Table in specific paper page */
 .paper_info h3 {
   text-align: center;
+  margin-bottom: 25px;
 }
 
 .edit_button {
-  text-align: right;
+  text-align: center;
+  margin-top: 10px;
+  margin-bottom: 50px;
 }
 
 .paper_info table, .paper_info th, .paper_info td {
@@ -220,13 +255,7 @@ td li {
   margin: 0px auto;
 }
 
-.feedback_form_wrap {
-  margin-top: 25px;
-}
-
-.feedback_form_wrap h3 {
-  text-align: center;
-}
+/* Modal CSS */
 
 .modal_btn {
   cursor: pointer;
@@ -299,4 +328,51 @@ td li {
   color: #000;
   text-decoration: none;
   cursor: pointer;
+}
+
+
+/* Counts CSS */
+.counts {
+  text-align: right;
+}
+
+.custom_column {
+  display: inline-block;
+  text-align: center;
+  margin: 0px 20px;
+}
+
+.custom_column .count {
+  font-size: 25px;
+}
+
+/* Comments */
+.comments {
+  background-color: white;
+  padding: 20px;
+  border-radius: 5px;
+}
+
+.comments h3 {
+  margin-top: 5px;
+  margin-bottom: 25px;
+}
+
+.comment-wrap {
+  border-bottom: 1px solid #ddd;
+  padding: 10px;
+}
+
+.comment {
+  display: inline-block;
+  width: 70%;
+  padding-left: 5px;
+}
+
+.comment_by {
+  display: inline-block;
+  font-size: 15px;
+  color: #aaa;
+  text-align: right;
+  width: 29%;
 }
