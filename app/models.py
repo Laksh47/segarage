@@ -90,7 +90,8 @@ class Tag(db.Model):
 class File(db.Model):
     __tablename__ = "files"
     id = db.Column(db.Integer, primary_key=True)
-    filename = db.Column(db.String(140), index=True)
+    filename = db.Column(db.String(80), index=True)
+    fileurl = db.Column(db.String(200), index=True)
     filetype = db.Column(db.String(50))
     paper_id = db.Column(db.Integer, db.ForeignKey('papers.id'))
 

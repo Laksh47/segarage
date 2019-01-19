@@ -33,3 +33,5 @@ pip install flask-paginate
 
 pip install flask_limiter
 
+pip install boto3
+

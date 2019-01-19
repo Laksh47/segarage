@@ -6,7 +6,7 @@ from time import time
 import jwt
 import os
 
-ALLOWED_EXTENSIONS_FILES = set(['txt', 'pdf', 'md', 'zip', 'tar', 'gz'])
+ALLOWED_EXTENSIONS_FILES = set(['txt', 'pdf', 'md', 'zip', 'tar', 'gz', 'docx', 'xlsx'])
 FILETYPE_CHOICES = ['Binary', 'Scripts (Source code)', 'Readme', 'Other']
 
 def allowed_files(filename):
@@ -24,24 +24,31 @@ def get_email_token(payload, expires_in=6000):
   return jwt.encode(payload, app.config['SECRET_KEY'], algorithm='HS256').decode('utf-8')
 
 def get_email_token_comment(payload):
-  # payload['exp'] = time() + expires_in
   return jwt.encode(payload, app.config['SECRET_KEY'], algorithm='HS256').decode('utf-8')
 
 def verify_email_token(token):
   try:
     payload = jwt.decode(token, app.config['SECRET_KEY'], algorithms=['HS256'])
-  except:
+  except Exception as e:
+    print("Something Happened: ", e)
     return
   return payload
 
-def save_file(field, paper_id):
-  filename = secure_filename(field.filename)
-  filepath = app.config['UPLOAD_FOLDER'] + '/{}/'.format(paper_id)
-
-  if not os.path.exists(os.path.dirname(filepath)):
-    os.makedirs(os.path.dirname(filepath))
-
-  field.save(filepath + filename)
+def upload_file_to_s3(s3, file, bucket_name, acl="public-read"):
+  try:
+    s3.upload_fileobj(
+      file,
+      bucket_name,
+      file.filename,
+      ExtraArgs={
+        "ACL": acl,
+        "ContentType": file.content_type
+      }
+    )
+  except Exception as e:
+    # This is a catch all exception, edit this part to fit your needs.
+    print("Something Happened: ", e)
+    return e
 
 def file_validation(form, field):
   if field.data:
@@ -58,6 +65,8 @@ def tags_obj_to_str(tags_array, delimiter=" "):
       tags_str += delimiter
     tags_str += tag.tagname
   return tags_str
+
+
 
 ##### elasticsearch utils
 

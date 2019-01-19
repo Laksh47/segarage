@@ -1,9 +1,5 @@
 /* Bootstrap styles overridden here */
 
-body {
-  font-size: 20px;
-}
-
 .nav.nav-pills.pull-left {
   font-size: 18px;
   margin: 5px 0;
@@ -115,6 +111,7 @@ ul.nav.nav-pills.inline-middle .active a, ul.nav.nav-pills.inline-middle a:hover
 /* overall css */
 .header {
   padding: 5px 0px 5px 0px;
+  font-size: 16px;
 }
 
 .footer {
@@ -228,6 +225,10 @@ td li {
 }
 
 /* Table in specific paper page */
+.paper_info {
+  font-size: 20px;
+}
+
 .paper_info h3 {
   text-align: center;
   margin-bottom: 25px;

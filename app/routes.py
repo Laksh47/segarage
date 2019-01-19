@@ -1,7 +1,10 @@
-from flask import render_template, flash, redirect, url_for, send_from_directory, request, g, jsonify, session
-from flask_paginate import Pagination, get_page_parameter, get_page_args
+from flask import render_template, flash, redirect, url_for
+from flask import request, g, jsonify, session
+from flask import Response, Markup
 
-from app import app
+from flask_paginate import Pagination, get_page_args
+
+from app import app, db, s3
 from app import db
 from app.forms import requestToolUpload, toolUpload, searchPapers, endorsePaper, editButton, toolUpdate
 from app.models import Paper, Tag, File, Comment
@@ -10,16 +13,7 @@ from app.utils import *
 from sqlalchemy import func
 from os import path
 
-from flask_limiter import Limiter
-from flask_limiter.util import get_remote_address
-
-## API rate limiter, currently set to 60 calls per minute and 3 calls per second
-limiter = Limiter(
-  app,
-  key_func=get_remote_address,
-  default_limits=["60 per minute", "3 per second"],
-)
-
+from werkzeug.utils import secure_filename
 
 
 @app.before_request
@@ -63,6 +57,7 @@ def tool_upload(token):
 
   form = toolUpload()
   form.authoremail.data = payload['authoremail']
+  form.papername.data = payload['papername']
 
   if form.validate_on_submit():
     paper = Paper(paper_name=form.papername.data, author_name=form.authorname.data, author_email=form.authoremail.data, tool_name=form.toolname.data, link_to_pdf=form.linktopdf.data, link_to_archive=form.linktoarchive.data, link_to_tool_webpage=form.linktotoolwebpage.data, link_to_demo=form.linktodemo.data, bibtex=form.bibtex.data, description=form.description.data)
@@ -79,22 +74,33 @@ def tool_upload(token):
     db.session.flush()
 
     filenames = []
+    fileurls = []
     filetypes = form.file_types.data.split(',')
 
     for file in form.all_files.data:
       if not isinstance(file, str):
-        save_file(file, paper.id)
         filenames.append(secure_filename(file.filename))
 
-    print("Uploaded files below for paper: {}".format(paper.id))
-    print(filenames)
+        filename = '{}/{}'.format(paper.id, secure_filename(file.filename))
+        file.filename = filename # updating the name with paper.id for easy access
 
-    for filename, filetype in zip(filenames, filetypes):
-      paper.files.append(File(filename=filename, filetype=filetype))
+        bucket_location = s3.get_bucket_location(Bucket=app.config['S3_BUCKET'])
+        s3_url = "https://s3.{0}.amazonaws.com/{1}/{2}".format(bucket_location['LocationConstraint'], app.config['S3_BUCKET'], filename)
+
+        upload_file_to_s3(s3, file, app.config['S3_BUCKET'])
+        fileurls.append(s3_url)
+
+    print("Uploaded files below for paper: {}".format(paper.id))
+    print(fileurls)
+
+    for filename, fileurl, filetype in zip(filenames, fileurls, filetypes):
+      paper.files.append(File(filename=filename, filetype=filetype, fileurl=fileurl))
 
     db.session.flush()
     db.session.commit()
-    flash('Tool submission success {}'.format(paper.id))
+
+    message = Markup('Tool submission success, <a href="{}">check here</a>'.format(url_for('specific_paper', id=paper.id)))
+    flash(message)
 
     return redirect(url_for('index'))
     
@@ -111,8 +117,12 @@ def downloads(id, filename):
   if paper == None:
     return render_template('404.html')
 
-  filepath = "{}/{}/{}".format(app.config['UPLOAD_FOLDER'], id, filename)
-  if not path.exists(filepath):
+  s3_filename = '{}/{}'.format(paper.id, filename)
+
+  try:
+    target_file = s3.get_object(Bucket=app.config['S3_BUCKET'], Key=s3_filename)
+  except Exception as e:
+    print("Something Happened: ", e)
     return render_template('404.html')
 
   session_download_key = 'downloaded_{}'.format(paper.id)
@@ -125,10 +135,12 @@ def downloads(id, filename):
     db.session.flush()
     db.session.commit()
 
-  # print("Filename: {}".format(filename))
-  # print("Dir: {}".format(app.config['UPLOAD_FOLDER'] + "/{}".format(id)))
-
-  return send_from_directory(app.config['UPLOAD_FOLDER'] + "/{}".format(id), filename, as_attachment=True)
+  response = Response(
+    target_file['Body'],
+    mimetype=target_file['ResponseMetadata']['HTTPHeaders']['content-type'],
+    headers={"Content-Disposition": "attachment;filename={}".format(filename)}
+  )
+  return response ## File as download attachment
 
 
 
