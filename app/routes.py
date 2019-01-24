@@ -1,11 +1,10 @@
 from flask import render_template, flash, redirect, url_for
 from flask import request, g, jsonify, session
-from flask import Response, Markup
+from flask import Response
 
 from flask_paginate import Pagination, get_page_args
 
 from app import app, db, s3
-from app import db
 from app.forms import requestToolUpload, toolUpload, searchPapers, endorsePaper, editButton, toolUpdate
 from app.models import Paper, Tag, File, Comment
 from app.utils import *
@@ -19,8 +18,6 @@ from werkzeug.utils import secure_filename
 @app.before_request
 def before_request():
   g.search_form = searchPapers()
-
-
 
 ### Index page
 @app.route('/')
@@ -99,10 +96,9 @@ def tool_upload(token):
     db.session.flush()
     db.session.commit()
 
-    message = Markup('Tool submission success, <a href="{}">check here</a>'.format(url_for('specific_paper', id=paper.id)))
-    flash(message)
+    flash('Tool submission success!')
 
-    return redirect(url_for('index'))
+    return redirect(url_for('specific_paper', id=paper.id))
     
   return render_template('tool_upload.html', title="Upload your tool here", form=form)
 
@@ -263,7 +259,8 @@ def search():
 
 
 
-#### Editing the paper information: Requesting, accessing, updating
+#### Editing the paper information: Requesting, accessing, updating, most of the code are from tool_upload but code duplication done for better understanding and for minor suble changes, might need to be refactored
+
 @app.route('/request_update/<id>', methods=['POST'])
 def request_update(id):
   print("paper id: {}".format(id))
@@ -303,12 +300,13 @@ def update_tool(token):
   form.linktotoolwebpage.data = paper.link_to_tool_webpage
   form.linktoarchive.data = paper.link_to_archive
 
+  form.files.data = files_to_str(paper.files, "\n")
+
   return render_template('tool_update.html', title="Update your tool here", form=form)
 
 
 @app.route('/update_tool/<token>', methods=['POST'])
 def update_tool_submit(token):
-  print("I am here!!!!")
   payload = verify_email_token(token)
   if not payload:
     flash('Link expired, try again')
@@ -338,6 +336,36 @@ def update_tool_submit(token):
 
     db.session.flush()
     db.session.commit()
+
+    filenames = []
+    fileurls = []
+    filetypes = form.file_types.data.split(',')
+
+    for file in form.all_files.data:
+      if not isinstance(file, str):
+        filenames.append(secure_filename(file.filename))
+
+        filename = '{}/{}'.format(paper.id, secure_filename(file.filename))
+        file.filename = filename # updating the name with paper.id for easy access
+
+        bucket_location = s3.get_bucket_location(Bucket=app.config['S3_BUCKET'])
+        s3_url = "https://s3.{0}.amazonaws.com/{1}/{2}".format(bucket_location['LocationConstraint'], app.config['S3_BUCKET'], filename)
+
+        upload_file_to_s3(s3, file, app.config['S3_BUCKET'])
+        fileurls.append(s3_url)
+
+    print("Uploaded files below for paper: {}".format(paper.id))
+    print(fileurls)
+
+    existing_files = [x.filename for x in paper.files]
+
+    for filename, fileurl, filetype in zip(filenames, fileurls, filetypes):
+      if filename not in existing_files:
+        paper.files.append(File(filename=filename, filetype=filetype, fileurl=fileurl))
+
+    db.session.flush()
+    db.session.commit()
+
     flash('Tool information update successfully')
     return render_template('index.html')
 

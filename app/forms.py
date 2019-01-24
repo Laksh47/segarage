@@ -70,4 +70,12 @@ class toolUpdate(FlaskForm):
 
   tags = StringField('Tags', validators=[DataRequired()])
 
+  files = TextAreaField('Exisiting files', render_kw={'disabled': 'true'}) ## Displaying already uploaded files
+
+  choices = [(item, item) for item in FILETYPE_CHOICES]
+  dropdown_choices = SelectField(choices=choices)
+  file_types = StringField()
+
+  all_files = MultipleFileField('You can either add files or overwrite the existing files by using the same filename!', validators=[file_validation])
+
   update = SubmitField('Update information')

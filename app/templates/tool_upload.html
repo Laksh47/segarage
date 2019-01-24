@@ -79,7 +79,7 @@
             {{ form.all_files.label }}
             <div class="wrap-file">
                 <div class="circle"></div>
-                <div class="custom_dropdown">{{form.dropdown_choices}}</div> 
+                <div class="custom_dropdown">{{form.dropdown_choices}}</div>
                 {{ form.all_files }}
             </div>
             {{ form.file_types }}
@@ -141,7 +141,7 @@
                 console.log('clicked plus');
                 if($('.wrap-file').size() < 5) {
                     var element = '<div class="wrap-file"><div class="circle"></div> <div class="custom_dropdown"><select id="dropdown_choices" name="dropdown_choices"><option value="Binary">Binary</option><option value="Scripts (Source code)">Scripts (Source code)</option><option value="Readme">Readme</option></select></div> <input id="all_files" name="all_files" type="file"></div>'
-                
+
                     $('.custom_upload').append(element);
                 }
             })

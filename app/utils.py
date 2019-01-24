@@ -66,6 +66,14 @@ def tags_obj_to_str(tags_array, delimiter=" "):
     tags_str += tag.tagname
   return tags_str
 
+def files_to_str(files, delimiter=" "):
+  file_pairs = ""
+  for file in files:
+    if file_pairs != "":
+      file_pairs += delimiter
+    file_pairs += "{}: {}".format(file.filetype, file.filename)
+  return file_pairs
+
 
 
 ##### elasticsearch utils
