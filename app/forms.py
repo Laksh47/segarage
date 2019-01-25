@@ -52,6 +52,8 @@ class toolUpload(FlaskForm):
 
   tags = StringField('Tags', validators=[DataRequired()])
 
+  useragreement = BooleanField("I agree to the terms of service", validators=[InputRequired()])
+
   upload = SubmitField('Upload')
 
 class toolUpdate(FlaskForm):

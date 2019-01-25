@@ -314,6 +314,11 @@ td li {
   width: 80%;
 }
 
+.modal_btn_useragreement {
+  text-decoration: underline;
+  cursor: pointer;
+}
+
 /* The Close Button */
 .close {
   color: #000;
