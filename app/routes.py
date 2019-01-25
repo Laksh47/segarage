@@ -187,10 +187,11 @@ def specific_paper(id):
 @app.route('/papers/<id>/comments', methods=['POST'])
 def add_comment(id):
   print("paper id: {}".format(id))
-  paper = Paper.query.get(id)
   endorse_form = endorsePaper()
   if endorse_form.validate_on_submit():
     print(endorse_form.__dict__)
+    # paper = Paper.query.get(id)
+
     upvoted = 1 if endorse_form.upvote.data else 0
     commenter_name = endorse_form.commenter_name.data if endorse_form.commenter_name.data else 'Anonymous'
     comment = Comment(commenter_name=commenter_name, commenter_email=endorse_form.commenter_email.data, comment=endorse_form.comment.data, upvoted=upvoted, verified=0, paper_id=id)
@@ -264,18 +265,25 @@ def search():
 @app.route('/request_update/<id>', methods=['POST'])
 def request_update(id):
   print("paper id: {}".format(id))
-  paper = Paper.query.get(id)
-  contact_email = paper.author_email
 
-  payload = { 'paper_id': id }
-  token = get_email_token(payload)
-  text_body=render_template('email/link_to_edit.txt', token=token)
-  html_body=render_template('email/link_to_edit.html', token=token)
+  edit_button = editButton()
 
-  send_email('Link to update tool/artifact information', app.config['ADMIN'], ['scrawler16.1@gmail.com'], text_body, html_body)
-  flash('Link to edit/update the artifact information is sent to the contact author, check email')
+  if edit_button.validate_on_submit():
+    paper = Paper.query.get(id)
+    contact_email = paper.author_email
 
-  return redirect(url_for('specific_paper', id=id))
+    payload = { 'paper_id': id }
+    token = get_email_token(payload)
+    text_body=render_template('email/link_to_edit.txt', token=token)
+    html_body=render_template('email/link_to_edit.html', token=token)
+
+    send_email('Link to update tool/artifact information', app.config['ADMIN'], ['scrawler16.1@gmail.com'], text_body, html_body)
+    flash('Link to edit/update the artifact information is sent to the contact author, check email')
+
+    return redirect(url_for('specific_paper', id=id))
+
+    data = {'errors': edit_button.errors, 'custom_msg': "Bad request for form submission, try again"}
+  return jsonify(data=data), 400
 
 
 @app.route('/update_tool/<token>', methods=['GET'])
