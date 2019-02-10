@@ -21,6 +21,7 @@ class TestCase(unittest.TestCase):
     app.config['TESTING'] = True
     app.config['WTF_CSRF_ENABLED'] = False
     app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///' + os.path.join(basedir, 'test.db')
+    app.config['S3_BUCKET'] = 'segarage-test'
 
     self.app = app.test_client()
     db.create_all()
@@ -114,7 +115,7 @@ class TestCase(unittest.TestCase):
     form_data = { 'papername':  'Test Paper', 'authoremail': 'test@test.com', 'linktoarchive': 'http://test.com', 'description': 'This paper is for unit testing', 'tags': 'test,paper', 'useragreement': True, 'dropdown_choices': 'Binary','file_types': 'Binary', 'bibtex': 'Test' }
 
     form_data['all_files'] = [(io.BytesIO(b"abcdef"), 'test.pdf')]
-    
+
     response = self.app.post('/update_tool/{}'.format(token), content_type='multipart/form-data', data=form_data)
     self.assertEqual(response.status, "200 OK")
 
