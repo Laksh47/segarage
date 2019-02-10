@@ -38,6 +38,7 @@ def request_upload():
     text_body=render_template('email/link_to_upload.txt', token=token)
     html_body=render_template('email/link_to_upload.html', token=token)
 
+    ### Email sender needs to be changed before deploying
     send_email('Link to upload tool', app.config['ADMIN'], ['scrawler16.1@gmail.com'], text_body, html_body)
 
     flash('Link to upload the tool has been sent to {} for the paper {}'.format(form.authoremail.data, form.papername.data))
@@ -143,11 +144,6 @@ def downloads(id, filename):
 ### Browsing through papers and looking up a specific paper
 @app.route('/papers')
 def papers():
-  search = False
-
-  # papers = Paper.query.all()
-  # print('Total number of papers: {}'.format(len(papers)))
-
   page, per_page, offset = get_page_args(per_page_parameter="PER_PAGE")
   paginated_papers = Paper.query.limit(per_page).offset(offset)
 
@@ -202,6 +198,7 @@ def add_comment(id):
     text_body=render_template('email/verify_comment.txt', token=token)
     html_body=render_template('email/verify_comment.html', token=token)
 
+    ### Email sender needs to be changed before deploying
     send_email('Verify Artifact Endorsement - SE Garage', app.config['ADMIN'], ['scrawler16.1@gmail.com'], text_body, html_body)
 
     db.session.commit()
@@ -261,7 +258,6 @@ def search():
 
 
 #### Editing the paper information: Requesting, accessing, updating, most of the code are from tool_upload but code duplication done for better understanding and for minor suble changes, might need to be refactored
-
 @app.route('/request_update/<id>', methods=['POST'])
 def request_update(id):
   print("paper id: {}".format(id))
@@ -277,6 +273,7 @@ def request_update(id):
     text_body=render_template('email/link_to_edit.txt', token=token)
     html_body=render_template('email/link_to_edit.html', token=token)
 
+    ### Email sender needs to be changed before deploying
     send_email('Link to update tool/artifact information', app.config['ADMIN'], ['scrawler16.1@gmail.com'], text_body, html_body)
     flash('Link to edit/update the artifact information is sent to the contact author, check email')
 

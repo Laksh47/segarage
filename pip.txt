@@ -35,6 +35,10 @@ pip install flask_limiter
 
 pip install boto3
 
-pip install nose2
+pip install nose2 
+	- nose2 -v tests
 
-pip install coverage
+pip install coverage 
+	- coverage run tests.py
+	- coverage report app/*.py
+	- coverage html app/*.py
