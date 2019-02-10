@@ -1,9 +1,11 @@
 import os
+import io
 import unittest
  
 from config import basedir
 from app import app, db, mail
 from app.models import Paper
+from app.utils import get_email_token
 
 # Run command `nose2 -v tests` to run the unit tests
 # Run command `coverage run tests.py` to run unittest and measure code coverage!
@@ -80,7 +82,29 @@ class TestCase(unittest.TestCase):
     """
     Actual upload paper functionality
     """
-    
+    payload = { 'authoremail': 'test@test.com', 'papername': 'Testing Paper' }
+    token = get_email_token(payload)
+
+    form_data = { 'papername':  'Test Paper', 'authoremail': 'test@test.com', 'linktoarchive': 'http://test.com', 'description': 'This paper is for unit testing', 'tags': 'test,paper', 'useragreement': True, 'file_types': 'Binary' }
+
+    form_data['all_files'] = [(io.BytesIO(b"abcdef"), 'test.pdf')]
+    response = self.app.post('/tool_upload/{}'.format(token), content_type='multipart/form-data', data=form_data, follow_redirects=True)
+    # print(response.__dict__)
+    self.assertEqual(response.status, "200 OK")
+
+  def test_papers(self):
+    """
+    Papers html page
+    """
+    response = self.app.get('/papers')
+    self.assertEqual(response.status, "200 OK")
+
+  def test_specific_papers(self):
+    """
+    Papers html page
+    """
+    response = self.app.get('/papers/4')
+    self.assertEqual(response.status, "404 NOT FOUND")
 
 if __name__ == '__main__':
   unittest.main()

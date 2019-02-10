@@ -142,7 +142,7 @@ def downloads(id, filename):
 
 
 ### Browsing through papers and looking up a specific paper
-@app.route('/papers')
+@app.route('/papers', methods=['GET'])
 def papers():
   page, per_page, offset = get_page_args(per_page_parameter="PER_PAGE")
   paginated_papers = Paper.query.limit(per_page).offset(offset)
@@ -157,7 +157,7 @@ def papers():
 def specific_paper(id):
   paper = Paper.query.get(id)
   if paper == None:
-    return render_template('404.html')
+    return render_template('404.html'), 404
 
 
   ### Updating paper view count based on session this logic might need to be re-designed
