@@ -143,6 +143,13 @@ class TestCase(unittest.TestCase):
     self.assertEqual(response.status, "404 NOT FOUND")
 
 
+  def test_download_file(self):
+    """
+    Trying to download a test file from test S3 bucket
+    """
+    paper = self.create_paper()
+    response = self.app.get('/downloads/{}/test.pdf'.format(paper.id), follow_redirects=True)
+    self.assertEqual(response.status, "200 OK")
 
   #### Helper methods for test cases
   def create_paper(self):

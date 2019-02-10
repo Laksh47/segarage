@@ -108,7 +108,7 @@ def tool_upload(token):
 
 
 ### Downloading Artifacts from papers
-@app.route('/downloads/<id>/<filename>', methods=['GET', 'POST'])
+@app.route('/downloads/<id>/<filename>', methods=['GET'])
 def downloads(id, filename):
   # print("Resource id: {}".format(id))
 
