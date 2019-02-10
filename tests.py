@@ -85,12 +85,39 @@ class TestCase(unittest.TestCase):
     payload = { 'authoremail': 'test@test.com', 'papername': 'Testing Paper' }
     token = get_email_token(payload)
 
-    form_data = { 'papername':  'Test Paper', 'authoremail': 'test@test.com', 'linktoarchive': 'http://test.com', 'description': 'This paper is for unit testing', 'tags': 'test,paper', 'useragreement': True, 'file_types': 'Binary' }
+    form_data = { 'papername':  'Test Paper', 'authoremail': 'test@test.com', 'linktoarchive': 'http://test.com', 'description': 'This paper is for unit testing', 'tags': 'test,paper', 'useragreement': True, 'dropdown_choices': 'Binary','file_types': 'Binary', 'bibtex': 'Test' }
 
     form_data['all_files'] = [(io.BytesIO(b"abcdef"), 'test.pdf')]
-    response = self.app.post('/tool_upload/{}'.format(token), content_type='multipart/form-data', data=form_data, follow_redirects=True)
-    # print(response.__dict__)
+    response = self.app.post('/tool_upload/{}'.format(token), content_type='multipart/form-data', data=form_data)
+    # print(response.get_data())
+    self.assertEqual(response.status, "302 FOUND")
+
+  def test_update_tool(self):
+    """
+    Testing the editing functionality
+    """
+    paper = self.create_paper()
+    payload = { 'paper_id': paper.id }
+    token = get_email_token(payload)
+
+    response = self.app.get('/update_tool/{}'.format(token))
     self.assertEqual(response.status, "200 OK")
+
+  def test_update_tool_submit(self):
+    """
+    Testing the editing functionality
+    """
+    paper = self.create_paper()
+    payload = { 'paper_id': paper.id }
+    token = get_email_token(payload)
+
+    form_data = { 'papername':  'Test Paper', 'authoremail': 'test@test.com', 'linktoarchive': 'http://test.com', 'description': 'This paper is for unit testing', 'tags': 'test,paper', 'useragreement': True, 'dropdown_choices': 'Binary','file_types': 'Binary', 'bibtex': 'Test' }
+
+    form_data['all_files'] = [(io.BytesIO(b"abcdef"), 'test.pdf')]
+    
+    response = self.app.post('/update_tool/{}'.format(token), content_type='multipart/form-data', data=form_data)
+    self.assertEqual(response.status, "200 OK")
+
 
   def test_papers(self):
     """
@@ -99,12 +126,30 @@ class TestCase(unittest.TestCase):
     response = self.app.get('/papers')
     self.assertEqual(response.status, "200 OK")
 
-  def test_specific_papers(self):
+  # def test_specific_papers(self):
+  #   """
+  #   Specific paper html page rendering
+  #   """
+  #   paper = self.create_paper()
+  #   response = self.app.get('/papers/{}'.format(paper.id))
+  #   self.assertEqual(response.status, "200 OK")
+
+  def test_specific_papers_not_exists(self):
     """
-    Papers html page
+    Specific paper html page rendering failure
     """
     response = self.app.get('/papers/4')
     self.assertEqual(response.status, "404 NOT FOUND")
+
+
+
+  #### Helper methods for test cases
+  def create_paper(self):
+    paper = Paper(paper_name='Test paper', author_email='test@gmail.com')
+    db.session.add(paper)
+    db.session.commit()
+    return paper
+
 
 if __name__ == '__main__':
   unittest.main()

@@ -60,7 +60,7 @@ def tool_upload(token):
   if form.validate_on_submit():
     paper = Paper(paper_name=form.papername.data, author_name=form.authorname.data, author_email=form.authoremail.data, tool_name=form.toolname.data, link_to_pdf=form.linktopdf.data, link_to_archive=form.linktoarchive.data, link_to_tool_webpage=form.linktotoolwebpage.data, link_to_demo=form.linktodemo.data, bibtex=form.bibtex.data, description=form.description.data)
 
-    print(form.tags.data)
+    # print(form.tags.data)
 
     for tag in form.tags.data.split(","):
       tag_obj = db.session.query(Tag).filter(Tag.tagname==tag.strip()).first()
@@ -88,8 +88,8 @@ def tool_upload(token):
         upload_file_to_s3(s3, file, app.config['S3_BUCKET'])
         fileurls.append(s3_url)
 
-    print("Uploaded files below for paper: {}".format(paper.id))
-    print(fileurls)
+    # print("Uploaded files below for paper: {}".format(paper.id))
+    # print(fileurls)
 
     for filename, fileurl, filetype in zip(filenames, fileurls, filetypes):
       paper.files.append(File(filename=filename, filetype=filetype, fileurl=fileurl))
@@ -100,6 +100,8 @@ def tool_upload(token):
     flash('Tool submission success!')
 
     return redirect(url_for('specific_paper', id=paper.id))
+
+  # print(form.errors)
     
   return render_template('tool_upload.html', title="Upload your tool here", form=form)
 
@@ -108,7 +110,7 @@ def tool_upload(token):
 ### Downloading Artifacts from papers
 @app.route('/downloads/<id>/<filename>', methods=['GET', 'POST'])
 def downloads(id, filename):
-  print("Resource id: {}".format(id))
+  # print("Resource id: {}".format(id))
 
   paper = Paper.query.get(id)
   if paper == None:
@@ -215,7 +217,7 @@ def verify_comment(token):
     flash('Email token corrupted')
     return redirect(url_for('index'))
 
-  print("Comment id: {}".format(payload['comment_id']))
+  # print("Comment id: {}".format(payload['comment_id']))
   paper = Paper.query.get(payload['paper_id'])
   comment = Comment.query.get(payload['comment_id'])
 
@@ -257,7 +259,7 @@ def search():
 #### Editing the paper information: Requesting, accessing, updating, most of the code are from tool_upload but code duplication done for better understanding and for minor suble changes, might need to be refactored
 @app.route('/request_update/<id>', methods=['POST'])
 def request_update(id):
-  print("paper id: {}".format(id))
+  # print("paper id: {}".format(id))
 
   edit_button = editButton()
 
@@ -356,8 +358,8 @@ def update_tool_submit(token):
         upload_file_to_s3(s3, file, app.config['S3_BUCKET'])
         fileurls.append(s3_url)
 
-    print("Uploaded files below for paper: {}".format(paper.id))
-    print(fileurls)
+    # print("Uploaded files below for paper: {}".format(paper.id))
+    # print(fileurls)
 
     existing_files = [x.filename for x in paper.files]
 
