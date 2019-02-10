@@ -99,17 +99,11 @@
   <!-- Modal content -->
   <div class="modal_content">
     <span class="close">&times;</span>
-    <div>
-      Please do not use this feature if you are not the contact author, only the contact authors get the link to upload the tools!
-    </div>
     <div class="modal_msg">
-
+      Please do not use this feature if you are not the contact author, only the contact authors get the link to upload the tools!
     </div>
     <form action="{{ url_for('request_update', id=paper.id) }}" method="post" class="edit_request">
       {{ edit_button.hidden_tag() }}
-      <div class="form-group">
-        {{ edit_button.recaptcha }}
-      </div>
       <div class="form-group">
         {{ edit_button.submit(class_='btn btn-success edit_button_function') }}
       </div>
@@ -221,17 +215,17 @@
       console.log('inside ajax');
     });
 
-    // Verify captcha and submit form
-    $('.edit_button_function').on('click', function(event) {
-      event.stopPropagation();
-      if((grecaptcha && grecaptcha.getResponse().length !== 0)) {
-        $(this).submit();
-      }
-      else {
-        $('.modal_msg').text('Verify Captcha')
-        event.preventDefault()
-      }
-    })
+    // // Verify captcha and submit form
+    // $('.edit_button_function').on('click', function(event) {
+    //   event.stopPropagation();
+    //   if((grecaptcha && grecaptcha.getResponse().length !== 0)) {
+    //     $(this).submit();
+    //   }
+    //   else {
+    //     $('.modal_msg').text('Verify Captcha')
+    //     event.preventDefault()
+    //   }
+    // })
 
     $('.edit_button').on('click', function() {
       $('.modal').show();

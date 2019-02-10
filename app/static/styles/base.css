@@ -274,6 +274,11 @@ td li {
   border-radius: 4px;
 }
 
+.modal_msg {
+  margin-bottom: 15px;
+  font-size: 25px;
+}
+
 .modal_text p {
   margin-bottom: 3px;
 }
@@ -290,7 +295,7 @@ td li {
   border-radius: 4px;
 }
 
-/* The Modal (background) taken and modified from w3 schools */
+/* The Modal (background) */
 .modal {
   display: none; /* Hidden by default */
   position: fixed; /* Stay in place */

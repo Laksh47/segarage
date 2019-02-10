@@ -112,3 +112,5 @@ uploads/
 
 migrations/versions/
 migrations/
+
+*.db

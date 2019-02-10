@@ -16,14 +16,11 @@ def send_email(subject, sender, recipients, text_body, html_body):
   msg = Message(subject, sender=sender, recipients=recipients)
   msg.body = text_body
   msg.html = html_body
-  print("in send mail fn")
   mail.send(msg)
 
 def get_email_token(payload, expires_in=6000):
-  payload['exp'] = time() + expires_in
-  return jwt.encode(payload, app.config['SECRET_KEY'], algorithm='HS256').decode('utf-8')
-
-def get_email_token_comment(payload):
+  if expires_in:
+    payload['exp'] = time() + expires_in
   return jwt.encode(payload, app.config['SECRET_KEY'], algorithm='HS256').decode('utf-8')
 
 def verify_email_token(token):

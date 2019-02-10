@@ -182,10 +182,10 @@ def specific_paper(id):
 ### Adding and verification of comments
 @app.route('/papers/<id>/comments', methods=['POST'])
 def add_comment(id):
-  print("paper id: {}".format(id))
+  # print("paper id: {}".format(id))
   endorse_form = endorsePaper()
   if endorse_form.validate_on_submit():
-    print(endorse_form.__dict__)
+    # print(endorse_form.__dict__)
     # paper = Paper.query.get(id)
 
     upvoted = 1 if endorse_form.upvote.data else 0
@@ -194,7 +194,8 @@ def add_comment(id):
     db.session.add(comment)
     db.session.flush()
 
-    token = get_email_token_comment({ "comment_id": comment.id, "paper_id": id })
+    ## JWT without expiration for comments
+    token = get_email_token({ "comment_id": comment.id, "paper_id": id }, expires_in=None)
     text_body=render_template('email/verify_comment.txt', token=token)
     html_body=render_template('email/verify_comment.html', token=token)
 
@@ -233,16 +234,12 @@ def verify_comment(token):
 ### Searching the papers
 @app.route('/search', methods=['GET', 'POST'])
 def search():
-
   if request.args.get('q'):
     g.search_form.q.data = request.args.get('q')
-
   q = g.search_form.q.data if g.search_form.q.data else None
 
   if q is None:
-    return render_template('404.html')
-
-  print("query: {}".format(q))
+    return render_template('404.html'), 404
 
   page = request.args.get('page', 1, type=int)
   per_page = app.config['PER_PAGE']
@@ -251,7 +248,7 @@ def search():
 
   href="search?q={}".format(q) + '&page={0}' ##customizing to include search query parameter
   pagination = Pagination(href=href, page=page, per_page=per_page, total=total, record_name='papers',format_total=True, format_number=True)
-  print(pagination.__dict__)
+  # print(pagination.__dict__)
 
   return render_template('papers.html', papers=paginated_papers, pagination=pagination, per_page=per_page)
 

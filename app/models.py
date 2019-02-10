@@ -40,31 +40,31 @@ class SearchableMixin(object):
                 remove_from_index(obj.__tablename__, obj)
         session._changes = None
 
-    @classmethod
-    def before_commit(cls, session):
-        # print("##### before committt ####")
-        # print(session.__dict__)
-        session._changes = {
-            'add': list(session.new),
-            'update': list(session.dirty),
-            'delete': list(session.deleted)
-        }
+    # @classmethod
+    # def before_commit(cls, session):
+    #     # print("##### before committt ####")
+    #     # print(session.__dict__)
+    #     session._changes = {
+    #         'add': list(session.new),
+    #         'update': list(session.dirty),
+    #         'delete': list(session.deleted)
+    #     }
 
-    @classmethod
-    def after_commit(cls, session):
-        # print("##### after committt ####")
-        for obj in session._changes['add']:
-            # print(obj)
-            if isinstance(obj, SearchableMixin):
-                # print("in instance of")
-                add_to_index(obj.__tablename__, obj)
-        for obj in session._changes['update']:
-            if isinstance(obj, SearchableMixin):
-                add_to_index(obj.__tablename__, obj)
-        for obj in session._changes['delete']:
-            if isinstance(obj, SearchableMixin):
-                remove_from_index(obj.__tablename__, obj)
-        session._changes = None
+    # @classmethod
+    # def after_commit(cls, session):
+    #     # print("##### after committt ####")
+    #     for obj in session._changes['add']:
+    #         # print(obj)
+    #         if isinstance(obj, SearchableMixin):
+    #             # print("in instance of")
+    #             add_to_index(obj.__tablename__, obj)
+    #     for obj in session._changes['update']:
+    #         if isinstance(obj, SearchableMixin):
+    #             add_to_index(obj.__tablename__, obj)
+    #     for obj in session._changes['delete']:
+    #         if isinstance(obj, SearchableMixin):
+    #             remove_from_index(obj.__tablename__, obj)
+    #     session._changes = None
 
     @classmethod
     def reindex(cls):
@@ -74,8 +74,8 @@ class SearchableMixin(object):
 db.event.listen(db.session, 'before_flush', SearchableMixin.before_flush)
 db.event.listen(db.session, 'after_flush', SearchableMixin.after_flush)
 
-db.event.listen(db.session, 'before_commit', SearchableMixin.before_commit)
-db.event.listen(db.session, 'after_commit', SearchableMixin.after_commit)
+# db.event.listen(db.session, 'before_commit', SearchableMixin.before_commit)
+# db.event.listen(db.session, 'after_commit', SearchableMixin.after_commit)
 
 paper_tag_association = db.Table('paper_to_tags', db.Model.metadata,
     db.Column('paper_id', db.Integer, db.ForeignKey('papers.id')),

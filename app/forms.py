@@ -7,7 +7,7 @@ from wtforms.validators import InputRequired, DataRequired, Email, ValidationErr
 from app.utils import FILETYPE_CHOICES, file_validation
 
 class editButton(FlaskForm):
-  recaptcha = RecaptchaField()
+  # recaptcha_for_edit = RecaptchaField()
   submit = SubmitField('Send the email to edit paper')
 
 class endorsePaper(FlaskForm):
