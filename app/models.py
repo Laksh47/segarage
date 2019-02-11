@@ -5,6 +5,10 @@ from app.utils import add_to_index, remove_from_index, query_index
 class SearchableMixin(object):
     @classmethod
     def search(cls, expression, page, per_page):
+        """
+        retrieve the ids from elasticsearch indexes
+        and replace them with corresponding objects from db
+        """
         ids, total = query_index(cls.__tablename__, expression, page, per_page)
         if total == 0:
             return cls.query.filter_by(id=0), 0
@@ -39,32 +43,6 @@ class SearchableMixin(object):
             if isinstance(obj, SearchableMixin):
                 remove_from_index(obj.__tablename__, obj)
         session._changes = None
-
-    # @classmethod
-    # def before_commit(cls, session):
-    #     # print("##### before committt ####")
-    #     # print(session.__dict__)
-    #     session._changes = {
-    #         'add': list(session.new),
-    #         'update': list(session.dirty),
-    #         'delete': list(session.deleted)
-    #     }
-
-    # @classmethod
-    # def after_commit(cls, session):
-    #     # print("##### after committt ####")
-    #     for obj in session._changes['add']:
-    #         # print(obj)
-    #         if isinstance(obj, SearchableMixin):
-    #             # print("in instance of")
-    #             add_to_index(obj.__tablename__, obj)
-    #     for obj in session._changes['update']:
-    #         if isinstance(obj, SearchableMixin):
-    #             add_to_index(obj.__tablename__, obj)
-    #     for obj in session._changes['delete']:
-    #         if isinstance(obj, SearchableMixin):
-    #             remove_from_index(obj.__tablename__, obj)
-    #     session._changes = None
 
     @classmethod
     def reindex(cls):
