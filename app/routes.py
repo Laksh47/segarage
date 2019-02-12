@@ -62,7 +62,7 @@ def tool_upload(token):
   form.papername.data = payload['papername']
 
   if form.validate_on_submit():
-    paper = Paper(paper_name=form.papername.data, author_name=form.authorname.data, author_email=form.authoremail.data, tool_name=form.toolname.data, link_to_pdf=form.linktopdf.data, link_to_archive=form.linktoarchive.data, link_to_tool_webpage=form.linktotoolwebpage.data, link_to_demo=form.linktodemo.data, bibtex=form.bibtex.data, description=form.description.data, view_count=1)
+    paper = Paper(paper_name=form.papername.data, author_name=form.authorname.data, author_email=form.authoremail.data, tool_name=form.toolname.data, link_to_pdf=form.linktopdf.data, link_to_archive=form.linktoarchive.data, link_to_tool_webpage=form.linktotoolwebpage.data, link_to_demo=form.linktodemo.data, bibtex=form.bibtex.data, description=form.description.data, view_count=0)
 
     # print(form.tags.data)
 
@@ -174,10 +174,11 @@ def specific_paper(id):
   if paper == None:
     return render_template('404.html'), 404
 
+  session_view_key = 'visited_{}'.format(paper.id)
 
   ### Updating paper view count based on session this logic might need to be re-designed
-  if 'visited' not in session:
-    session['visited'] = True
+  if session_view_key not in session:
+    session[session_view_key] = True
 
     paper.view_count += 1
     db.session.flush()
