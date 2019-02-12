@@ -47,7 +47,11 @@ def request_upload():
 
 @app.route('/tool_upload/<token>', methods=['GET', 'POST'])
 def tool_upload(token):
-
+  """
+  tool upload form takes GET and POST methods
+  renders the form for GET
+  form submission handling for POST
+  """
   payload = verify_email_token(token)
   if not payload:
     flash('Link expired or invalid, try again')
@@ -110,6 +114,9 @@ def tool_upload(token):
 ### Downloading Artifacts from papers
 @app.route('/downloads/<id>/<filename>', methods=['GET'])
 def downloads(id, filename):
+  """
+  Download method to fetch the required file from S3 Bucket
+  """
   # print("Resource id: {}".format(id))
 
   paper = Paper.query.get(id)
@@ -146,6 +153,9 @@ def downloads(id, filename):
 ### Browsing through papers and looking up a specific paper
 @app.route('/papers', methods=['GET'])
 def papers():
+  """
+  Lists all the uploaded paper with pagination
+  """
   page, per_page, offset = get_page_args(per_page_parameter="PER_PAGE")
   paginated_papers = Paper.query.limit(per_page).offset(offset)
 
@@ -157,6 +167,9 @@ def papers():
 
 @app.route('/papers/<id>', methods=['GET'])
 def specific_paper(id):
+  """
+  Renders the individual paper given paper id
+  """
   paper = Paper.query.get(id)
   if paper == None:
     return render_template('404.html'), 404
@@ -181,9 +194,11 @@ def specific_paper(id):
 
 
 
-### Adding and verification of comments
 @app.route('/papers/<id>/comments', methods=['POST'])
 def add_comment(id):
+  """
+  Adding comments to a specific paper (unverified)
+  """
   # print("paper id: {}".format(id))
   endorse_form = endorsePaper()
   if endorse_form.validate_on_submit():
@@ -212,6 +227,9 @@ def add_comment(id):
 
 @app.route('/verify_comment/<token>')
 def verify_comment(token):
+  """
+  Verify the specific comment (makes it visible while viewing the papaer)
+  """
   payload = verify_email_token(token)
   if not payload:
     flash('Email token corrupted')
@@ -233,9 +251,12 @@ def verify_comment(token):
 
 
 
-### Searching the papers
 @app.route('/search', methods=['GET', 'POST'])
 def search():
+  """
+  Searching the papers and uses pagination to render the results
+  Takes query from GET(query params) and POST (body params)
+  """
   if request.args.get('q'):
     g.search_form.q.data = request.args.get('q')
   q = g.search_form.q.data if g.search_form.q.data else None
@@ -256,9 +277,13 @@ def search():
 
 
 
-#### Editing the paper information: Requesting, accessing, updating, most of the code are from tool_upload but code duplication done for better understanding and for minor suble changes, might need to be refactored
 @app.route('/request_update/<id>', methods=['POST'])
 def request_update(id):
+  """
+  Editing the paper information: Requesting, accessing, updating, most of the code are from tool_upload 
+  but code duplication done for better understanding and for minor suble changes, 
+  might need to be refactored
+  """
   # print("paper id: {}".format(id))
 
   edit_button = editButton()
@@ -284,6 +309,9 @@ def request_update(id):
 
 @app.route('/update_tool/<token>', methods=['GET'])
 def update_tool(token):
+  """
+  Update tool page, only renders the form
+  """
   payload = verify_email_token(token)
   if not payload:
     flash('Link expired, try again')
@@ -311,6 +339,9 @@ def update_tool(token):
 
 @app.route('/update_tool/<token>', methods=['POST'])
 def update_tool_submit(token):
+  """
+  Update tool page, takes care of the form submission
+  """
   payload = verify_email_token(token)
   if not payload:
     flash('Link expired, try again')

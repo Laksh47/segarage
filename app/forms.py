@@ -11,6 +11,9 @@ class editButton(FlaskForm):
   submit = SubmitField('Send the email to edit paper')
 
 class endorsePaper(FlaskForm):
+  """
+  Form for comment section in view paper page
+  """
   commenter_email = StringField('Email', validators=[DataRequired(), Email('Please enter valid email address')])
   commenter_name = StringField('Name (optional)')
   comment = TextAreaField('Feedback for the artifacts', validators=[DataRequired()])
@@ -19,10 +22,16 @@ class endorsePaper(FlaskForm):
   submit =  SubmitField('Submit')
 
 class searchPapers(FlaskForm):
+  """
+  Search form appears in every view page (navbar)
+  """
   q = StringField('Search for papers', validators=[DataRequired()])
   search_button = SubmitField('Search papers')
 
 class requestToolUpload(FlaskForm):
+  """
+  Request for upload form
+  """
   authoremail = StringField('Contact author Email', validators=[DataRequired(), Email('Please enter valid email address')])
   papername = StringField('Paper Name', validators=[DataRequired()])
 
@@ -30,6 +39,9 @@ class requestToolUpload(FlaskForm):
   request_upload = SubmitField('Need to upload tool for the paper')
 
 class toolUpload(FlaskForm):
+  """
+  Tool upload form
+  """
   toolname = StringField('Tool name')
 
   papername = StringField('Paper Title', validators=[DataRequired()])
@@ -57,6 +69,9 @@ class toolUpload(FlaskForm):
   upload = SubmitField('Upload')
 
 class toolUpdate(FlaskForm):
+  """
+  Tool update form
+  """
   toolname = StringField('Tool name')
 
   papername = StringField('Paper Title', validators=[DataRequired()])

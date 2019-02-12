@@ -10,20 +10,33 @@ ALLOWED_EXTENSIONS_FILES = set(['txt', 'pdf', 'md', 'zip', 'tar', 'gz', 'docx', 
 FILETYPE_CHOICES = ['Binary', 'Scripts (Source code)', 'Readme', 'Other']
 
 def allowed_files(filename):
+  """
+  Checks if the file extension matches the list of allowed extensions
+  """
   return '.' in filename and filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS_FILES
 
 def send_email(subject, sender, recipients, text_body, html_body):
+  """
+  Send email function
+  """
   msg = Message(subject, sender=sender, recipients=recipients)
   msg.body = text_body
   msg.html = html_body
   mail.send(msg)
 
 def get_email_token(payload, expires_in=6000):
+  """
+  By default the function returns a token that expires in 6000 seconds
+  if passed None in expires_in => indefinite token
+  """
   if expires_in:
     payload['exp'] = time() + expires_in
   return jwt.encode(payload, app.config['SECRET_KEY'], algorithm='HS256').decode('utf-8')
 
 def verify_email_token(token):
+  """
+  Verify's the email token is valid or not
+  """
   try:
     payload = jwt.decode(token, app.config['SECRET_KEY'], algorithms=['HS256'])
   except Exception as e:
@@ -32,6 +45,9 @@ def verify_email_token(token):
   return payload
 
 def upload_file_to_s3(s3, file, bucket_name, acl="public-read"):
+  """
+  Uploading a given file object to AWS S3 bucket (using boto3 lib)
+  """
   try:
     s3.upload_fileobj(
       file,
@@ -43,11 +59,13 @@ def upload_file_to_s3(s3, file, bucket_name, acl="public-read"):
       }
     )
   except Exception as e:
-    # This is a catch all exception, edit this part to fit your needs.
     print("Something Happened: ", e)
     return e
 
 def file_validation(form, field):
+  """
+  File validation callback for forms
+  """
   if field.data:
     for file in field.data:
       if isinstance(file, str):
@@ -56,6 +74,9 @@ def file_validation(form, field):
         raise ValidationError('File format not supported (supported: md, txt, pdf, docx, zip, gz, rar)')
 
 def tags_obj_to_str(tags_array, delimiter=" "):
+  """
+  Converts the tags(model) into a string with the given delimiter
+  """
   tags_str = ""
   for tag in tags_array:
     if tags_str != "":
@@ -64,6 +85,9 @@ def tags_obj_to_str(tags_array, delimiter=" "):
   return tags_str
 
 def files_to_str(files, delimiter=" "):
+  """
+  Converts the files(model) into a string with the given delimiter
+  """
   file_pairs = ""
   for file in files:
     if file_pairs != "":
@@ -76,6 +100,10 @@ def files_to_str(files, delimiter=" "):
 ##### elasticsearch utils
 
 def add_to_index(index, model):
+  """
+  Adds the given model object to the elastic search indexes
+  uses the searchable field to get the field names to be indexed
+  """
   if not app.elasticsearch:
     return
   payload = {}
@@ -93,6 +121,10 @@ def remove_from_index(index, model):
   app.elasticsearch.delete(index=index, doc_type=index, id=model.id)
 
 def query_index(index, query, page, per_page):
+  """
+  Method that actually queries the elasticsearch indexes
+  indexes every field, takes pagination details as arguments
+  """
   if not app.elasticsearch:
     return [], 0
   search = app.elasticsearch.search(index=index, doc_type=index, body={'query': {'multi_match': {'query': query, 'fields': ['*']}}, 
