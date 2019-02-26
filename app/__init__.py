@@ -33,6 +33,7 @@ limiter = Limiter(
 # Create an S3 client
 s3 = boto3.client(
   's3',
+  endpoint_url=app.config['S3_ENDPOINT'],
   aws_access_key_id=app.config['S3_KEY'],
   aws_secret_access_key=app.config['S3_SECRET']
 )

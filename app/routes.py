@@ -86,8 +86,7 @@ def tool_upload(token):
         filename = '{}/{}'.format(paper.id, secure_filename(file.filename))
         file.filename = filename # updating the name with paper.id for easy access
 
-        bucket_location = s3.get_bucket_location(Bucket=app.config['S3_BUCKET'])
-        s3_url = "https://s3.{0}.amazonaws.com/{1}/{2}".format(bucket_location['LocationConstraint'], app.config['S3_BUCKET'], filename)
+        s3_url = "{0}/{1}/{2}".format(app.config['S3_ENDPOINT'], app.config['S3_BUCKET'], filename)
 
         upload_file_to_s3(s3, file, app.config['S3_BUCKET'])
         fileurls.append(s3_url)

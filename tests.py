@@ -21,7 +21,7 @@ class TestCase(unittest.TestCase):
     app.config['TESTING'] = True
     app.config['WTF_CSRF_ENABLED'] = False
     app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///' + os.path.join(basedir, 'test.db')
-    app.config['S3_BUCKET'] = 'segarage-test'
+    app.config['S3_BUCKET'] = 'segarage_test'
     Paper.__tablename__ = 'papers_test'
 
     self.app = app.test_client()
