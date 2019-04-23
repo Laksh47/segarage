@@ -99,6 +99,8 @@ class Paper(SearchableMixin, db.Model):
     link_to_tool_webpage = db.Column(db.String(250))
     link_to_demo = db.Column(db.String(250))
     bibtex = db.Column(db.Text)
+    year = db.Column(db.String(4))
+    conference = db.Column(db.String(200))
 
     files = db.relationship("File")
     tags = db.relationship("Tag", secondary=paper_tag_association)
