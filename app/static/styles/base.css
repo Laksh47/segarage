@@ -201,7 +201,7 @@ td li {
   flex-grow: 1;
   margin: 7px 7px 7px 0;
   min-width: 300px;
-  min-height: 165px;
+  min-height: 75px;
   background-color: #d1dae2;
 }
 
