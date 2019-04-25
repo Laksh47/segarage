@@ -75,6 +75,20 @@
               <span style="color: red;">[{{ error }}]</span>
             {% endfor %}
         </div>
+        <div class="form-group">
+            {{ form.year.label }}
+            {{ form.year(size=32, class_='form-control') }}
+            {% for error in form.year.errors %}
+              <span style="color: red;">[{{ error }}]</span>
+            {% endfor %}
+        </div>
+        <div class="form-group">
+            {{ form.conference.label }}
+            {{ form.conference(size=32, class_='form-control') }}
+            {% for error in form.conference.errors %}
+              <span style="color: red;">[{{ error }}]</span>
+            {% endfor %}
+        </div>
         <div class="form-group required custom_upload">
             {{ form.all_files.label }}
             <div class="wrap-file">

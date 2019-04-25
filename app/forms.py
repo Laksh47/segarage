@@ -63,6 +63,9 @@ class toolUpload(FlaskForm):
   all_files = MultipleFileField('Upload your files (readme, binary, script etc.,)', validators=[DataRequired(), InputRequired(), file_validation])
 
   tags = StringField('Tags', validators=[DataRequired()])
+  
+  year = StringField('Year of publication')
+  conference = StringField('Conference Name')
 
   useragreement = BooleanField("I agree to the terms of service", validators=[InputRequired()])
 
@@ -87,6 +90,9 @@ class toolUpdate(FlaskForm):
   description = TextAreaField('A short description on the Paper/Artifact', validators=[DataRequired()])
 
   tags = StringField('Tags', validators=[DataRequired()])
+
+  year = StringField('Year of publication')
+  conference = StringField('Conference Name')
 
   files = TextAreaField('Exisiting files', render_kw={'disabled': 'true'}) ## Displaying already uploaded files
 

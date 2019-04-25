@@ -62,7 +62,7 @@ def tool_upload(token):
   form.papername.data = payload['papername']
 
   if form.validate_on_submit():
-    paper = Paper(paper_name=form.papername.data, author_name=form.authorname.data, author_email=form.authoremail.data, tool_name=form.toolname.data, link_to_pdf=form.linktopdf.data, link_to_archive=form.linktoarchive.data, link_to_tool_webpage=form.linktotoolwebpage.data, link_to_demo=form.linktodemo.data, bibtex=form.bibtex.data, description=form.description.data, view_count=0)
+    paper = Paper(paper_name=form.papername.data, author_name=form.authorname.data, author_email=form.authoremail.data, tool_name=form.toolname.data, link_to_pdf=form.linktopdf.data, link_to_archive=form.linktoarchive.data, link_to_tool_webpage=form.linktotoolwebpage.data, link_to_demo=form.linktodemo.data, bibtex=form.bibtex.data, description=form.description.data, year=form.year.data, conference=form.conference.data, view_count=0)
 
     # print(form.tags.data)
 
@@ -331,6 +331,9 @@ def update_tool(token):
   form.linktodemo.data = paper.link_to_demo
   form.linktotoolwebpage.data = paper.link_to_tool_webpage
   form.linktoarchive.data = paper.link_to_archive
+  form.year.data = paper.year
+  form.conference.data = paper.conference
+
 
   form.files.data = files_to_str(paper.files, "\n")
 
@@ -360,6 +363,8 @@ def update_tool_submit(token):
     paper.link_to_demo = form.linktodemo.data
     paper.link_to_tool_webpage = form.linktotoolwebpage.data
     paper.link_to_archive = form.linktoarchive.data
+    paper.year = form.year.data
+    paper.conference = form.conference.data
 
     paper.tags = []
 
