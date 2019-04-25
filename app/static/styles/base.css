@@ -387,3 +387,58 @@ td li {
   text-align: right;
   width: 29%;
 }
+
+
+/* Mobile CSS */
+@media (max-width: 45em) {
+  .inline-middle {
+    width: auto;
+    display: block;
+    text-align: center;
+  }
+
+  .nav-pills>li, .nav-pills>li+li {
+    float: none;
+    width: 95%;
+    text-align: center;
+    margin: 10px auto;
+  }
+
+  .searchbar.inline-middle {
+    display: inline-block;
+    width: 50%;    
+  }
+
+  .form-control {
+    width: 90%;
+  }
+
+  .specific_paper {
+    min-width: 275px;
+  }
+
+  .footer {
+    text-align: center;
+  }
+
+  .counts {
+    text-align: center;
+  }
+
+  .custom_column {
+    margin: 0px 20px 10px 20px;
+  }
+
+  tr> td:first-child {
+    display: none;
+  }
+
+  td {
+    text-align: center;
+  }
+
+  .feedback_form_wrap {
+    width: 90%;
+  }
+
+}

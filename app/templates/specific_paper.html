@@ -35,42 +35,42 @@
   <table>
   <tr>
     <td>Contact author email: </td>
-    <td><b> {{ paper.author_email }} </b></td>
+    <td> {{ paper.author_email }} </td>
   </tr>
   <tr>
     <td>Tool name: </td>
-    <td><b>{{ paper.tool_name }}</b></td>
+    <td>{{ paper.tool_name }}</td>
   </tr>
   <tr>
     <td>Description:</td>
-    <td><b>{{ paper.description }}</b></td>
+    <td>{{ paper.description }}</td>
   </tr>
   <tr>
     <td>Link to archive:</td>
-    <td><b>{{ paper.link_to_archive }}</b></td>
+    <td><a href="{{ paper.link_to_archive }}" target="_blank">{{ paper.link_to_archive }}</a></td>
   </tr>
   <tr>
     <td>Cite the paper if you use the artifact:</td>
-    <td><b>{{ paper.bibtex }}</b></td>
+    <td>{{ paper.bibtex }}</td>
   </tr>
   <tr>
     <td>Link to public pdf:</td>
-    <td><b>{{ paper.link_to_pdf }}</b></td>
+    <td><a href="{{ paper.link_to_pdf }}" target="_blank">{{ paper.link_to_pdf }}</a></td>
   </tr>
   <tr>
     <td>Link to tool webpage:</td>
-    <td><b>{{ paper.link_to_tool_webpage }}</b></td>
+    <td><a href="{{ paper.link_to_tool_webpage }}" target="_blank">{{ paper.link_to_tool_webpage }}</a></td>
   </tr>
   <tr>
     <td>Link to demo:</td>
-    <td><b>{{ paper.link_to_demo }}</b></td>
+    <td><a href="{{ paper.link_to_demo }}" target="_blank">{{ paper.link_to_demo }}</a></td>
   </tr>
   <tr>
     <td>Tags:</td>
     <td>
-      <b>
+      
         {{ tags }}
-      </b>
+      
     </td>
   </tr>
   <tr>

@@ -1,0 +1,141 @@
+sudo apt update
+sudo apt install mysql-server
+sudo mysql_secure_installation
+
+
+sudo apt install default-jre
+sudo apt install default-jdk
+sudo apt install openjdk-8-jdk
+
+
+wget https://artifacts.elastic.co/downloads/elasticsearch/elasticsearch-6.5.4.deb
+wget https://artifacts.elastic.co/downloads/elasticsearch/elasticsearch-6.5.4.deb.sha512
+shasum -a 512 -c elasticsearch-6.5.4.deb.sha512 
+sudo dpkg -i elasticsearch-6.5.4.deb
+
+--------------------------------------------------------------------------------------------------------------------------------
+
+MySQL, ES 6.5.4 and Java 10 installed so far
+
+added alias for python to use python3 always
+
+sudo apt-get install python3-venv
+
+installed packages in pip.txt
+
+mysql remote login error
+
+bind-address to 0.0.0.0 in mysql.conf.d/my.cnf
+CREATE USER 'segarage'@'localhost' IDENTIFIED BY 'softwarearchitecturegroup';
+CREATE USER 'segarage'@'%' IDENTIFIED BY 'softwarearchitecturegroup';
+GRANT ALL ON *.* TO 'segarage'@'localhost';
+GRANT ALL ON *.* TO 'segarage'@'%';
+
+flask db init
+flask db migrate
+
+--------------------------------------------------------------------------------------------------------------------------------
+--------------------------------------------------------------------------------------------------------------------------------
+
+sudo apt update
+sudo apt install nginx
+sudo ufw app list
+sudo ufw allow 'Nginx Full'
+sudo ufw enable
+
+systemctl status nginx
+
+----------------------------------------------------------------------
+
+Nginx: Flask deploy and reverse proxy
+
+pip install uwsgi
+pip install wheel
+
+----------------------------------------------------------------------
+
+https://www.digitalocean.com/community/tutorials/how-to-serve-flask-applications-with-uswgi-and-nginx-on-ubuntu-18-04
+
+update A record and CNAME record in google domains for segarage.org
+
+
+Create file => wsgi.py
+from segarage import app
+
+if __name__ == "__main__":
+    app.run()
+
+----------------------------------------------------------------------
+
+Create file => "segarage.ini" in the project repo
+[uwsgi]
+module = wsgi:app
+
+master = true
+processes = 2
+
+socket = /tmp/segarage.sock
+chmod-socket = 660
+vacuum = true
+
+die-on-term = true
+
+----------------------------------------------------------------------
+
+Create file => "/etc/systemd/system/segarage.service"
+[Unit]
+Description=uWSGI instance to serve segarage
+After=network.target
+
+[Service]
+User=root
+Group=www-data
+WorkingDirectory=/root/segarage
+Environment="PATH=/root/segarage/venv/bin"
+ExecStart=/root/segarage/venv/bin/uwsgi --ini segarage.ini
+
+EnvironmentFile=/root/segarage_env
+
+[Install]
+WantedBy=multi-user.target
+
+----------------------------------------------------------------------
+
+sudo systemctl start segarage
+sudo systemctl enable segarage
+sudo systemctl status segarage
+
+----------------------------------------------------------------------
+
+create file => "/etc/nginx/sites-available/segarage"
+server {
+    listen 80;
+    server_name segarage.org www.segarage.org;
+
+    location / {
+        include uwsgi_params;
+        uwsgi_pass unix:/tmp/segarage.sock;
+    }
+}
+
+----------------------------------------------------------------------
+
+sudo ln -s /etc/nginx/sites-available/segarage /etc/nginx/sites-enabled
+
+sudo less /var/log/nginx/error.log
+
+Make sure the socket file is in /tmp/ or any other folder accesible by nginx
+
+https config: (using let's encrypt)
+sudo add-apt-repository ppa:certbot/certbot
+sudo apt install python-certbot-nginx
+sudo certbot --nginx -d segarage.org -d www.segarage.org
+enter 2 in the option that comes!
+
+--------------------------------------------------------------------------------------------------------------------------------
+--------------------------------------------------------------------------------------------------------------------------------
+
+For backend script:
+
+pip install pandas
+pip install xlrd
