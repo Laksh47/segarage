@@ -4,15 +4,22 @@ from app import app, db, s3
 from app.models import Paper, Tag, File
 from werkzeug.utils import secure_filename
 
+import re
 import pandas as pd
 
-REPO_FOLDER = '/Users/lakshmanan/Downloads'
-excel_file = '/Users/lakshmanan/Downloads/SAMPLE_DATA.xlsx'
+REPO_FOLDER = '/home/larumuga/Desktop/SEGarage final data'
+excel_file = '/home/larumuga/Desktop/april23_clean.xlsx'
 
 def add_temp(paper, tags, filenames, db, s3):
 
   if tags is not None:
-    tags = list(set(map(str.strip, tags.split(",")))) ## Stripping whitespaces and making unique list
+    delimiters = ",", ";"
+    regexPattern = '|'.join(map(re.escape, delimiters))
+
+    ## Stripping whitespaces and making unique list
+    tags = [s.lower().strip() for s in re.split(regexPattern, tags)]
+    tags = [s for s in tags if (s is not '' and s is not None)]
+    tags = list(set(tags))
     print(tags)
 
     for tag in tags:
@@ -51,13 +58,13 @@ dfs = df.where((pd.notnull(df)), None) ## Changing nan to None in the dataframe
 
 for i in range(len(dfs)):
   # print(dfs['filenames'][i])
-  paper = Paper(paper_name=dfs['title'][i], author_name=dfs['author_name'][i], author_email=dfs['email-primary'][i], tool_name='Not Provided', link_to_pdf=dfs['acm'][i], link_to_archive='Not provided', link_to_tool_webpage=dfs['available(link)'][i], link_to_demo=dfs['video'][i], bibtex=dfs['bibtex'][i], description=dfs['intro'][i], view_count=0, conference=dfs['conference'][i], year=dfs['year'][i])
+  paper = Paper(paper_name=dfs['title'][i], author_name=dfs['NAME OF AUTHOR'][i], author_email=dfs['email-primary'][i], tool_name=dfs['File name for tool'][i].split('-')[0], link_to_pdf=dfs['acm'][i], link_to_archive='Not provided', link_to_tool_webpage=dfs['available(link)'][i], link_to_demo=dfs['video'][i], bibtex=dfs['bibtext'][i], description=dfs['intro'][i], view_count=0, conference=dfs['conference'][i], year=dfs['year'][i])
 
   taglist_one = dfs['categories-key words'][i] or ''
   taglist_two = dfs['categories-descirption '][i] or ''
   tags = '{}, {}'.format(taglist_one, taglist_two)
-  filenames = dfs['filenames'][i]
+  filenames = dfs['File name for tool'][i]
 
   add_temp(paper, tags, filenames, db, s3)
-  # Paper.reindex();
+  Paper.reindex();
 
