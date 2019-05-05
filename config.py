@@ -15,7 +15,7 @@ class Config(object):
   MAIL_USE_TLS = os.environ.get('MAIL_USE_TLS') is not None
   MAIL_USERNAME = os.environ.get('MAIL_USERNAME') or 'SE Garage'
   MAIL_PASSWORD = os.environ.get('MAIL_PASSWORD')
-  ADMIN = 'segarage@uwaterloo.ca'
+  ADMIN = 'segarage.uwaterloo@gmail.com'
 
   SECRET_KEY = os.environ.get('SECRET_KEY') or 'SEGarage SECangku'
 
