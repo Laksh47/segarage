@@ -240,6 +240,16 @@ td li {
   margin-bottom: 50px;
 }
 
+.paper_info table {
+  table-layout: fixed;
+  width: 100%;
+}
+
+.paper_info td {
+  text-overflow: ellipsis;
+  overflow: hidden;
+}
+
 .paper_info table, .paper_info th, .paper_info td {
   border: 1px solid #ddd;
   border-radius: 5px;
