@@ -47,7 +47,13 @@
   </tr>
   <tr>
     <td>Link to archive:</td>
-    <td><a href="{{ paper.link_to_archive }}" target="_blank">{{ paper.link_to_archive }}</a></td>
+    <td>
+      {% if paper.link_to_archive == 'Not provided' or paper.link_to_archive == None %}
+        <a>Not provided by authors</a>
+      {% else %}
+        <a href="{{paper.link_to_archive}}" target="_blank">{{ paper.link_to_archive }}</a>
+      {% endif %}
+    </td>
   </tr>
   <tr>
     <td>Cite the paper if you use the artifact:</td>
@@ -55,15 +61,33 @@
   </tr>
   <tr>
     <td>Link to public pdf:</td>
-    <td><a href="{{ paper.link_to_pdf }}" target="_blank">{{ paper.link_to_pdf }}</a></td>
+    <td>
+      {% if paper.link_to_pdf == 'Not provided' or paper.link_to_pdf == None %}
+        <a>Not provided by authors</a>
+      {% else %}
+        <a href="{{ paper.link_to_pdf }}" target="_blank">{{ paper.link_to_pdf }}</a>
+      {% endif %}
+    </td>
   </tr>
   <tr>
     <td>Link to tool webpage:</td>
-    <td><a href="{{ paper.link_to_tool_webpage }}" target="_blank">{{ paper.link_to_tool_webpage }}</a></td>
+    <td>
+      {% if paper.link_to_tool_webpage == 'Not provided' or paper.link_to_tool_webpage == None %}
+        <a>Not provided by authors</a>
+      {% else %}
+        <a href="{{ paper.link_to_tool_webpage }}" target="_blank">{{ paper.link_to_tool_webpage }}</a>
+      {% endif %}
+    </td>
   </tr>
   <tr>
     <td>Link to demo:</td>
-    <td><a href="{{ paper.link_to_demo }}" target="_blank">{{ paper.link_to_demo }}</a></td>
+    <td>
+      {% if paper.link_to_demo == 'Not provided' or paper.link_to_demo == None %}
+        <a>Not provided by authors</a>
+      {% else %}
+        <a href="{{ paper.link_to_demo }}" target="_blank">{{ paper.link_to_demo }}</a>
+      {% endif %}
+    </td>
   </tr>
   <tr>
     <td>Tags:</td>
