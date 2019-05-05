@@ -250,11 +250,16 @@ td li {
   overflow: hidden;
 }
 
+td.preserve-line-breaks {
+  white-space: pre-wrap;
+}
+
 .paper_info table, .paper_info th, .paper_info td {
   border: 1px solid #ddd;
   border-radius: 5px;
   padding: 15px;
   font-size: 18px;
+  line-height: 28px;
 }
 
 .paper_info table ul {
