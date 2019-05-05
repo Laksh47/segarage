@@ -39,7 +39,7 @@ def request_upload():
     html_body=render_template('email/link_to_upload.html', token=token)
 
     ### Email sender needs to be changed before deploying
-    send_email('Link to upload tool', app.config['ADMIN'], ['scrawler16.1@gmail.com'], text_body, html_body)
+    send_email('Link to upload tool', app.config['ADMIN'], [form.authoremail.data], text_body, html_body)
 
     flash('Link to upload the tool has been sent to {} for the paper {}'.format(form.authoremail.data, form.papername.data))
     return redirect(url_for('index'))
@@ -217,7 +217,7 @@ def add_comment(id):
     html_body=render_template('email/verify_comment.html', token=token)
 
     ### Email sender needs to be changed before deploying
-    send_email('Verify Artifact Endorsement - SE Garage', app.config['ADMIN'], ['scrawler16.1@gmail.com'], text_body, html_body)
+    send_email('Verify Artifact Endorsement - SE Garage', app.config['ADMIN'], [endorse_form.commenter_email.data], text_body, html_body)
 
     db.session.commit()
 
@@ -298,7 +298,7 @@ def request_update(id):
     html_body=render_template('email/link_to_edit.html', token=token)
 
     ### Email sender needs to be changed before deploying
-    send_email('Link to update tool/artifact information', app.config['ADMIN'], ['scrawler16.1@gmail.com'], text_body, html_body)
+    send_email('Link to update tool/artifact information', app.config['ADMIN'], [contact_email], text_body, html_body)
     flash('Link to edit/update the artifact information is sent to the contact author, check email')
 
     return redirect(url_for('specific_paper', id=id))

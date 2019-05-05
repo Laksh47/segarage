@@ -20,6 +20,8 @@ MySQL, ES 6.5.4 and Java 10 installed so far
 added alias for python to use python3 always
 
 sudo apt-get install python3-venv
+python3 -m venv venv
+source venv/bin/activate
 
 installed packages in pip.txt
 
