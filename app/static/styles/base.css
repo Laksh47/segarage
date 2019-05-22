@@ -315,7 +315,7 @@ td.preserve-line-breaks {
   display: none; /* Hidden by default */
   position: fixed; /* Stay in place */
   z-index: 1; /* Sit on top */
-  padding-top: 100px; /* Location of the box */
+  padding-top: 40px; /* Location of the box */
   left: 0;
   top: 0;
   width: 100%; /* Full width */
@@ -402,6 +402,11 @@ td.preserve-line-breaks {
   text-align: right;
   width: 29%;
 }
+
+/*.scrollable {
+  overflow-y: scroll;
+  height: 400px;
+}*/
 
 
 /* Mobile CSS */
