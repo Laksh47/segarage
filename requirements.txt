@@ -14,7 +14,7 @@ flask-paginate==0.5.1
 Flask-SQLAlchemy==2.3.2
 Flask-WTF==0.14.2
 ItsDangerous==1.0.0
-Jinja2==2.10
+Jinja2==2.10.1
 jmespath==0.9.3
 limits==1.3
 Mako==1.0.7
