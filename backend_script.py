@@ -7,8 +7,8 @@ from werkzeug.utils import secure_filename
 import re
 import pandas as pd
 
-REPO_FOLDER = '/home/larumuga/Desktop/SEGarage final data'
-excel_file = '/home/larumuga/Desktop/april23_clean.xlsx'
+REPO_FOLDER = '/Users/lakshmanan/Downloads/SEGarage final data'
+excel_file = '/Users/lakshmanan/Downloads/april23_clean.xlsx'
 
 def add_temp(paper, tags, filenames, db, s3):
 
@@ -31,22 +31,22 @@ def add_temp(paper, tags, filenames, db, s3):
   db.session.add(paper)
   db.session.flush()
 
-  if filenames is not None:
-    new_filenames = []
-    fileurls = []
+  # if filenames is not None:
+  #   new_filenames = []
+  #   fileurls = []
 
-    for filename in filenames.split(","):
-      filename = secure_filename(filename)
-      new_filenames.append(filename)
-      new_filename = '{}/{}'.format(paper.id, filename) # updating the name with paper.id for easy access
+  #   for filename in filenames.split(","):
+  #     filename = secure_filename(filename)
+  #     new_filenames.append(filename)
+  #     new_filename = '{}/{}'.format(paper.id, filename) # updating the name with paper.id for easy access
 
-      s3_url = "{0}/{1}/{2}".format(app.config['S3_ENDPOINT'], app.config['S3_BUCKET'], new_filename)
+  #     s3_url = "{0}/{1}/{2}".format(app.config['S3_ENDPOINT'], app.config['S3_BUCKET'], new_filename)
 
-      s3.upload_file('{}/{}'.format(REPO_FOLDER, filename), 'segarage_test', new_filename)
-      fileurls.append(s3_url)
+  #     s3.upload_file('{}/{}'.format(REPO_FOLDER, filename), 'segarage_test', new_filename)
+  #     fileurls.append(s3_url)
 
-    for filename, fileurl in zip(new_filenames, fileurls):
-      paper.files.append(File(filename=filename, filetype='Other', fileurl=fileurl))
+  #   for filename, fileurl in zip(new_filenames, fileurls):
+  #     paper.files.append(File(filename=filename, filetype='Other', fileurl=fileurl))
 
   db.session.flush()
   db.session.commit()
