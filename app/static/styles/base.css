@@ -415,13 +415,13 @@ td.preserve-line-breaks {
   .nav-pills>li, .nav-pills>li+li {
     float: none;
     width: 95%;
-    text-align: center;
+    text-align: left;
     margin: 10px auto;
   }
 
   .searchbar.inline-middle {
     display: inline-block;
-    width: 50%;    
+    width: 60%;
   }
 
   .form-control {
