@@ -45,7 +45,7 @@
     <td>Description:</td>
     <td>{{ paper.description }}</td>
   </tr>
-  <tr>
+  <!-- <tr>
     <td>Link to archive:</td>
     <td>
       {% if paper.link_to_archive == 'Not provided' or paper.link_to_archive == None %}
@@ -54,7 +54,7 @@
         <a href="{{paper.link_to_archive}}" target="_blank">{{ paper.link_to_archive }}</a>
       {% endif %}
     </td>
-  </tr>
+  </tr> -->
   <tr>
     <td>Bibtex:</td>
     <td class="preserve-line-breaks">{{ paper.bibtex }}</td>
