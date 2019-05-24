@@ -234,6 +234,11 @@ td li {
   margin-bottom: 25px;
 }
 
+.terms {
+  font-size: 15px;
+  margin: 5px 0 0 5px;
+}
+
 .edit_button {
   text-align: center;
   margin-top: 10px;

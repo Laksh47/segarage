@@ -116,6 +116,9 @@
     </td>
   </tr>
   </table>
+  <div class="terms">
+    <span class="modal_btn_useragreement"> Terms &amp; Conditions </span>
+  </div>
   <div class="edit_button">
     <button class="trigger_edit btn">
       Edit paper information
@@ -124,7 +127,7 @@
 </div>
 
 <!-- The Modal -->
-<div class="modal">
+<div class="modal edit_button_modal">
 
   <!-- Modal content -->
   <div class="modal_content">
@@ -138,6 +141,41 @@
         {{ edit_button.submit(class_='btn btn-success edit_button_function') }}
       </div>
     </form>
+  </div>
+
+</div>
+
+<!-- The Modal -->
+<div class="modal useragreement_modal" id="useragreement_modal">
+
+  <!-- Modal content -->
+  <div class="modal_content">
+    <span class="close">&times;</span>
+    <div class="scrollable">
+        Terms of Use (adapted from <a href = "https://about.zenodo.org/terms/">Zenodo</a>). <br><br>
+
+        The SEGarage service ("SEGarage") is offered by Mei Nagappan with generous contributions from the School of Computer Science at the University of Waterloo to make available the tools generated in research. <br><br>
+
+        Use of SEGarage, both the uploading and downloading of data, denotes agreement with the following terms:<br><br>
+
+        SEGarage is a research data repository for the preservation and making available of research tools. Access to SEGarage’s content is open to all, for non-military purposes only.<br><br>
+
+        Content may be uploaded free of charge by those without ready access to an organized data centre.<br><br>
+
+        The uploader shall ensure that their content is suitable for open dissemination, and that it complies with these terms and all applicable laws (especially in Canada), including, but not limited to, privacy, data protection and intellectual property rights.<br><br>
+
+        All content is provided "as-is". Users of content ("Users") shall respect applicable license conditions. Download and use of content from SEGarage does not transfer any intellectual property rights in the content to the User.<br><br>
+
+        Users are exclusively responsible for their use of content, and shall hold the University of Waterloo and Mei Nagappan free and harmless in connection with their download and/or use.<br><br>
+
+        We reserve the right, without notice, at our sole discretion and without liability, (i) to alter or delete inappropriate content, and (ii) to restrict or remove User access where it considers that use of SEGarage interferes with its operations or violates these Terms of Use or applicable laws.<br><br>
+
+        Unless specified otherwise, SEGarage metadata may be freely reused under the <a href = "https://creativecommons.org/publicdomain/zero/1.0/">CC0 waiver</a>. Bulk downloading of email addresses taken from SEGarage is not allowed.<br><br>
+
+        These Terms of Use are subject to change by us at any time and without notice, other than through posting the updated Terms of Use on the SEGarage website.<br><br>
+
+        If you have any questions or comments with respect to SEGarage, or if you are unsure whether your intended use is in line with these Terms of Use, or if you seek permission for a use that does not fall within these Terms of Use, please <a href="mailto:segarage@uwaterloo.ca">contact us</a>.<br><br>
+    </div>
   </div>
 
 </div>
@@ -257,8 +295,12 @@
     //   }
     // })
 
+    $('.modal_btn_useragreement').on('click', function() {
+      $('.useragreement_modal').show();
+    });
+
     $('.edit_button').on('click', function() {
-      $('.modal').show();
+      $('.edit_button_modal').show();
     })
 
     $('span.close').on('click', function() {
@@ -266,7 +308,7 @@
     })
 
     $(window).on('click', function(event) {
-      if(event.target.className == "modal") {
+      if(event.target.className.indexOf("edit_button_modal") != -1 || event.target.className.indexOf("useragreement_modal") != -1) {
         $('.modal').hide();
       }
     })
