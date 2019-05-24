@@ -29,7 +29,7 @@ class Config(object):
   PRESERVE_CONTEXT_ON_EXCEPTION = True
   PROPAGATE_EXCEPTIONS = True
 
-  PER_PAGE = 7
+  PER_PAGE = 50
 
   ELASTICSEARCH_URL = os.environ.get('ELASTICSEARCH_URL')
 
