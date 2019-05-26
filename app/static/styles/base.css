@@ -467,3 +467,43 @@ td.preserve-line-breaks {
   }
 
 }
+
+
+/* New Theme tryout
+
+body {
+  background-color: black;
+  color: white;
+}
+
+.jumbotron {
+  background-color: #3c3939;
+}
+
+ul.nav.nav-pills.inline-middle a {
+  background-color: #3c3939;
+}
+
+ul.nav.nav-pills.inline-middle .active a, ul.nav.nav-pills.inline-middle a:hover {
+  background-color: #7b2929;
+}
+
+.specific_paper {
+  background-color: #3c3939;
+}
+
+.specific_paper a.paper_link {
+  color: #dcd9d9;
+  border-color: #f4f5f7;
+}
+
+.specific_paper:hover {
+  color: white;
+  border: 3px solid #f4f5f7;
+  font-size: 22px;
+}
+
+.specific_paper:hover a.paper_link {
+  color: white;
+}
+*/
