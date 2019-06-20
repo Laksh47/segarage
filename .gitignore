@@ -110,7 +110,4 @@ uploads/
 
 *.zip
 
-migrations/versions/
-migrations/
-
 *.db
