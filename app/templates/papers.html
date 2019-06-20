@@ -6,17 +6,18 @@
 
 {{ pagination.info }}
 {{ pagination.links }}
-	<div class="papers">
-		{% for paper in papers %}
-			<div class="specific_paper">
-				<a class="paper_link" href="/papers/{{ paper.id }}">
-						<div>{{ paper.paper_name }}</div>
-						<div>{{ paper.tool_name }}</div>
-						<div>{{ paper.author_name }}</div>
-				</a>
-			</div>
-		{% endfor %}
+<div class="papers">
+	{% for paper in papers %}
+	<div class="specific_paper">
+		<a class="paper_link" href="/papers/{{ paper.id }}">
+			<div>{{ paper.paper_name }}</div>
+			<div>{{ paper.author_name }}</div>
+			<div>{{ paper.year }}</div>
+
+		</a>
 	</div>
+	{% endfor %}
+</div>
 
 {{ pagination.links }}
 

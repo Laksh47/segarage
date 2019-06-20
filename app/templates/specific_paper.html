@@ -28,24 +28,24 @@
         Upvotes
       </div>
     </div>
- 
+
   </div>
   <h3>{{ paper.paper_name }}</h3>
 
   <table>
-  <tr>
-    <td>Contact author email: </td>
-    <td> {{ paper.author_email }} </td>
-  </tr>
-  <tr>
-    <td>Tool name: </td>
-    <td>{{ paper.tool_name }}</td>
-  </tr>
-  <tr>
-    <td>Description:</td>
-    <td>{{ paper.description }}</td>
-  </tr>
-  <!-- <tr>
+    <tr>
+      <td>Author email: </td>
+      <td> {{ paper.author_email }} </td>
+    </tr>
+    <tr>
+      <td>Tool name: </td>
+      <td>{{ paper.tool_name }}</td>
+    </tr>
+    <tr>
+      <td>Description:</td>
+      <td>{{ paper.description }}</td>
+    </tr>
+    <!-- <tr>
     <td>Link to archive:</td>
     <td>
       {% if paper.link_to_archive == 'Not provided' or paper.link_to_archive == None %}
@@ -55,66 +55,74 @@
       {% endif %}
     </td>
   </tr> -->
-  <tr>
-    <td>Bibtex:</td>
-    <td class="preserve-line-breaks">{{ paper.bibtex }}</td>
-  </tr>
-  <tr>
-    <td>Link to public pdf:</td>
-    <td>
-      {% if paper.link_to_pdf == 'Not provided' or paper.link_to_pdf == None %}
+    <tr>
+      <td>Bibtex:</td>
+      <td class="preserve-line-breaks">{{ paper.bibtex }}</td>
+    </tr>
+    <tr>
+      <td>Link to public pdf:</td>
+      <td>
+        {% if paper.link_to_pdf == 'Not provided' or paper.link_to_pdf == None %}
         <a>Not provided by authors</a>
-      {% else %}
+        {% else %}
         <a href="{{ paper.link_to_pdf }}" target="_blank">{{ paper.link_to_pdf }}</a>
-      {% endif %}
-    </td>
-  </tr>
-  <tr>
-    <td>Link to tool webpage:</td>
-    <td>
-      {% if paper.link_to_tool_webpage == 'Not provided' or paper.link_to_tool_webpage == None %}
-        <a>Not provided by authors</a>
-      {% else %}
-        <a href="{{ paper.link_to_tool_webpage }}" target="_blank">{{ paper.link_to_tool_webpage }}</a>
-      {% endif %}
-    </td>
-  </tr>
-  <tr>
-    <td>Link to demo:</td>
-    <td>
-      {% if paper.link_to_demo == 'Not provided' or paper.link_to_demo == None %}
-        <a>Not provided by authors</a>
-      {% else %}
-        <a href="{{ paper.link_to_demo }}" target="_blank">{{ paper.link_to_demo }}</a>
-      {% endif %}
-    </td>
-  </tr>
-  <tr>
-    <td>Tags:</td>
-    <td>
-      
-        {{ tags }}
-      
-    </td>
-  </tr>
-  <tr>
-    <td>Artifacts:</td>
-    <td>
-      <ul>
-      {% for file in paper.files %}
-        {% if file != 'None' %}
-          <li>{{ file.filetype }}: <a href="/downloads/{{ paper.id }}/{{file.filename}}">{{ file.filename }}</a></li>
         {% endif %}
-      {% endfor %}
-      </ul>
-    </td>
-  </tr>
-  <tr>
-    <td>Year and Conference:</td>
-    <td>
-      {{ paper.year }}, {{ paper.conference }}
-    </td>
-  </tr>
+      </td>
+    </tr>
+    <tr>
+      <td>Link to tool webpage:</td>
+      <td>
+        {% if paper.link_to_tool_webpage == 'Not provided' or paper.link_to_tool_webpage == None %}
+        <a>Not provided by authors</a>
+        {% else %}
+        <a href="{{ paper.link_to_tool_webpage }}" target="_blank">{{ paper.link_to_tool_webpage }}</a>
+        {% endif %}
+      </td>
+    </tr>
+    <tr>
+      <td>Link to demo:</td>
+      <td>
+        {% if paper.link_to_demo == 'Not provided' or paper.link_to_demo == None %}
+        <a>Not provided by authors</a>
+        {% else %}
+        <a href="{{ paper.link_to_demo }}" target="_blank">{{ paper.link_to_demo }}</a>
+        {% endif %}
+      </td>
+    </tr>
+    <tr>
+      <td>Keywords:</td>
+      <td>
+
+        {{ tags }}
+
+      </td>
+    </tr>
+    <tr>
+      <td>Tags:</td>
+      <td>
+
+        {{ tags }}
+
+      </td>
+    </tr>
+    <tr>
+      <td>Artifacts:</td>
+      <td>
+        <ul>
+          {% for file in paper.files %}
+          {% if file != 'None' %}
+          <li>{{ file.filetype }}: <a href="/downloads/{{ paper.id }}/{{file.filename}}">{{ file.filename }}</a></li>
+          {% endif %}
+          {% endfor %}
+        </ul>
+      </td>
+    </tr>
+    <tr>
+      <td>Year and Conference:</td>
+      <td>
+        {{ paper.year }}, {{ paper.conference }}
+      </td>
+    </tr>
   </table>
   <div class="terms">
     <span class="modal_btn_useragreement"> Terms of use </span>
@@ -133,7 +141,8 @@
   <div class="modal_content">
     <span class="close">&times;</span>
     <div class="modal_msg">
-      Please do not use this feature if you are not the contact author, only the contact authors get the link to upload the tools!
+      Please do not use this feature if you are not the contact author, only the contact authors get the link to upload
+      the tools!
     </div>
     <form action="{{ url_for('request_update', id=paper.id) }}" method="post" class="edit_request">
       {{ edit_button.hidden_tag() }}
@@ -152,29 +161,43 @@
   <div class="modal_content">
     <span class="close">&times;</span>
     <div class="scrollable">
-        Terms of Use (adapted from <a href = "https://about.zenodo.org/terms/">Zenodo</a>). <br><br>
+      Terms of Use (adapted from <a href="https://about.zenodo.org/terms/">Zenodo</a>). <br><br>
 
-        The SEGarage service ("SEGarage") is offered by Mei Nagappan with generous contributions from the School of Computer Science at the University of Waterloo to make available the tools generated in research. <br><br>
+      The SEGarage service ("SEGarage") is offered by Mei Nagappan with generous contributions from the School of
+      Computer Science at the University of Waterloo to make available the tools generated in research. <br><br>
 
-        Use of SEGarage, both the uploading and downloading of data, denotes agreement with the following terms:<br><br>
+      Use of SEGarage, both the uploading and downloading of data, denotes agreement with the following terms:<br><br>
 
-        SEGarage is a research data repository for the preservation and making available of research tools. Access to SEGarage’s content is open to all, for non-military purposes only.<br><br>
+      SEGarage is a research data repository for the preservation and making available of research tools. Access to
+      SEGarage’s content is open to all, for non-military purposes only.<br><br>
 
-        Content may be uploaded free of charge by those without ready access to an organized data centre.<br><br>
+      Content may be uploaded free of charge by those without ready access to an organized data centre.<br><br>
 
-        The uploader shall ensure that their content is suitable for open dissemination, and that it complies with these terms and all applicable laws (especially in Canada), including, but not limited to, privacy, data protection and intellectual property rights.<br><br>
+      The uploader shall ensure that their content is suitable for open dissemination, and that it complies with these
+      terms and all applicable laws (especially in Canada), including, but not limited to, privacy, data protection and
+      intellectual property rights.<br><br>
 
-        All content is provided "as-is". Users of content ("Users") shall respect applicable license conditions. Download and use of content from SEGarage does not transfer any intellectual property rights in the content to the User.<br><br>
+      All content is provided "as-is". Users of content ("Users") shall respect applicable license conditions. Download
+      and use of content from SEGarage does not transfer any intellectual property rights in the content to the
+      User.<br><br>
 
-        Users are exclusively responsible for their use of content, and shall hold the University of Waterloo and Mei Nagappan free and harmless in connection with their download and/or use.<br><br>
+      Users are exclusively responsible for their use of content, and shall hold the University of Waterloo and Mei
+      Nagappan free and harmless in connection with their download and/or use.<br><br>
 
-        We reserve the right, without notice, at our sole discretion and without liability, (i) to alter or delete inappropriate content, and (ii) to restrict or remove User access where it considers that use of SEGarage interferes with its operations or violates these Terms of Use or applicable laws.<br><br>
+      We reserve the right, without notice, at our sole discretion and without liability, (i) to alter or delete
+      inappropriate content, and (ii) to restrict or remove User access where it considers that use of SEGarage
+      interferes with its operations or violates these Terms of Use or applicable laws.<br><br>
 
-        Unless specified otherwise, SEGarage metadata may be freely reused under the <a href = "https://creativecommons.org/publicdomain/zero/1.0/">CC0 waiver</a>. Bulk downloading of email addresses taken from SEGarage is not allowed.<br><br>
+      Unless specified otherwise, SEGarage metadata may be freely reused under the <a
+        href="https://creativecommons.org/publicdomain/zero/1.0/">CC0 waiver</a>. Bulk downloading of email addresses
+      taken from SEGarage is not allowed.<br><br>
 
-        These Terms of Use are subject to change by us at any time and without notice, other than through posting the updated Terms of Use on the SEGarage website.<br><br>
+      These Terms of Use are subject to change by us at any time and without notice, other than through posting the
+      updated Terms of Use on the SEGarage website.<br><br>
 
-        If you have any questions or comments with respect to SEGarage, or if you are unsure whether your intended use is in line with these Terms of Use, or if you seek permission for a use that does not fall within these Terms of Use, please <a href="mailto:segarage@uwaterloo.ca">contact us</a>.<br><br>
+      If you have any questions or comments with respect to SEGarage, or if you are unsure whether your intended use is
+      in line with these Terms of Use, or if you seek permission for a use that does not fall within these Terms of Use,
+      please <a href="mailto:segarage@uwaterloo.ca">contact us</a>.<br><br>
     </div>
   </div>
 
@@ -183,14 +206,14 @@
 <div class="comments">
   <h3>Comments</h3>
   {% for comment in comments %}
-    <div class="comment-wrap">
-      <div class="comment">
-        {{ comment.comment }}
-      </div>
-      <div class="comment_by">
-        commented by {{ comment.commenter_name }}
-      </div>
-    </div>    
+  <div class="comment-wrap">
+    <div class="comment">
+      {{ comment.comment }}
+    </div>
+    <div class="comment_by">
+      commented by {{ comment.commenter_name }}
+    </div>
+  </div>
   {% endfor %}
 </div>
 
@@ -202,35 +225,35 @@
     </div>
     {{ form.hidden_tag() }}
     <div class="form-group required">
-        {{ form.commenter_email.label }}
-        {{ form.commenter_email(size=32, class_='form-control') }}
-        {% for error in form.commenter_email.errors %}
-          <span style="color: red;">[{{ error }}]</span>
-        {% endfor %}
+      {{ form.commenter_email.label }}
+      {{ form.commenter_email(size=32, class_='form-control') }}
+      {% for error in form.commenter_email.errors %}
+      <span style="color: red;">[{{ error }}]</span>
+      {% endfor %}
     </div>
     <div class="form-group">
-        {{ form.commenter_name.label }}
-        {{ form.commenter_name(size=32, class_='form-control') }}
-        {% for error in form.commenter_name.errors %}
-          <span style="color: red;">[{{ error }}]</span>
-        {% endfor %}
+      {{ form.commenter_name.label }}
+      {{ form.commenter_name(size=32, class_='form-control') }}
+      {% for error in form.commenter_name.errors %}
+      <span style="color: red;">[{{ error }}]</span>
+      {% endfor %}
     </div>
     <div class="form-group required">
-        {{ form.comment.label }}
-        {{ form.comment(size=32, class_='form-control') }}
-        {% for error in form.comment.errors %}
-          <span style="color: red;">[{{ error }}]</span>
-        {% endfor %}
+      {{ form.comment.label }}
+      {{ form.comment(size=32, class_='form-control') }}
+      {% for error in form.comment.errors %}
+      <span style="color: red;">[{{ error }}]</span>
+      {% endfor %}
     </div>
     <div class="form-group">
-        {{ form.upvote() }}
-        {{ form.upvote.label }}
+      {{ form.upvote() }}
+      {{ form.upvote.label }}
     </div>
     <div class="form-group">
-        {{ form.recaptcha }}
-        {% for error in form.recaptcha.errors %}
-            <span style="color: red;">[{{ error }}]</span>
-        {% endfor %}
+      {{ form.recaptcha }}
+      {% for error in form.recaptcha.errors %}
+      <span style="color: red;">[{{ error }}]</span>
+      {% endfor %}
     </div>
     <div class="form-group">{{ form.submit(class_='btn btn-success') }}</div>
 
@@ -243,7 +266,7 @@
 
 
 <script>
-  $(document).ready(function() {
+  $(document).ready(function () {
     $('.feedback_form').submit(function (e) {
       $('.form_submission_msg').text('')
       $('.loading').show();
@@ -267,10 +290,10 @@
           var errors = error.responseJSON.data.errors
           var keys = Object.keys(errors)
           $('.ajax_errors').remove()
-          for (var index in keys){
+          for (var index in keys) {
             key = keys[index]
             id = `#${key}`
-            if(key == 'recaptcha') {
+            if (key == 'recaptcha') {
               id = '.g-recaptcha'
             }
             msg = errors[key]
@@ -295,20 +318,20 @@
     //   }
     // })
 
-    $('.modal_btn_useragreement').on('click', function() {
+    $('.modal_btn_useragreement').on('click', function () {
       $('.useragreement_modal').show();
     });
 
-    $('.edit_button').on('click', function() {
+    $('.edit_button').on('click', function () {
       $('.edit_button_modal').show();
     })
 
-    $('span.close').on('click', function() {
+    $('span.close').on('click', function () {
       $('.modal').hide();
     })
 
-    $(window).on('click', function(event) {
-      if(event.target.className.indexOf("edit_button_modal") != -1 || event.target.className.indexOf("useragreement_modal") != -1) {
+    $(window).on('click', function (event) {
+      if (event.target.className.indexOf("edit_button_modal") != -1 || event.target.className.indexOf("useragreement_modal") != -1) {
         $('.modal').hide();
       }
     })
@@ -318,9 +341,9 @@
 
     // Inject our CSRF token into our AJAX request.
     $.ajaxSetup({
-      beforeSend: function(xhr, settings) {
+      beforeSend: function (xhr, settings) {
         if (!/^(GET|HEAD|OPTIONS|TRACE)$/i.test(settings.type) && !this.crossDomain) {
-            xhr.setRequestHeader("X-CSRFToken", "{{ form.csrf_token._value() }}")
+          xhr.setRequestHeader("X-CSRFToken", "{{ form.csrf_token._value() }}")
         }
       }
     })

@@ -12,6 +12,7 @@ pip install mysqlclient
 sudo apt-get install libmysqlclient-dev)
 
 pip install flask-migrate
+mysql_secure_installation
 
 pip install flask-mail
 
