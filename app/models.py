@@ -101,6 +101,7 @@ class Paper(SearchableMixin, db.Model):
     bibtex = db.Column(db.Text)
     year = db.Column(db.String(4))
     conference = db.Column(db.String(200))
+    
 
     files = db.relationship("File")
     tags = db.relationship("Tag", secondary=paper_tag_association)

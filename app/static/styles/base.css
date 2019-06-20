@@ -454,9 +454,11 @@ td.preserve-line-breaks {
     margin: 0px 20px 10px 20px;
   }
 
+  /*
   tr> td:first-child {
     display: none;
   }
+  */
 
   td {
     text-align: left;
