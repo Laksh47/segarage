@@ -66,5 +66,6 @@ for i in range(len(dfs)):
   filenames = dfs['File name for tool'][i]
 
   add_temp(paper, tags, filenames, db, s3)
-  Paper.reindex();
+
+Paper.reindex();
 

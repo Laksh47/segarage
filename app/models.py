@@ -85,7 +85,7 @@ class Comment(db.Model):
 
 class Paper(SearchableMixin, db.Model):
     __tablename__ = "papers"
-    __searchable__ = ['paper_name', 'description', 'tool_name', 'tags'] #fields that should be made full-text search ex: ['paper_name']
+    __searchable__ = ['paper_name', 'description', 'tool_name', 'tags', 'category'] #fields that should be made full-text search ex: ['paper_name']
 
     id = db.Column(db.Integer, primary_key=True)
     author_name = db.Column(db.String(64))
@@ -101,6 +101,7 @@ class Paper(SearchableMixin, db.Model):
     bibtex = db.Column(db.Text)
     year = db.Column(db.String(4))
     conference = db.Column(db.String(200))
+    category = db.Column(db.String(150))
     
 
     files = db.relationship("File")
