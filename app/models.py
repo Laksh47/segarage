@@ -87,6 +87,7 @@ class Paper(SearchableMixin, db.Model):
     __tablename__ = "papers"
     __searchable__ = ['paper_name', 'description', 'tool_name', 'tags', 'category'] #fields that should be made full-text search ex: ['paper_name']
 
+
     id = db.Column(db.Integer, primary_key=True)
     author_name = db.Column(db.String(64))
     paper_name = db.Column(db.Text)

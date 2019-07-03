@@ -100,9 +100,11 @@
     <tr>
       <td>Tags:</td>
       <td>
-
-        {{ tags }}
-
+        <a href="{{ url_for('category_search',token=paper.category) }}">
+          <div style="height:100%;width:100%">
+            {{ paper.category }}
+          </div>
+        </a>
       </td>
     </tr>
     <tr>
