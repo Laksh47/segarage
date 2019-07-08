@@ -11,6 +11,8 @@ import re
 ALLOWED_EXTENSIONS_FILES = set(['txt', 'pdf', 'md', 'zip', 'tar', 'gz', 'docx', 'xlsx'])
 FILETYPE_CHOICES = ['Binary', 'Scripts (Source code)', 'Readme', 'Other']
 
+CATEGORY_LIST = set(['Mutation testing', 'Model-driven development', 'SPLs and OO repair', 'Test automation and failure diagnosis', 'Testing vulnerability', 'Testing', 'Program Understanding', 'Energy and requirement analysis', 'Analysis and refactoring', 'Verification and validation', 'Demonstrations Assistance', 'Authoring and Synthesis', 'Automated Programming Support', 'Empirical studies of code', 'Software evolution and maintenance', 'Software repair', 'Apps and App Stores', 'Search-based software engineering ', 'Program reduction technologies', 'Test improvement', 'Software comprehension', 'Human and social aspects of computing', 'Models and modeling', 'Inference and invariants', 'Test generation', 'Mining software repositories', 'Documentation', 'Development tools and frameworks', 'Recommendation systems', 'Formal methods', 'Web applications', 'Defect prediction', 'Debugging', 'Code smells', 'Concurrency', 'Product lines', 'Compilers', 'Emerging trends', 'Open source', 'Performance', 'Android', 'Repair and model synthesis', 'Specification and Verification', 'Patching and Fixing ', 'Tools and Environments', 'Research Testing ', 'Mobile Applications', 'Regression Testing', 'Security and Privacy', 'Automated Bug Detection', 'Search and APIs', 'Build and Package Management', 'Symbolic Execution', 'Apps and Energy', 'Requirements', 'Software Understanding', 'Configuration, Variability, and Clones', 'Other'])
+
 def allowed_files(filename):
   """
   Checks if the file extension matches the list of allowed extensions

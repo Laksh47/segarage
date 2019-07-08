@@ -4,7 +4,7 @@ from flask_wtf.file import FileField
 from wtforms import StringField, PasswordField, BooleanField, SubmitField, TextAreaField, MultipleFileField, SelectField, BooleanField
 from wtforms.validators import InputRequired, DataRequired, Email, ValidationError
 
-from app.utils import FILETYPE_CHOICES, file_validation, file_upload_or_link, accept_specific_links, valid_url_check
+from app.utils import FILETYPE_CHOICES, CATEGORY_LIST, file_validation, file_upload_or_link, accept_specific_links, valid_url_check
 
 class editButton(FlaskForm):
   # recaptcha_for_edit = RecaptchaField()
@@ -57,6 +57,10 @@ class toolUpload(FlaskForm):
 
   choices = [(item, item) for item in FILETYPE_CHOICES]
   dropdown_choices = SelectField(choices=choices)
+
+  choices = [(item, item) for item in CATEGORY_LIST]
+  category = SelectField('Paper category', choices=choices, default='Other')
+
   file_types = StringField()
 
   linktotoolwebpage = StringField('Link to tool download', validators=[accept_specific_links])
@@ -98,6 +102,9 @@ class toolUpdate(FlaskForm):
   choices = [(item, item) for item in FILETYPE_CHOICES]
   dropdown_choices = SelectField(choices=choices)
   file_types = StringField()
+
+  choices = [(item, item) for item in CATEGORY_LIST]
+  category = SelectField('Paper category', choices=choices)
 
   linktotoolwebpage = StringField('Link to tool download', validators=[accept_specific_links])
   all_files = MultipleFileField('You can either add files or overwrite the existing files by using the same filename!', validators=[file_validation])

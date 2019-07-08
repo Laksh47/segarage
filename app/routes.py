@@ -62,7 +62,7 @@ def tool_upload(token):
   form.papername.data = payload['papername']
 
   if form.validate_on_submit():
-    paper = Paper(paper_name=form.papername.data, author_name=form.authorname.data, author_email=form.authoremail.data, tool_name=form.toolname.data, link_to_pdf=form.linktopdf.data, link_to_archive=form.linktoarchive.data, link_to_tool_webpage=form.linktotoolwebpage.data, link_to_demo=form.linktodemo.data, bibtex=form.bibtex.data, description=form.description.data, year=form.year.data, conference=form.conference.data, view_count=0)
+    paper = Paper(paper_name=form.papername.data, author_name=form.authorname.data, author_email=form.authoremail.data, tool_name=form.toolname.data, link_to_pdf=form.linktopdf.data, link_to_archive=form.linktoarchive.data, link_to_tool_webpage=form.linktotoolwebpage.data, link_to_demo=form.linktodemo.data, bibtex=form.bibtex.data, description=form.description.data, year=form.year.data, conference=form.conference.data, category=form.category.data, view_count=0)
 
     # print(form.tags.data)
 
@@ -326,6 +326,7 @@ def update_tool(token):
   form.authoremail.data = paper.author_email
   form.description.data = paper.description
   form.bibtex.data = paper.bibtex
+  form.category.data = paper.category
   form.tags.data = tags_obj_to_str(paper.tags, ", ")
   form.linktopdf.data = paper.link_to_pdf
   form.linktodemo.data = paper.link_to_demo
@@ -359,6 +360,7 @@ def update_tool_submit(token):
     paper.author_email = form.authoremail.data
     paper.description = form.description.data
     paper.bibtex = form.bibtex.data
+    paper.category = form.category.data
     paper.link_to_pdf = form.linktopdf.data
     paper.link_to_demo = form.linktodemo.data
     paper.link_to_tool_webpage = form.linktotoolwebpage.data
