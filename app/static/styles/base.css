@@ -413,9 +413,20 @@ td.preserve-line-breaks {
   height: 400px;
 }*/
 
+.or {
+  font-size: 20px;
+  color: #040404;
+  margin-bottom: 10px;
+}
+
 
 /* Mobile CSS */
 @media (max-width: 45em) {
+
+  .or {
+    font-size: 16px;
+  }
+
   .inline-middle {
     width: auto;
     display: block;

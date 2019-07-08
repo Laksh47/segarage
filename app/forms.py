@@ -4,7 +4,7 @@ from flask_wtf.file import FileField
 from wtforms import StringField, PasswordField, BooleanField, SubmitField, TextAreaField, MultipleFileField, SelectField, BooleanField
 from wtforms.validators import InputRequired, DataRequired, Email, ValidationError
 
-from app.utils import FILETYPE_CHOICES, file_validation
+from app.utils import FILETYPE_CHOICES, file_validation, file_upload_or_link, accept_specific_links, valid_url_check
 
 class editButton(FlaskForm):
   # recaptcha_for_edit = RecaptchaField()
@@ -48,10 +48,9 @@ class toolUpload(FlaskForm):
   authorname = StringField('Contact author Name')
   authoremail = StringField('Contact author Email', validators=[DataRequired(), Email('Please enter valid email address')])
 
-  linktopdf = StringField('Link to publicly available version of the paper')
-  linktoarchive = StringField('Link to published version (ACM/IEEE/peerJ etc.,)', validators=[DataRequired()])
-  linktotoolwebpage = StringField('Link to tool webpage')
-  linktodemo = StringField('Link to demo (youtube)')
+  linktopdf = StringField('Link to publicly available version of the paper', validators=[valid_url_check])
+  linktoarchive = StringField('Link to published version (ACM/IEEE/peerJ etc.,)', validators=[DataRequired(), valid_url_check])
+  linktodemo = StringField('Link to demo (youtube)', validators=[valid_url_check])
 
   bibtex = TextAreaField('BibTex entry', validators=[DataRequired()])
   description = TextAreaField('A short description on the Paper/Artifact', validators=[DataRequired()])
@@ -60,7 +59,8 @@ class toolUpload(FlaskForm):
   dropdown_choices = SelectField(choices=choices)
   file_types = StringField()
 
-  all_files = MultipleFileField('Upload your files (readme, binary, script etc.,)', validators=[DataRequired(), InputRequired(), file_validation])
+  linktotoolwebpage = StringField('Link to tool download', validators=[accept_specific_links])
+  all_files = MultipleFileField('Upload your files (readme, binary, script etc.,)', validators=[file_upload_or_link, file_validation])
 
   tags = StringField('Tags', validators=[DataRequired()])
   
@@ -81,10 +81,9 @@ class toolUpdate(FlaskForm):
   authorname = StringField('Contact author Name')
   authoremail = StringField('Contact author Email', validators=[DataRequired(), Email('Please enter valid email address')])
 
-  linktopdf = StringField('Link to publicly available version of the paper')
-  linktoarchive = StringField('Link to published version (ACM/IEEE/peerJ etc.,)', validators=[DataRequired()])
-  linktotoolwebpage = StringField('Link to tool webpage')
-  linktodemo = StringField('Link to demo (youtube)')
+  linktopdf = StringField('Link to publicly available version of the paper', validators=[valid_url_check])
+  linktoarchive = StringField('Link to published version (ACM/IEEE/peerJ etc.,)', validators=[DataRequired(), valid_url_check])
+  linktodemo = StringField('Link to demo (youtube)', validators=[valid_url_check])
 
   bibtex = TextAreaField('BibTex entry', validators=[DataRequired()])
   description = TextAreaField('A short description on the Paper/Artifact', validators=[DataRequired()])
@@ -100,6 +99,7 @@ class toolUpdate(FlaskForm):
   dropdown_choices = SelectField(choices=choices)
   file_types = StringField()
 
+  linktotoolwebpage = StringField('Link to tool download', validators=[accept_specific_links])
   all_files = MultipleFileField('You can either add files or overwrite the existing files by using the same filename!', validators=[file_validation])
 
   update = SubmitField('Update information')
