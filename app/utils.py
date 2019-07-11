@@ -1,13 +1,15 @@
 from flask_mail import Message
 from app import app, mail
 from werkzeug.utils import secure_filename
-
+from wtforms import ValidationError
 from time import time
+
 import jwt
 import os
+import re
 
-ALLOWED_EXTENSIONS_FILES = set(['txt', 'pdf', 'md', 'zip', 'tar', 'gz', 'docx', 'xlsx'])
-FILETYPE_CHOICES = ['Binary', 'Scripts (Source code)', 'Readme', 'Other']
+from .constants import CATEGORY_LIST, ALLOWED_EXTENSIONS_FILES, FILETYPE_CHOICES
+
 
 def allowed_files(filename):
   """
@@ -62,17 +64,6 @@ def upload_file_to_s3(s3, file, bucket_name, acl="public-read"):
     print("Something Happened: ", e)
     return e
 
-def file_validation(form, field):
-  """
-  File validation callback for forms
-  """
-  if field.data:
-    for file in field.data:
-      if isinstance(file, str):
-        continue
-      if not allowed_files(file.filename):
-        raise ValidationError('File format not supported (supported: md, txt, pdf, docx, zip, gz, rar)')
-
 def tags_obj_to_str(tags_array, delimiter=" "):
   """
   Converts the tags(model) into a string with the given delimiter
@@ -95,6 +86,46 @@ def files_to_str(files, delimiter=" "):
     file_pairs += "{}: {}".format(file.filetype, file.filename)
   return file_pairs
 
+### Form custom validations
+
+def valid_url_check(form, field):
+  link_provided = (not not field.data)
+
+  if link_provided:
+    pattern = "(https:|http:)\/\/[[:alnum:]]*[.]*[\S]*"
+
+    if not re.match(pattern, field.data):
+      raise ValidationError("Not a valid url")
+
+def accept_specific_links(form, field):
+  link_provided = (not not field.data)
+
+  if link_provided:
+    pattern = "https:\/\/[[:alnum:]]*[.]*(regex101.com|github.com|softwareheritage.org)[\S]*"
+    if not re.match(pattern, field.data):
+      raise ValidationError("Links are accepted only from zenodo.com/github.com/softwareheritage.org")
+
+def file_upload_or_link(form, field):
+  link_provided = (not not form.linktotoolwebpage.data)
+  file_provided = False
+
+  for file in form.all_files.data:
+    if (not not file):
+      file_provided = True
+
+  if not link_provided or not file_provided:
+    raise ValidationError('You can provide a link to either zenodo.com/github.com/softwareheritage.org in the above field or upload here')
+
+def file_validation(form, field):
+  """
+  File validation callback for forms
+  """
+  if field.data:
+    for file in field.data:
+      if isinstance(file, str):
+        continue
+      if not allowed_files(file.filename):
+        raise ValidationError('File format not supported (supported: md, txt, pdf, docx, zip, gz, rar)')
 
 
 ##### elasticsearch utils
