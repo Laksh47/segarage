@@ -4,7 +4,8 @@ from flask_wtf.file import FileField
 from wtforms import StringField, PasswordField, BooleanField, SubmitField, TextAreaField, MultipleFileField, SelectField, BooleanField
 from wtforms.validators import InputRequired, DataRequired, Email, ValidationError
 
-from app.utils import FILETYPE_CHOICES, CATEGORY_LIST, file_validation, file_upload_or_link, accept_specific_links, valid_url_check
+from app.constants import FILETYPE_CHOICES, CATEGORY_LIST
+from app.utils import file_validation, file_upload_or_link, accept_specific_links, valid_url_check
 
 class editButton(FlaskForm):
   # recaptcha_for_edit = RecaptchaField()
