@@ -9,7 +9,7 @@ from app.utils import file_validation, file_upload_or_link, accept_specific_link
 
 class editButton(FlaskForm):
   # recaptcha_for_edit = RecaptchaField()
-  submit = SubmitField('Send the email to edit paper')
+  submit = SubmitField('Send email to edit paper')
 
 class endorsePaper(FlaskForm):
   """
@@ -17,7 +17,7 @@ class endorsePaper(FlaskForm):
   """
   commenter_email = StringField('Email', validators=[DataRequired(), Email('Please enter valid email address')])
   commenter_name = StringField('Name (optional)')
-  comment = TextAreaField('Feedback for the artifacts', validators=[DataRequired()])
+  comment = TextAreaField('Feedback', validators=[DataRequired()])
   upvote = BooleanField("Upvote this artifact!")
   recaptcha = RecaptchaField()
   submit =  SubmitField('Submit')
@@ -51,10 +51,10 @@ class toolUpload(FlaskForm):
 
   linktopdf = StringField('Link to publicly available version of the paper', validators=[valid_url_check])
   linktoarchive = StringField('Link to published version (ACM/IEEE/peerJ etc.,)', validators=[DataRequired(), valid_url_check])
-  linktodemo = StringField('Link to demo (youtube)', validators=[valid_url_check])
+  linktodemo = StringField('Link to demo (Youtube)', validators=[valid_url_check])
 
   bibtex = TextAreaField('BibTex entry', validators=[DataRequired()])
-  description = TextAreaField('A short description on the Paper/Artifact', validators=[DataRequired()])
+  description = TextAreaField('A short description of the Paper/Artifact', validators=[DataRequired()])
 
   choices = [(item, item) for item in FILETYPE_CHOICES]
   dropdown_choices = SelectField(choices=choices)
@@ -65,7 +65,7 @@ class toolUpload(FlaskForm):
   file_types = StringField()
 
   linktotoolwebpage = StringField('Link to tool download', validators=[accept_specific_links])
-  all_files = MultipleFileField('Upload your files (readme, binary, script etc.,)', validators=[file_upload_or_link, file_validation])
+  all_files = MultipleFileField('Upload your files (readme, binary, script etc.)', validators=[file_upload_or_link, file_validation])
 
   tags = StringField('Tags', validators=[DataRequired()])
   
@@ -87,7 +87,7 @@ class toolUpdate(FlaskForm):
   authoremail = StringField('Contact author Email', validators=[DataRequired(), Email('Please enter valid email address')])
 
   linktopdf = StringField('Link to publicly available version of the paper', validators=[valid_url_check])
-  linktoarchive = StringField('Link to published version (ACM/IEEE/peerJ etc.,)', validators=[DataRequired(), valid_url_check])
+  linktoarchive = StringField('Link to published version (ACM/IEEE/peerJ etc.)', validators=[DataRequired(), valid_url_check])
   linktodemo = StringField('Link to demo (youtube)', validators=[valid_url_check])
 
   bibtex = TextAreaField('BibTex entry', validators=[DataRequired()])
