@@ -87,12 +87,17 @@ def files_to_str(files, delimiter=" "):
   return file_pairs
 
 ### Form custom validations
+@app.template_filter()
+def check_protocol_prefix(url):
+  if not (url.startswith('https://') or url.startswith('http://')):
+    return 'http://{}'.format(url)
+  return url
 
 def valid_url_check(form, field):
   link_provided = (not not field.data)
 
   if link_provided:
-    pattern = "(https:|http:)\/\/[[:alnum:]]*[.]*[\S]*"
+    pattern = "(?:(?:https?):\/\/)?(?:\w+\.)+\w{2,3}"
 
     if not re.match(pattern, field.data):
       raise ValidationError("Not a valid url")
@@ -101,7 +106,7 @@ def accept_specific_links(form, field):
   link_provided = (not not field.data)
 
   if link_provided:
-    pattern = "https:\/\/[[:alnum:]]*[.]*(regex101.com|github.com|softwareheritage.org)[\S]*"
+    pattern = "(?:(?:https?):\/\/)?(zenodo.com|github.com|softwareheritage.org)[\S]*"
     if not re.match(pattern, field.data):
       raise ValidationError("Links are accepted only from zenodo.com/github.com/softwareheritage.org")
 
