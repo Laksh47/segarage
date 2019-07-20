@@ -37,7 +37,7 @@ class requestToolUpload(FlaskForm):
   papername = StringField('Paper Name', validators=[DataRequired()])
 
   recaptcha = RecaptchaField()
-  request_upload = SubmitField('Need to upload tool for the paper')
+  request_upload = SubmitField('Request tool upload')
 
 class toolUpload(FlaskForm):
   """
