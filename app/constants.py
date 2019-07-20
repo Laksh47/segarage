@@ -53,4 +53,5 @@ CATEGORY_LIST = set([
 "Traceability",
 "Ubiquitous/pervasive software systems",
 "Validation and verification",
+"Other"
 ])
