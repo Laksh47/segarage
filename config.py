@@ -35,7 +35,7 @@ class Config(object):
 
   PERMANENT_SESSION_LIFETIME =  timedelta(days=1) ## For Flask session cookies
 
-  S3_BUCKET  = os.environ.get("S3_BUCKET_NAME")
+  S3_BUCKET  = os.environ.get("S3_BUCKET_NAME") or 'segarage_tools'
   S3_KEY = os.environ.get("S3_ACCESS_KEY")
   S3_SECRET = os.environ.get("S3_SECRET_ACCESS_KEY")
   S3_ENDPOINT = os.environ.get("S3_ENDPOINT")

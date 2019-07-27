@@ -89,8 +89,9 @@ def files_to_str(files, delimiter=" "):
 ### Form custom validations
 @app.template_filter()
 def check_protocol_prefix(url):
-  if not (url.startswith('https://') or url.startswith('http://')):
-    return 'http://{}'.format(url)
+  if url:
+    if not (url.startswith('https://') or url.startswith('http://')):
+      return 'http://{}'.format(url)
   return url
 
 def valid_url_check(form, field):
