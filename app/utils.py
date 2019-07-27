@@ -119,7 +119,7 @@ def file_upload_or_link(form, field):
     if (not not file):
       file_provided = True
 
-  if not link_provided or not file_provided:
+  if not link_provided and not file_provided:
     raise ValidationError('You can provide a link to either zenodo.com/github.com/softwareheritage.org in the above field or upload here')
 
 def file_validation(form, field):
