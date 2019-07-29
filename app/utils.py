@@ -128,7 +128,7 @@ def file_validation(form, field):
   """
   if field.data:
     for file in field.data:
-      if isinstance(file, str) and file == '' and file.filename == '':
+      if isinstance(file, str) or file == '' or file.filename == '':
         continue
       if not allowed_files(file.filename):
         raise ValidationError('File format not supported (supported: md, txt, pdf, docx, zip, gz, rar)')
