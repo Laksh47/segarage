@@ -7,8 +7,8 @@ from werkzeug.utils import secure_filename
 import re
 import pandas as pd
 
-REPO_FOLDER = '/home/larumuga/Downloads/samples'
-excel_file = '/home/larumuga/Downloads/sent.xlsx'
+REPO_FOLDER = '/home/larumuga/Downloads/samples/2nd'
+excel_file = '/home/larumuga/Downloads/sent_2.xlsx'
 
 def add_temp(paper, tags, filenames, db, s3):
 
@@ -42,7 +42,7 @@ def add_temp(paper, tags, filenames, db, s3):
 
       s3_url = "{0}/{1}/{2}".format(app.config['S3_ENDPOINT'], app.config['S3_BUCKET'], new_filename)
 
-      s3.upload_file('{}/{}'.format(REPO_FOLDER, filename), 'segarage_test', new_filename)
+      s3.upload_file('{}/{}'.format(REPO_FOLDER, filename), app.config['S3_BUCKET'], new_filename)
       fileurls.append(s3_url)
 
     print(new_filenames)
