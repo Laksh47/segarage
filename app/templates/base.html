@@ -1,59 +1,105 @@
 <html>
-    <head>
-      <title>SE Garage</title>
-      <!-- Latest compiled and minified CSS -->
-      <link rel="stylesheet" href="{{ url_for('static',filename='styles/bootstrap.min.css') }}">
 
-      <!-- Optional theme -->
-      <link rel="stylesheet" href="{{ url_for('static',filename='styles/bootstrap-theme.min.css') }}">
+<head>
+  <title>SE Garage</title>
+  <!-- Latest compiled and minified CSS -->
+  <link rel="stylesheet" href="{{ url_for('static',filename='styles/bootstrap.min.css') }}">
 
-      <link rel="stylesheet" type= "text/css" href= "{{ url_for('static',filename='styles/base.css') }}">
+  <!-- Optional theme -->
+  <link rel="stylesheet" href="{{ url_for('static',filename='styles/bootstrap-theme.min.css') }}">
 
-      <script src="{{ url_for('static',filename='js/jquery.min.js') }}"></script>
+  <link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='styles/base.css') }}">
 
-      <script type="text/javascript" src="{{ url_for('static',filename='js/jquery.tagsinput.min.js') }}"></script>
-      <link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='styles/jquery.tagsinput.min.css') }}" />
+  <script src="{{ url_for('static',filename='js/jquery.min.js') }}"></script>
 
-      <meta name="viewport" content = "width=device-width, initial-scale=1.0">
+  <script type="text/javascript" src="{{ url_for('static',filename='js/jquery.tagsinput.min.js') }}"></script>
+  <link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='styles/jquery.tagsinput.min.css') }}" />
 
-    </head>
-    <body>
-      <div class="container">
-        <div class="header clearfix">
-          <nav class="clearfix">
-            <ul class="nav nav-pills inline-middle">
-              <li role="presentation" {%- if request.path == "/index" %} class="active" {% endif %}><a href="{{ url_for('index') }}">Home</a></li>
-              <li role="presentation" {%- if request.path == "/request_upload" %} class="active" {% endif %}><a href="{{ url_for('request_upload') }}">Request Upload</a></li>
-              <li role="presentation" {%- if request.path == "/papers" %} class="active" {% endif %}><a href="{{ url_for('papers') }}">Papers</a></li>
-            </ul>
-            <div class="searchbar-wrap inline-middle">
-              <form action="{{ url_for('search') }}" method="post" name="search">
-                  {{ g.search_form.hidden_tag() }}
-                  {{ g.search_form.q(size=20, class_='form-control searchbar inline-middle') }}
-                  {{ g.search_form.search_button(class_='btn btn-success') }}
-              </form>
-            </div>
-          </nav>
-        </div>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="icon" type="image/png" href="{{ url_for('static',filename='assets/LogoDefault.png') }}">
+</head>
 
-        {% with messages = get_flashed_messages() %}
-        {% if messages %}
-            {% for message in messages %}
-              <div class="alert alert-info">
-                <strong>{{ message }} </strong>
-              </div>
-            {% endfor %}
-        {% endif %}
-        {% endwith %}
+<body>
+  <div class="container-fluid" >
+    <nav class="nav nav-pills">
+      <li role="presentation" {%- if request.path == "/index" %} class="active"{% endif %}>
+
+        <a href="{{ url_for('index') }}"> 
+          <img src="{{ url_for('static',filename='assets/LogoWhite.png') }}" style="margin-right: 10px;" height="50px"/>
+        </a>     
+      </li>  
+      <li role="presentation"  {%- if request.path == "/request_upload" %} class="active nonicon" {% else %} class="nonicon" {% endif %}>
+        <a href="{{ url_for('request_upload') }}">Request Upload</a>
+      </li>
+
+      <li role="presentation" {% if request.path == "/papers" %} class="active nonicon" {% else %} class="nonicon" {% endif %}>
+        <a href="{{ url_for('papers') }}">Papers</a>
+      </li> 
+    </nav>
+    
+
+
+    <!-- <div class="header" style="padding: 0px; background-color: black;">
+        <ul class="nav nav-pills inline-middle">
+
+          <li role="presentation" {%- if request.path == "/index" %} class="active" {% endif %} >
+
+            <a href="{{ url_for('index') }}" style="margin: 0px;"> 
+              <img src="{{ url_for('static',filename='assets/icon12.png') }}" width="30" height="30" style="margin-right: 10px;"/>
+              SE Garage
+            </a>
+          </li>
+
+          <li role="presentation" {%- if request.path == "/request_upload" %} class="active"{% endif %}>
+
+            <a href="{{ url_for('request_upload') }}" class="nonicon" >Request Upload</a>
+          </li>
+
+          <li role="presentation" {%- if request.path == "/papers" %} class="active float-right" {% endif %}>
+
+            <a href="{{ url_for('papers') }}" class="nonicon" >Papers</a>
+          </li> 
+        </ul>
         
-        <!-- <h1>Welcome to SE Garage</h1> -->
-        <div class="jumbotron">
-          {% block content %}{% endblock %}
+         <div class="searchbar-wrap inline-middle">
+          <form action="{{ url_for('search') }}" method="post" name="search">
+            {{ g.search_form.hidden_tag() }}
+            {{ g.search_form.q(size=20, class_='form-control searchbar inline-middle') }}
+            {{ g.search_form.search_button(class_='btn') }}
+          </form>
         </div>
 
-        <footer class="footer">
-            <p>&copy; University of Waterloo</p> <p>Lakshmanan Arumugam, Vikram N.Subramanian, Yin Lin, Mei Nagappan.</p> For any queries, please contact <a href="mailto:segarage@uwaterloo.ca"> segarage@uwaterloo.ca </a>
-        </footer>
-      </div>
-    </body>
+    </div> -->
+    
+  </div>
+  <div class="jumbotron jumbotron-fluid preview">
+    <div class="container">
+      {% block title %}{% endblock %}
+    </div>
+  </div>
+  
+  <div class="jumbotron jumbotron-fluid">
+    {% with messages = get_flashed_messages() %}
+    {% if messages %}
+    {% for message in messages %}
+    <div class="alert alert-info">
+      <strong>{{ message }} </strong>
+    </div>
+    {% endfor %}
+    {% endif %}
+    {% endwith %}
+
+    <!-- <h1>Welcome to SE Garage</h1> -->
+    <div class="container">
+      {% block content %}{% endblock %}
+    </div>
+  </div>
+
+  <footer class="footer" style="padding-left: 20%;">
+    <p>&copy; University of Waterloo</p>
+    <p>Lakshmanan Arumugam, Vikram N.Subramanian, Yin Lin, Mei Nagappan.</p> For any queries, please contact <a
+      href="mailto:segarage@uwaterloo.ca"> segarage@uwaterloo.ca </a>
+  </footer>
+</body>
+
 </html>
