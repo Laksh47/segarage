@@ -1,79 +1,12 @@
 /* Bootstrap styles overridden here */
 
-/* new new theme */
-
-body {
-  background-color: white;
-  color: black;
+.nav.nav-pills.pull-left {
+  font-size: 18px;
+  margin: 5px 0;
 }
 
-/* Navbar */
-.navbar .container-fluid{
-  background-color:black;
-}
-
-.navbar .navbar-brand {
-    margin: 0;
-    padding: 0;
-}
-
-.navbar .navbar-brand img {
-    padding-left:3rem;
-    height:50px;
-    max-height: 100%;
-}
-
-.navbar .navbar-brand img:hover{
-  opacity:0.75;
-}
-
-/* Unselected */
-.navbar .nav-item .nav-link{
-  color:white;
-  font-size:16px;
-  padding-right:3rem;
-  padding-left:3rem;
-}
-
-/* Selected and Hover */
-.navbar .nav-item .nav-link:hover,
-.navbar .nav-item.active{
-  background-color:grey;
-}
-
-/* Search Bar */
-.preview {
-  background-color: rgb(31, 34, 131);
-  color: white;
-  height:350px;
-  margin: 0;
-}
-
-.preview h2 {
-  padding-top:5rem;
-}
-
-.preview .searchbar-wrap form { 
-  text-align: center;
-}
-
-.specific_paper {
-  background-color: #3c3939;
-}
-
-.specific_paper a.paper_link {
-  color: #dcd9d9;
-  border-color: #f4f5f7;
-}
-
-.specific_paper:hover {
-  color: white;
-  border: 3px solid #f4f5f7;
-  font-size: 22px;
-}
-
-.specific_paper:hover a.paper_link {
-  color: white;
+.nav-pills>li+li {
+  margin-left: 5px;
 }
 
 label {
