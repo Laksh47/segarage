@@ -5,9 +5,9 @@ from flask import Response
 from flask_paginate import Pagination, get_page_args
 
 from app import app, db, s3
-from app.forms import requestToolUpload, toolUpload, searchPapers, endorsePaper, editButton, toolUpdate
-from app.models import Paper, Tag, File, Comment
-from app.utils import *
+from .forms import requestToolUpload, toolUpload, searchPapers, endorsePaper, editButton, toolUpdate
+from .models import Paper, Tag, File, Comment
+from .utils import *
 
 from sqlalchemy import func
 from os import path

@@ -22,13 +22,16 @@
 <body>
   <div class="container-fluid" >
     <nav class="nav nav-pills">
-      <li role="presentation" {%- if request.path == "/index" %} class="active"{% endif %}>
 
-        <a href="{{ url_for('index') }}"> 
-          <img src="{{ url_for('static',filename='assets/LogoWhite.png') }}" style="margin-right: 10px;" height="50px"/>
+      <li role="presentation" {%- if request.path == "/index" %} class="active"{% endif %} style="margin-left: 4%;">
+        <a href="{{ url_for('index') }}" class="icon"> 
+          <img {%- if request.path == "/index" %} src="{{ url_for('static',filename='assets/IconDefault.png') }}" 
+          {% else %} src="{{ url_for('static',filename='assets/IconWhite.png') }}" {% endif %}/>
+          SE Garage
         </a>     
       </li>  
-      <li role="presentation"  {%- if request.path == "/request_upload" %} class="active nonicon" {% else %} class="nonicon" {% endif %}>
+
+      <li role="presentation"  {%- if request.path == "/request_upload" %} class="active nonicon" {% else %} class="nonicon" {% endif %} style="margin-right: 4%;">
         <a href="{{ url_for('request_upload') }}">Request Upload</a>
       </li>
 
@@ -36,7 +39,6 @@
         <a href="{{ url_for('papers') }}">Papers</a>
       </li> 
     </nav>
-    
 
 
     <!-- <div class="header" style="padding: 0px; background-color: black;">
@@ -72,10 +74,12 @@
     </div> -->
     
   </div>
+
   <div class="jumbotron jumbotron-fluid preview">
     <div class="container">
       {% block title %}{% endblock %}
     </div>
+    
   </div>
   
   <div class="jumbotron jumbotron-fluid">
