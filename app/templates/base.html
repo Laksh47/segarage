@@ -18,86 +18,42 @@
 
     </head>
     <body>
-        <nav class="navbar navbar-static-top navbar-fixed-top">
-          <div class="container-fluid">
-            <div class="navbar-header">
-              <a role="presentation" {%- if request.path == "/index" %} class="active navbar-brand"{% endif %} class="navbar-brand" href="{{ url_for('index') }}">
-                <img src="{{ url_for('static',filename='assets/LogoWhite.png') }}"></a>
-              </a> 
-            </div>    
-            <ul class="nav navbar-nav navbar-right">
-              <li {%- if request.path == "/request_upload" %} class="active nav-item" {% else %} class="nav-item" {% endif %}>
-                <a class="nav-link" href="{{ url_for('request_upload') }}">Request Upload</a>
-              </li>
-
-              <li {% if request.path == "/papers" %} class="active nav-item" {% else %} class="nav-item" {% endif %}>
-                <a class="nav-link" href="{{ url_for('papers') }}">Papers</a>
-              </li> 
-            </ul>
-          </div>
-        </nav>
-
-
-        <!--
-        <div class="header" style="padding: 0px; background-color: black;">
+      <div class="container">
+        <div class="header clearfix">
+          <nav class="clearfix">
             <ul class="nav nav-pills inline-middle">
-
-              <li role="presentation" {%- if request.path == "/index" %} class="active" {% endif %} >
-
-                <a href="{{ url_for('index') }}" style="margin: 0px;"> 
-                  <img src="{{ url_for('static',filename='assets/icon12.png') }}" width="30" height="30" style="margin-right: 10px;"/>
-                  SE Garage
-                </a>
-              </li>
-
-              <li role="presentation" {%- if request.path == "/request_upload" %} class="active"{% endif %}>
-
-                <a href="{{ url_for('request_upload') }}" class="nonicon" >Request Upload</a>
-              </li>
-
-              <li role="presentation" {%- if request.path == "/papers" %} class="active float-right" {% endif %}>
-
-                <a href="{{ url_for('papers') }}" class="nonicon" >Papers</a>
-              </li> 
+              <li role="presentation" {%- if request.path == "/index" %} class="active" {% endif %}><a href="{{ url_for('index') }}">Home</a></li>
+              <li role="presentation" {%- if request.path == "/request_upload" %} class="active" {% endif %}><a href="{{ url_for('request_upload') }}">Request Upload</a></li>
+              <li role="presentation" {%- if request.path == "/papers" %} class="active" {% endif %}><a href="{{ url_for('papers') }}">Papers</a></li>
             </ul>
-
-             <div class="searchbar-wrap inline-middle">
+            <div class="searchbar-wrap inline-middle">
               <form action="{{ url_for('search') }}" method="post" name="search">
-                {{ g.search_form.hidden_tag() }}
-                {{ g.search_form.q(size=20, class_='form-control searchbar inline-middle') }}
-                {{ g.search_form.search_button(class_='btn') }}
+                  {{ g.search_form.hidden_tag() }}
+                  {{ g.search_form.q(size=20, class_='form-control searchbar inline-middle') }}
+                  {{ g.search_form.search_button(class_='btn btn-success') }}
               </form>
             </div>
-
-        </div> -->
-
-      <div class="jumbotron jumbotron-fluid preview">
-        <div class="container">
-          {% block title %}{% endblock %}
+          </nav>
         </div>
-      </div>
 
-      <div class="jumbotron jumbotron-fluid">
         {% with messages = get_flashed_messages() %}
         {% if messages %}
-        {% for message in messages %}
-        <div class="alert alert-info">
-          <strong>{{ message }} </strong>
-        </div>
-        {% endfor %}
+            {% for message in messages %}
+              <div class="alert alert-info">
+                <strong>{{ message }} </strong>
+              </div>
+            {% endfor %}
         {% endif %}
         {% endwith %}
-
+        
         <!-- <h1>Welcome to SE Garage</h1> -->
-        <div class="container">
+        <div class="jumbotron">
           {% block content %}{% endblock %}
         </div>
-      </div>
 
-      <footer class="footer" style="padding-left: 20%;">
-        <p>&copy; University of Waterloo</p>
-        <p>Lakshmanan Arumugam, Vikram N.Subramanian, Yin Lin, Mei Nagappan.</p> For any queries, please contact <a
-          href="mailto:segarage@uwaterloo.ca"> segarage@uwaterloo.ca </a>
-      </footer>
+        <footer class="footer">
+            <p>&copy; University of Waterloo</p> <p>Lakshmanan Arumugam, Vikram N.Subramanian, Yin Lin, Mei Nagappan.</p> For any queries, please contact <a href="mailto:segarage@uwaterloo.ca"> segarage@uwaterloo.ca </a>
+        </footer>
+      </div>
     </body>
 </html>
