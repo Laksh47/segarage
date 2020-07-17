@@ -27,6 +27,16 @@ body {
   opacity:0.75;
 }
 
+.nav-search{
+  width:30%; 
+  margin: auto; 
+  position: absolute; 
+  top: 0; 
+  left: 0; 
+  right: 0; 
+  bottom: 0;
+}
+
 /* Unselected */
 .navbar .nav-item .nav-link{
   color:white;
@@ -41,7 +51,7 @@ body {
   background-color:grey;
 }
 
-/* Search Bar */
+/* Jumbotron/title block */
 .preview {
   background-color: rgb(31, 34, 131);
   color: white;
@@ -93,15 +103,6 @@ textarea.form-control {
   content: ' *';
   color: red;
   vertical-align: middle;
-}
-
-ul.nav.nav-pills.inline-middle a {
-  background-color: #c1c0c0;
-  color: white;
-}
-
-ul.nav.nav-pills.inline-middle .active a, ul.nav.nav-pills.inline-middle a:hover {
-  background-color: black;
 }
 
 /* Flask paginate CSS */
@@ -496,13 +497,6 @@ td.preserve-line-breaks {
     text-align: center;
   }
 
-  .nav-pills>li, .nav-pills>li+li {
-    float: none;
-    width: 95%;
-    text-align: left;
-    margin: 10px auto;
-  }
-
   .searchbar.inline-middle {
     display: inline-block;
     width: 60%;
@@ -585,58 +579,6 @@ ul.nav.nav-pills.inline-middle .active a, ul.nav.nav-pills.inline-middle a:hover
 } */
 
 
-/* new new theme */
-
-body {
-  background-color: white;
-  color: black;
-}
-
-.container-fluid {
-  padding: 0px;
-}
-
-.preview {
-  text-align: center;
-  background-color: #3B4FB9;
-  color: white;
-  margin: 0px;
-}
-
-
-.nav.nav-pills {
-  background-color: black;
-  padding: 10px;
-}
-
-
-/* unselected  */
-nav.nav-pills a {
-  background-color: black;
-  color: white;
-  font-size: 20px;
-}
-
-/* selected */
-nav.nav-pills .active a, nav.nav-pills .active a:hover, .nav.nav-pills a:hover {  
-  background-color: white;
-  color: black;
-}
-
-nav.nav-pills .nonicon{
-  float: right;
-}
-
-nav.nav-pills img {
-  margin-right: 10px; 
-  margin-bottom: 5px;
-  height: 40px;
-}
-
-nav.nav-pills .icon {
-  padding-top: 3px;
-  padding-bottom: 0px;
-}
 .specific_paper {
   background-color: #3c3939;
 }

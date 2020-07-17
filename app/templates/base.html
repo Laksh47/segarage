@@ -17,6 +17,8 @@
       <meta name="viewport" content = "width=device-width, initial-scale=1.0">
       <link rel="icon" type="image/png" href="{{ url_for('static',filename='assets/IconDefault.png') }}">
     </head>
+
+    <!-- navbar -->
     <body>
       <nav class="navbar navbar-static-top navbar-fixed-top">
         <div class="container-fluid">
@@ -24,7 +26,8 @@
             <a role="presentation" {%- if request.path == "/index" %} class="active navbar-brand"{% endif %} class="navbar-brand" href="{{ url_for('index') }}">
               <img src="{{ url_for('static',filename='assets/LogoWhite.png') }}"></a>
             </a> 
-          </div>    
+          </div>  
+          
           <ul class="nav navbar-nav navbar-right">
             <li {%- if request.path == "/request_upload" %} class="active nav-item" {% else %} class="nav-item" {% endif %}>
               <a class="nav-link" href="{{ url_for('request_upload') }}">Request Upload</a>
@@ -33,16 +36,22 @@
               <a class="nav-link" href="{{ url_for('papers') }}">Papers</a>
             </li> 
           </ul>
+          <div class="searchbar-wrap inline">
+            <form action="{{ url_for('search') }}" method="post" name="search">
+              {{ g.search_form.hidden_tag() }}
+              {{ g.search_form.q(size=20, class_='form-control nav-search', placeholder="Search Here") }}
+            </form>
+          </div>
         </div>
       </nav>
 
+  <!-- Page title -->
   <div class="jumbotron jumbotron-fluid preview">
     <div class="container">
       {% block title %}{% endblock %}
     </div>
-    
   </div>
-  
+
   <div class="jumbotron jumbotron-fluid">
     {% with messages = get_flashed_messages() %}
     {% if messages %}
@@ -54,13 +63,13 @@
     {% endif %}
     {% endwith %}
 
-    <!-- <h1>Welcome to SE Garage</h1> -->
+    <!-- page content -->
     <div class="container">
       {% block content %}{% endblock %}
     </div>
   </div>
 
-  <footer class="footer" style="padding-left: 20%;">
+  <footer class="footer" style="padding-left: 1rem;">
     <p>&copy; University of Waterloo</p>
     <p>Lakshmanan Arumugam, Vikram N.Subramanian, Yin Lin, Mei Nagappan.</p> For any queries, please contact <a
       href="mailto:segarage@uwaterloo.ca"> segarage@uwaterloo.ca </a>
