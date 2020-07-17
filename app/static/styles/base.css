@@ -85,10 +85,6 @@ form {
   margin: 0;
 }
 
-.form-control {
-  width: 50%;
-}
-
 textarea.form-control {
   min-height: 175px;
 }
@@ -549,8 +545,9 @@ td.preserve-line-breaks {
 }
 
 
-/* New Theme tryout
+/* New Theme tryout */
 
+/* 
 body {
   background-color: black;
   color: white;
@@ -585,5 +582,76 @@ ul.nav.nav-pills.inline-middle .active a, ul.nav.nav-pills.inline-middle a:hover
 
 .specific_paper:hover a.paper_link {
   color: white;
+} */
+
+
+/* new new theme */
+
+body {
+  background-color: white;
+  color: black;
 }
-*/
+
+.container-fluid {
+  padding: 0px;
+}
+
+.preview {
+  text-align: center;
+  background-color: #3B4FB9;
+  color: white;
+  margin: 0px;
+}
+
+
+.nav.nav-pills {
+  background-color: black;
+  padding: 10px;
+}
+
+
+/* unselected  */
+nav.nav-pills a {
+  background-color: black;
+  color: white;
+  font-size: 20px;
+}
+
+/* selected */
+nav.nav-pills .active a, nav.nav-pills .active a:hover, .nav.nav-pills a:hover {  
+  background-color: white;
+  color: black;
+}
+
+nav.nav-pills .nonicon{
+  float: right;
+}
+
+nav.nav-pills img {
+  margin-right: 10px; 
+  margin-bottom: 5px;
+  height: 40px;
+}
+
+nav.nav-pills .icon {
+  padding-top: 3px;
+  padding-bottom: 0px;
+}
+.specific_paper {
+  background-color: #3c3939;
+}
+
+.specific_paper a.paper_link {
+  color: #dcd9d9;
+  border-color: #f4f5f7;
+}
+
+.specific_paper:hover {
+  color: white;
+  border: 3px solid #f4f5f7;
+  font-size: 22px;
+}
+
+.specific_paper:hover a.paper_link {
+  color: white;
+}

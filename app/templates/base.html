@@ -36,24 +36,34 @@
         </div>
       </nav>
 
-        {% with messages = get_flashed_messages() %}
-        {% if messages %}
-            {% for message in messages %}
-              <div class="alert alert-info">
-                <strong>{{ message }} </strong>
-              </div>
-            {% endfor %}
-        {% endif %}
-        {% endwith %}
-        
-        <!-- <h1>Welcome to SE Garage</h1> -->
-        <div class="jumbotron">
-          {% block content %}{% endblock %}
-        </div>
+  <div class="jumbotron jumbotron-fluid preview">
+    <div class="container">
+      {% block title %}{% endblock %}
+    </div>
+    
+  </div>
+  
+  <div class="jumbotron jumbotron-fluid">
+    {% with messages = get_flashed_messages() %}
+    {% if messages %}
+    {% for message in messages %}
+    <div class="alert alert-info">
+      <strong>{{ message }} </strong>
+    </div>
+    {% endfor %}
+    {% endif %}
+    {% endwith %}
 
-        <footer class="footer">
-            <p>&copy; University of Waterloo</p> <p>Lakshmanan Arumugam, Vikram N.Subramanian, Yin Lin, Mei Nagappan.</p> For any queries, please contact <a href="mailto:segarage@uwaterloo.ca"> segarage@uwaterloo.ca </a>
-        </footer>
-      </div>
-    </body>
+    <!-- <h1>Welcome to SE Garage</h1> -->
+    <div class="container">
+      {% block content %}{% endblock %}
+    </div>
+  </div>
+
+  <footer class="footer" style="padding-left: 20%;">
+    <p>&copy; University of Waterloo</p>
+    <p>Lakshmanan Arumugam, Vikram N.Subramanian, Yin Lin, Mei Nagappan.</p> For any queries, please contact <a
+      href="mailto:segarage@uwaterloo.ca"> segarage@uwaterloo.ca </a>
+  </footer>
+</body>
 </html>
