@@ -351,7 +351,7 @@ td li {
   margin: 7px 7px 7px 0;
   min-width: 300px;
   min-height: 75px;
-  background-color: #e0e0e0;
+  background-color: #3C58A4;
   position: relative;
   z-index: 0;
 }
@@ -360,6 +360,8 @@ td li {
   text-overflow: ellipsis;
   overflow: hidden;
   padding: 10px;
+  background-color: #e0e0e0;
+
 }
 
 .specific_paper div.paper_icon {
@@ -368,7 +370,7 @@ td li {
   padding: 10px;
 }
 .specific_paper .icon {
-  width: 100px;
+  height: 100px;
 }
 .specific_paper .title {
   font-weight: bold;
@@ -378,6 +380,10 @@ td li {
 }
 .specific_paper .description {
   color: #000;
+}
+
+.specific_paper .paper_desc {
+  margin-left: 133px;
 }
 
 
