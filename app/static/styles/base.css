@@ -597,3 +597,136 @@ ul.nav.nav-pills.inline-middle .active a, ul.nav.nav-pills.inline-middle a:hover
 .specific_paper:hover a.paper_link {
   color: white;
 }
+
+/* lz2003 style changes July 21*/
+
+/* Jumbotron/title block */
+.preview {
+  background-color: rgb(31, 34, 131);
+  color: white;
+  padding-top: 50px;
+  padding-bottom: 50px;
+  margin: 0;
+}
+/* Paper browsing app store UI */
+.papers {
+  display: flex;
+  flex-flow: row wrap;
+}
+
+/* Affects the container */
+.specific_paper {
+  border: 2px solid #d1dae2;
+  border-radius: 0px;
+  padding: 15px;
+  font-size: 20px;
+  cursor: pointer;
+  flex-grow: 1;
+  margin: 7px 7px 7px 0;
+  min-width: 300px;
+  min-height: 75px;
+  background-color: #d1dae2;
+}
+
+.specific_paper div {
+  text-overflow: ellipsis;
+  overflow: hidden;
+  width: 100%;
+}
+
+/* Text color and hovering */
+.specific_paper:hover, .specific_paper:hover a.paper_link {
+  color: #1a1b1a;
+  border-color: #030959;
+}
+
+.specific_paper {
+  background-color: #e0e0e0;
+}
+
+.specific_paper a.paper_link {
+  color: #414142;
+}
+
+.specific_paper:hover {
+  color: #030959;
+}
+
+.specific_paper:hover a.paper_link {
+  text-decoration: none;
+  color: #030959;
+}
+
+/* Table in specific paper page */
+
+/* Styles elements in the preview jumbotron */
+.paper-top .icon {
+  width:100px; 
+  height:100px; 
+  float:left; 
+  margin-right:20px;
+}
+
+.paper-top .row {
+  margin-top:50px;
+}
+
+.paper-top .col-lg-4 {
+  margin-top:50px;
+  font-size:22px;
+}
+
+.paper-top .col-lg-8 .info-author {
+  font-size:20px;
+  padding-top:20px;
+}
+
+.paper-top .col-lg-8 .info-year {
+  font-size:20px;
+}
+
+.paper-top h3{
+  font-size:36px;
+  margin-bottom:25px;
+}
+
+/* Styles elements outside the preview jumbotron */
+.main-body h2, .sidebar h2 {
+  margin-top:0;
+  padding-top: 10px;
+  padding-bottom: 20px;
+  border-bottom: 1px solid #c4c4c4;
+}
+
+.main-body {
+  padding-right: 7rem;
+}
+
+.paper_info {
+  font-size: 20px;
+}
+
+.terms {
+  font-size: 15px;
+  margin: 5px 0 0 5px;
+}
+
+.edit_button {
+  text-align: center;
+  margin-top: 10px;
+  margin-bottom: 50px;
+}
+
+/* Cite this Paper */
+.cite_button {
+  cursor: pointer;
+}
+
+.paper-top a {
+  color:white;
+}
+
+.cite_button:hover, .paper-top a:hover {
+  color: #f3f3f3;
+  text-decoration: underline;
+}
