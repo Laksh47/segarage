@@ -1,12 +1,72 @@
 /* Bootstrap styles overridden here */
 
-.nav.nav-pills.pull-left {
-  font-size: 18px;
-  margin: 5px 0;
+/* new new theme */
+
+body {
+  background-color: white;
+  color: black;
 }
 
-.nav-pills>li+li {
-  margin-left: 5px;
+/* Navbar */
+.navbar .container-fluid{
+  background-color:black;
+}
+
+.navbar .navbar-brand {
+    margin: 0;
+    padding: 0;
+}
+
+.navbar .navbar-brand img {
+    padding-left:3rem;
+    height:50px;
+    max-height: 100%;
+}
+
+.navbar .navbar-brand img:hover{
+  opacity:0.75;
+}
+
+.nav-search{
+  width:30%; 
+  margin: auto; 
+  position: absolute; 
+  top: 0; 
+  left: 0; 
+  right: 0; 
+  bottom: 0;
+}
+
+/* Unselected */
+.navbar .nav-item .nav-link{
+  color:white;
+  font-size:16px;
+  padding-right:3rem;
+  padding-left:3rem;
+}
+
+/* Selected and Hover */
+.navbar .nav-item .nav-link:hover,
+.navbar .nav-item.active{
+  background-color:grey;
+}
+
+/* Jumbotron/title block */
+.preview {
+  background-color: rgb(31, 34, 131);
+  color: white;
+  padding-top: 50px;
+  padding-bottom: 50px;
+  margin: 0;
+}
+
+.preview h2 {
+  padding-top:5rem;
+}
+
+.preview .searchbar-wrap form { 
+  text-align: center;
+  margin-bottom:50px;
 }
 
 label {
@@ -18,10 +78,6 @@ form {
   margin: 0;
 }
 
-.form-control {
-  width: 50%;
-}
-
 textarea.form-control {
   min-height: 175px;
 }
@@ -30,15 +86,6 @@ textarea.form-control {
   content: ' *';
   color: red;
   vertical-align: middle;
-}
-
-ul.nav.nav-pills.inline-middle a {
-  background-color: #c1c0c0;
-  color: white;
-}
-
-ul.nav.nav-pills.inline-middle .active a, ul.nav.nav-pills.inline-middle a:hover {
-  background-color: black;
 }
 
 /* Flask paginate CSS */
@@ -192,9 +239,10 @@ td li {
   flex-flow: row wrap;
 }
 
+/* Affects the container */
 .specific_paper {
   border: 2px solid #d1dae2;
-  border-radius: 5px;
+  border-radius: 0px;
   padding: 15px;
   font-size: 20px;
   cursor: pointer;
@@ -211,27 +259,76 @@ td li {
   width: 100%;
 }
 
-.specific_paper a.paper_link {
-  color: #545353;
-}
-
-.specific_paper a.paper_link:hover {
-  text-decoration: none;
-}
-
+/* Text color and hovering */
 .specific_paper:hover, .specific_paper:hover a.paper_link {
   color: #1a1b1a;
-  border-color: black;
+  border-color: #030959;
+}
+
+.specific_paper {
+  background-color: #e0e0e0;
+}
+
+.specific_paper a.paper_link {
+  color: #414142;
+}
+
+.specific_paper:hover {
+  color: #030959;
+}
+
+.specific_paper:hover a.paper_link {
+  text-decoration: none;
+  color: #030959;
 }
 
 /* Table in specific paper page */
-.paper_info {
-  font-size: 20px;
+
+/* Styles elements in the preview jumbotron */
+.paper-top .icon {
+  width:100px; 
+  height:100px; 
+  float:left; 
+  margin-right:20px;
 }
 
-.paper_info h3 {
-  text-align: center;
-  margin-bottom: 25px;
+.paper-top .row {
+  margin-top:50px;
+}
+
+.paper-top .col-lg-4 {
+  margin-top:50px;
+  font-size:22px;
+}
+
+.paper-top .col-lg-8 .info-author {
+  font-size:20px;
+  padding-top:20px;
+}
+
+.paper-top .col-lg-8 .info-year {
+  font-size:20px;
+}
+
+.paper-top h3{
+  font-size:36px;
+  margin-bottom:25px;
+}
+
+/* Styles elements outside the preview jumbotron */
+.main-body h2, .sidebar h2 {
+  margin-top:0;
+  padding-top: 10px;
+  padding-bottom: 20px;
+  border-bottom: 1px solid #c4c4c4;
+}
+
+.main-body {
+  padding-right: 7rem;
+}
+
+.paper_info {
+  font-size: 20px;
 }
 
 .terms {
@@ -245,6 +342,21 @@ td li {
   margin-bottom: 50px;
 }
 
+/* Cite this Paper */
+.cite_button {
+  cursor: pointer;
+}
+
+.paper-top a {
+  color:white;
+}
+
+.cite_button:hover, .paper-top a:hover {
+  color: #f3f3f3;
+  text-decoration: underline;
+}
+
+/* OLD STYLE FOR TABLE
 .paper_info table {
   table-layout: fixed;
   width: 100%;
@@ -274,7 +386,7 @@ td.preserve-line-breaks {
 
 .paper_info table {
   margin: 0px auto;
-}
+}*/
 
 /* Modal CSS */
 
@@ -320,7 +432,7 @@ td.preserve-line-breaks {
   display: none; /* Hidden by default */
   position: fixed; /* Stay in place */
   z-index: 1; /* Sit on top */
-  padding-top: 40px; /* Location of the box */
+  padding-top: 80px; /* Location of the box */
   left: 0;
   top: 0;
   width: 100%; /* Full width */
@@ -433,13 +545,6 @@ td.preserve-line-breaks {
     text-align: center;
   }
 
-  .nav-pills>li, .nav-pills>li+li {
-    float: none;
-    width: 95%;
-    text-align: left;
-    margin: 10px auto;
-  }
-
   .searchbar.inline-middle {
     display: inline-block;
     width: 60%;
@@ -482,8 +587,9 @@ td.preserve-line-breaks {
 }
 
 
-/* New Theme tryout
+/* New Theme tryout */
 
+/* 
 body {
   background-color: black;
   color: white;
@@ -518,5 +624,4 @@ ul.nav.nav-pills.inline-middle .active a, ul.nav.nav-pills.inline-middle a:hover
 
 .specific_paper:hover a.paper_link {
   color: white;
-}
-*/
+} */
