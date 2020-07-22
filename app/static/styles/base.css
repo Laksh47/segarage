@@ -49,22 +49,6 @@ body {
   background-color:grey;
 }
 
-/* Jumbotron/title block */
-.preview {
-  background-color: rgb(31, 34, 131);
-  color: white;
-  height:350px;
-  margin: 0;
-}
-
-.preview h2 {
-  padding-top:5rem;
-}
-
-.preview .searchbar-wrap form { 
-  text-align: center;
-}
-
 /* Papers list */
 
 label {
@@ -198,50 +182,6 @@ td li {
 
 
 /* Table in specific paper page */
-
-.paper_info h3 {
-  text-align: center;
-  margin-bottom: 25px;
-}
-
-.terms {
-  font-size: 15px;
-  margin: 5px 0 0 5px;
-}
-
-.edit_button {
-  text-align: center;
-  margin-top: 10px;
-  margin-bottom: 50px;
-}
-
-.paper_info table {
-  table-layout: fixed;
-  width: 100%;
-  margin: 0 auto;
-}
-
-.paper_info td {
-  text-overflow: ellipsis;
-  overflow: hidden;
-}
-
-td.preserve-line-breaks {
-  white-space: pre-wrap;
-}
-
-.paper_info table, .paper_info th, .paper_info td {
-  border: 1px solid #ddd;
-  border-radius: 5px;
-  padding: 15px;
-  font-size: 18px;
-  line-height: 28px;
-}
-
-.paper_info table ul {
-  padding: 0;
-  margin: 0;
-}
 
 
 /* Modal CSS */
