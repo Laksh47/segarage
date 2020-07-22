@@ -1,24 +1,43 @@
 {% extends "base.html" %}
-
+{% block title %}
+<h1>Browse Papers</h1>
+{{ pagination.info }}
+{% endblock %}
 {% block content %}
 
-<h3> Browse papers </h3>
+<div class="papers row">
+	<div class="col-lg-2">
+		{{ pagination.links }}
 
-{{ pagination.info }}
-{{ pagination.links }}
-<div class="papers">
-	{% for paper in papers %}
-	<div class="specific_paper">
-		<a class="paper_link" href="/papers/{{ paper.id }}">
-			<div>{{ paper.paper_name }}</div>
-			<div>{{ paper.author_name }}</div>
-			<div>{{ paper.year }}</div>
-
-		</a>
+		<h2>placeholder</h2>
+		<h2>placeholder</h2>
+		<h2>placeholder</h2>
+		<h2>placeholder</h2>
 	</div>
-	{% endfor %}
+
+	<div class="col-lg-10">
+		{% for paper in papers %}
+		<div class="specific_paper">
+			<a class="paper_link" href="/papers/{{ paper.id }}">
+				<div class="paper_icon">
+					<img class="icon" src="{{ url_for('static',filename='assets/IconDefault.png') }}" alt="{{ url_for('static',filename='assets/IconDefault.png') }}">
+				</div>
+				<div class="paper_desc">
+					<div>{{ paper.paper_name }}</div>
+					<div>{{ paper.author_name }}</div>
+					<div>{{ paper.year }}</div>
+				</div>
+			</a>
+		</div>
+		{% endfor %}
+	</div>
 </div>
 
-{{ pagination.links }}
+<div class="papers" style="width: 70%; float: right;">
+	
+</div>
+
+
+
 
 {% endblock %}
