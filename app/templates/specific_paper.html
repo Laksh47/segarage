@@ -1,8 +1,35 @@
 {% extends "base.html" %}
 
+{% block title %}
+<!-- Start Title -->
+<div class="container-fluid paper-top">
+  <div class="row">
+    <div class="col-lg-8">
+      <div>
+        <img class="icon" src="{{ url_for('static',filename='assets/13.svg') }}">
+        <h3>{{ paper.paper_name }}</h3>
+      </div>
+      <div class="info-author">Author: {{ paper.author_name }}</div>
+      <div class="info-year">Year: {{ paper.year }}</div>
+    </div>
+    <div class="col-lg-4">
+      <div><a href="{{ url_for('papers') }}">
+        Back to Search
+      </a></div>
+      <div>
+        <span class="cite_button">Cite this Paper </span><br>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- End Title -->
+
+{% endblock %}
+
 {% block content %}
 
 <div class="paper_info">
+  <!-- OLD VIEWS, DOWNLOADS AND UPVOTES
   <div class="counts">
     <div class="custom_column">
       <div class="count">
@@ -29,9 +56,52 @@
       </div>
     </div>
 
-  </div>
-  <h3>{{ paper.paper_name }}</h3>
+  </div> -->
 
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-lg-8 main-body">
+        <h2>Description</h2>
+        <div>{{ paper.description }}</div>
+      </div>
+      <div class="col-lg-4 sidebar">
+        <h2>Information</h2>
+        <div>Email: {{ paper.author_email }}</div>
+        <div>Tool: {{ paper.tool_name }}</div>
+        <div>PDF: {% if paper.link_to_pdf == 'Not provided' or paper.link_to_pdf == None %}
+          <a>Not provided by authors</a>{% else %}
+          <a href="{{ paper.link_to_pdf | check_protocol_prefix }}" target="_blank">{{ paper.link_to_pdf | check_protocol_prefix }}</a>
+          {% endif %}
+        </div>
+        <div>Tool Link: {% if paper.link_to_tool_webpage == 'Not provided' or paper.link_to_tool_webpage == None %}
+          <a>Not provided by authors</a>{% else %}
+          <a href="{{ paper.link_to_tool_webpage | check_protocol_prefix }}" target="_blank">{{ paper.link_to_tool_webpage | check_protocol_prefix }}</a>
+          {% endif %}
+        </div>
+        <div>Demo: {% if paper.link_to_demo == 'Not provided' or paper.link_to_demo == None %}
+          <a>Not provided by authors</a>{% else %}
+          <a href="{{ paper.link_to_demo | check_protocol_prefix }}" target="_blank">{{ paper.link_to_demo | check_protocol_prefix }}</a>
+          {% endif %}
+        </div>
+        <div>Archive: {% if paper.link_to_archive == 'Not provided' or paper.link_to_archive == None %}
+          <a>Not provided by authors</a> {% else %}
+          <a href="{{paper.link_to_archive | check_protocol_prefix }}" target="_blank">{{ paper.link_to_archive | check_protocol_prefix }}</a>
+          {% endif %}
+        </div>
+        <div>{% for file in paper.files %} {% if file != 'None' %}
+          {{ file.filetype }}: <a href="/downloads/{{ paper.id }}/{{file.filename}}">{{ file.filename }}</a>
+           {% endif %} {% endfor %}
+        </div>
+        <div>Categories: <a href="/search?q={{paper.category}}">
+          {{ paper.category }}
+        </a></div>
+        <div>Conference: {{ paper.year }}, {{ paper.conference }}</div>
+        <div>Tags: {{ tags }}</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- THE OLD TABLE
   <table>
     <tr>
       <td>Author email: </td>
@@ -45,7 +115,8 @@
       <td>Description:</td>
       <td>{{ paper.description }}</td>
     </tr>
-    <!-- <tr>
+    comment this out 
+      <tr>
     <td>Link to archive:</td>
     <td>
       {% if paper.link_to_archive == 'Not provided' or paper.link_to_archive == None %}
@@ -54,7 +125,7 @@
         <a href="{{paper.link_to_archive | check_protocol_prefix }}" target="_blank">{{ paper.link_to_archive | check_protocol_prefix }}</a>
       {% endif %}
     </td>
-  </tr> -->
+  </tr> Comment this out ^^
     <tr>
       <td>Bibtex:</td>
       <td class="preserve-line-breaks">{{ paper.bibtex }}</td>
@@ -124,6 +195,7 @@
       </td>
     </tr>
   </table>
+  -->
   <div class="terms">
     <span class="modal_btn_useragreement"> Terms of use </span>
   </div>
@@ -134,9 +206,20 @@
   </div>
 </div>
 
+<!-- The Bibtex Modal -->
+<div class="modal cite_button_modal">
+  <!-- Modal Bibtex content -->
+  <div class="modal_content">
+    <span class="close">&times;</span>
+    <div class="modal_msg">
+      Bibtex:<br><br>
+      {{ paper.bibtex }}
+    </div>
+  </div>
+</div>  
+
 <!-- The Modal -->
 <div class="modal edit_button_modal">
-
   <!-- Modal content -->
   <div class="modal_content">
     <span class="close">&times;</span>
@@ -151,8 +234,7 @@
       </div>
     </form>
   </div>
-
-</div>
+</div>  
 
 <!-- The Modal -->
 <div class="modal useragreement_modal" id="useragreement_modal">
@@ -326,12 +408,16 @@
       $('.edit_button_modal').show();
     })
 
+    $('.cite_button').on('click', function () {
+      $('.cite_button_modal').show();
+    })
+
     $('span.close').on('click', function () {
       $('.modal').hide();
     })
 
     $(window).on('click', function (event) {
-      if (event.target.className.indexOf("edit_button_modal") != -1 || event.target.className.indexOf("useragreement_modal") != -1) {
+      if (event.target.className.indexOf("edit_button_modal") != -1 || event.target.className.indexOf("useragreement_modal") != -1 || event.target.className.indexOf("cite_button_modal") != -1 ) {
         $('.modal').hide();
       }
     })
