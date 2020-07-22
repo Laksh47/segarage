@@ -1,7 +1,5 @@
 /* Bootstrap styles overridden here */
 
-/* new new theme */
-
 body {
   background-color: white;
   color: black;
@@ -67,24 +65,7 @@ body {
   text-align: center;
 }
 
-.specific_paper {
-  background-color: #3c3939;
-}
-
-.specific_paper a.paper_link {
-  color: #dcd9d9;
-  border-color: #f4f5f7;
-}
-
-.specific_paper:hover {
-  color: white;
-  border: 3px solid #f4f5f7;
-  font-size: 22px;
-}
-
-.specific_paper:hover a.paper_link {
-  color: white;
-}
+/* Papers list */
 
 label {
   font-size: 20px;
@@ -105,36 +86,40 @@ textarea.form-control {
   vertical-align: middle;
 }
 
-/* Flask paginate CSS */
-.pagination-page-info {
-  padding: .6em;
-  padding-left: 0;
-  width: 40em;
-  margin: .5em;
-  margin-left: 0;
-  font-size: 18px;
-  padding-bottom: 0;
-  margin-bottom: 0;
-}
 
-.pagination-page-info b {
-  color: black;
-  background: #b7c5d6;
-  padding-left: 2px;
-  padding: .1em .25em;
-  font-size: 18px;
-}
 
-.pagination ul {
-  padding: 0;
-  margin: 5px 0;
-}
+/* overall css */
 
-.pagination ul li {
+.inline-middle {
   display: inline-block;
-  margin: 0px 10px;
-  font-size: 20px;
+  vertical-align: middle;
+  width: 49.5%;
 }
+
+/* th, td {
+  border: 1px solid;
+  padding: 5px;
+}
+
+td li {
+  list-style: none;
+  margin: 5px;
+}
+
+.wrap-file input[type=file] {
+  display: inline-block;
+  vertical-align: super;
+}
+
+.wrap-file .custom_dropdown {
+  display: inline-block;
+  vertical-align: super;
+}
+
+.searchbar-wrap {
+  text-align: right;
+} */
+
 
 /* Plus sign css */
 .circle {
@@ -172,47 +157,6 @@ textarea.form-control {
   z-index: 9;
 }
 
-/* overall css */
-.header {
-  padding: 5px 0px 5px 0px;
-  font-size: 16px;
-}
-
-.footer {
-  margin: 20px 0 50px 0;
-}
-
-.inline-middle {
-  display: inline-block;
-  vertical-align: middle;
-  width: 49.5%;
-}
-
-th, td {
-  border: 1px solid;
-  padding: 5px;
-}
-
-td li {
-  list-style: none;
-  margin: 5px;
-}
-
-.wrap-file input[type=file] {
-  display: inline-block;
-  vertical-align: super;
-}
-
-.wrap-file .custom_dropdown {
-  display: inline-block;
-  vertical-align: super;
-}
-
-.searchbar-wrap {
-  text-align: right;
-}
-
-
 /* AJAX form */
 
 .feedback_form_wrap {
@@ -234,7 +178,7 @@ td li {
 .feedback_form {
   background-color: white;
   padding: 30px;
-  margin: 10px 0px;
+  margin: 10px 0;
 }
 
 .feedback_form .form-control {
@@ -251,47 +195,9 @@ td li {
 }
 
 /* Paper browsing app store UI */
-.papers {
-  display: flex;
-  flex-flow: row wrap;
-}
 
-.specific_paper {
-  border: 2px solid #d1dae2;
-  border-radius: 5px;
-  padding: 15px;
-  font-size: 20px;
-  cursor: pointer;
-  flex-grow: 1;
-  margin: 7px 7px 7px 0;
-  min-width: 300px;
-  min-height: 75px;
-  background-color: #d1dae2;
-}
-
-.specific_paper div {
-  text-overflow: ellipsis;
-  overflow: hidden;
-  width: 100%;
-}
-
-.specific_paper a.paper_link {
-  color: #545353;
-}
-
-.specific_paper a.paper_link:hover {
-  text-decoration: none;
-}
-
-.specific_paper:hover, .specific_paper:hover a.paper_link {
-  color: #1a1b1a;
-  border-color: black;
-}
 
 /* Table in specific paper page */
-.paper_info {
-  font-size: 20px;
-}
 
 .paper_info h3 {
   text-align: center;
@@ -312,6 +218,7 @@ td li {
 .paper_info table {
   table-layout: fixed;
   width: 100%;
+  margin: 0 auto;
 }
 
 .paper_info td {
@@ -336,9 +243,6 @@ td.preserve-line-breaks {
   margin: 0;
 }
 
-.paper_info table {
-  margin: 0px auto;
-}
 
 /* Modal CSS */
 
@@ -434,7 +338,7 @@ td.preserve-line-breaks {
 .custom_column {
   display: inline-block;
   text-align: center;
-  margin: 0px 20px;
+  margin: 0 20px;
 }
 
 .custom_column .count {
@@ -506,10 +410,6 @@ td.preserve-line-breaks {
     width: 90%;
   }
 
-  .specific_paper {
-    min-width: 275px;
-  }
-
   .footer {
     text-align: center;
   }
@@ -519,7 +419,7 @@ td.preserve-line-breaks {
   }
 
   .custom_column {
-    margin: 0px 20px 10px 20px;
+    margin: 0 20px 10px 20px;
   }
 
   /*
@@ -539,64 +439,12 @@ td.preserve-line-breaks {
 }
 
 
-/* New Theme tryout */
-
-/* 
-body {
-  background-color: black;
-  color: white;
-}
-
-.jumbotron {
-  background-color: #3c3939;
-}
-
-ul.nav.nav-pills.inline-middle a {
-  background-color: #3c3939;
-}
-
-ul.nav.nav-pills.inline-middle .active a, ul.nav.nav-pills.inline-middle a:hover {
-  background-color: #7b2929;
-}
-
-.specific_paper {
-  background-color: #3c3939;
-}
-
-.specific_paper a.paper_link {
-  color: #dcd9d9;
-  border-color: #f4f5f7;
-}
-
 .specific_paper:hover {
   color: white;
   border: 3px solid #f4f5f7;
   font-size: 22px;
 }
 
-.specific_paper:hover a.paper_link {
-  color: white;
-} */
-
-
-.specific_paper {
-  background-color: #3c3939;
-}
-
-.specific_paper a.paper_link {
-  color: #dcd9d9;
-  border-color: #f4f5f7;
-}
-
-.specific_paper:hover {
-  color: white;
-  border: 3px solid #f4f5f7;
-  font-size: 22px;
-}
-
-.specific_paper:hover a.paper_link {
-  color: white;
-}
 
 /* lz2003 style changes July 21*/
 
@@ -617,7 +465,7 @@ ul.nav.nav-pills.inline-middle .active a, ul.nav.nav-pills.inline-middle a:hover
 /* Affects the container */
 .specific_paper {
   border: 2px solid #d1dae2;
-  border-radius: 0px;
+  border-radius: 0;
   padding: 15px;
   font-size: 20px;
   cursor: pointer;
@@ -625,7 +473,7 @@ ul.nav.nav-pills.inline-middle .active a, ul.nav.nav-pills.inline-middle a:hover
   margin: 7px 7px 7px 0;
   min-width: 300px;
   min-height: 75px;
-  background-color: #d1dae2;
+  background-color: #e0e0e0;
 }
 
 .specific_paper div {
@@ -638,24 +486,13 @@ ul.nav.nav-pills.inline-middle .active a, ul.nav.nav-pills.inline-middle a:hover
 .specific_paper:hover, .specific_paper:hover a.paper_link {
   color: #1a1b1a;
   border-color: #030959;
-}
-
-.specific_paper {
-  background-color: #e0e0e0;
+  text-decoration: none;
 }
 
 .specific_paper a.paper_link {
   color: #414142;
 }
 
-.specific_paper:hover {
-  color: #030959;
-}
-
-.specific_paper:hover a.paper_link {
-  text-decoration: none;
-  color: #030959;
-}
 
 /* Table in specific paper page */
 
