@@ -318,23 +318,22 @@ td li {
 }
 
 
-.specific_paper:hover {
+/* .specific_paper:hover {
   color: white;
   border: 3px solid #f4f5f7;
   font-size: 22px;
-}
-
-
-/* lz2003 style changes July 21*/
+} */
 
 /* Jumbotron/title block */
 .preview {
-  background-color: rgb(31, 34, 131);
+  background-color: #1f2283;
   color: white;
   padding-top: 50px;
   padding-bottom: 50px;
   margin: 0;
 }
+
+
 /* Paper browsing app store UI */
 .papers {
   display: flex;
@@ -343,9 +342,9 @@ td li {
 
 /* Affects the container */
 .specific_paper {
-  border: 2px solid #d1dae2;
+  border: 2px solid #eeeeee;
   border-radius: 0;
-  padding: 15px;
+  /* padding: 10px; */
   font-size: 20px;
   cursor: pointer;
   flex-grow: 1;
@@ -353,13 +352,34 @@ td li {
   min-width: 300px;
   min-height: 75px;
   background-color: #e0e0e0;
+  position: relative;
+  z-index: 0;
 }
 
-.specific_paper div {
+.specific_paper div.paper_desc {
   text-overflow: ellipsis;
   overflow: hidden;
-  width: 100%;
+  padding: 10px;
 }
+
+.specific_paper div.paper_icon {
+  float: left;
+  background-color: #1f2283;
+  padding: 10px;
+}
+.specific_paper .icon {
+  width: 100px;
+}
+.specific_paper .title {
+  font-weight: bold;
+}
+.specific_paper .name_year {
+  color: #626262;
+}
+.specific_paper .description {
+  color: #000;
+}
+
 
 /* Text color and hovering */
 .specific_paper:hover, .specific_paper:hover a.paper_link {
@@ -371,6 +391,7 @@ td li {
 .specific_paper a.paper_link {
   color: #414142;
 }
+
 
 
 /* Table in specific paper page */
