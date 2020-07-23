@@ -19,20 +19,21 @@
 		{% for paper in papers %}
 		<div class="specific_paper">
 			<a class="paper_link" href="/papers/{{ paper.id }}">
-				<div class="paper_icon">
-					<img class="icon"src="{{ url_for('static',filename='assets/IconWhite.png') }}" alt="{{ url_for('static',filename='assets/IconDefault.png') }}">
-				</div>
-				<div class="paper_desc">
-					<div class="title">{{ paper.paper_name }}</div>
-					<div class="name_year">
-						<div>{{ paper.author_name }}</div>
-						<div>{{ paper.year }}</div>
+				<div class="top_container">
+					<div class="paper_icon">
+						<img class="icon"src="{{ url_for('static',filename='assets/IconWhite.png') }}" alt="{{ url_for('static',filename='assets/IconDefault.png') }}">
+					</div>
+					<div class="paper_text">
+						<div class="title">{{ paper.paper_name }}</div>
+						<div class="name_year">
+							<div>{{ paper.author_name }}</div>
+							<div>{{ paper.year }}</div>
+						</div>
 					</div>
 				</div>
-				<div class="paper_desc">
+				<div class="paper_text">
 					<div class="description">{{ paper.small_description }}</div>
 				</div>
-
 			</a>
 		</div>
 		{% endfor %}
