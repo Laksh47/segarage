@@ -356,22 +356,30 @@ td li {
   z-index: 0;
 }
 
-.specific_paper div.paper_desc {
-  text-overflow: ellipsis;
-  overflow: hidden;
-  padding: 10px;
+.specific_paper .top_container {
+  height: 120px; 
   background-color: #e0e0e0;
-
 }
 
-.specific_paper div.paper_icon {
+.specific_paper .paper_icon {
   float: left;
   background-color: #1f2283;
   padding: 10px;
+  height: 120px;
+  width: 133px;
 }
 .specific_paper .icon {
   height: 100px;
 }
+
+.specific_paper .paper_text {
+  text-overflow: ellipsis;
+  overflow: hidden;
+  padding: 10px;
+  background-color: #e0e0e0;
+  margin-left: 133px;
+}
+
 .specific_paper .title {
   font-weight: bold;
 }
@@ -382,9 +390,7 @@ td li {
   color: #000;
 }
 
-.specific_paper .paper_desc {
-  margin-left: 133px;
-}
+
 
 
 /* Text color and hovering */
