@@ -23,8 +23,8 @@
 <div class="specific_paper">
 	<a class="paper_link" href="/papers/{{ paper.id }}">
 		<div class="paper_image">
-			<img class="icon" src="{{ url_for('static',filename='assets/IconWhite.png') }}"
-				alt="{{ url_for('static',filename='assets/IconDefault.png') }}">
+			<img class="icon" src="{{ url_for('static',filename='assets/{}.png'.format(icondict[paper.category])) }}"
+				onerror="this.src='static/assets/36.png'; ">
 		</div>
 		<div class="paper_info">
 			<div class="top">
