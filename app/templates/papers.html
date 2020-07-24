@@ -9,15 +9,48 @@
 	<div class="col-lg-2">
 		{{ pagination.links }}
 
-		<h2>placeholder</h2>
-		<h2>placeholder</h2>
-		<h2>placeholder</h2>
-		<h2>placeholder</h2>
+		<h3> Categories: </h3>
+		<form>
+			<input type="radio" name="sort_option" value="Empirical software engineering"> Empirical software engineering <br>
+			<input type="radio" name="sort_option" value="option2"> Option2 <br>
+			<input type="radio" name="sort_option" value="option3"> Option3 <br>
+			<input type="submit" value="Submit">
+		</form>
+		sort_options: {{sort_options}}
 	</div>
 
 	<div class="col-lg-10">
-		{% for paper in papers %}
+		{% for paper in papers|sort(reverse=true, attribute="year")%}
+		<!-- Design 2 -->
 		<div class="specific_paper">
+			
+			<a class="paper_link" href="/papers/{{ paper.id }}">
+				<div class="paper_image">
+					<img class="icon" src="{{ url_for('static',filename='assets/{}.png'.format(icondict[paper.category])) }}"
+						onerror="this.src='static/assets/36.png'; ">
+				</div>
+				<div class="paper_info">
+					<div class="top">
+						<div class="title">
+							{{ paper.paper_name }}
+						</div>
+						<div class="name_year">
+							<div>
+								{{ paper.author_name }}
+							</div>
+							<div>
+								{{ paper.year }}
+							</div>
+						</div>
+					</div>
+					<div class="bot">
+						{{ paper.small_description }}
+					</div>
+				</div>
+			</a>
+		</div>
+		<!-- Design 1 -->
+		<!-- <div class="specific_paper">
 			<a class="paper_link" href="/papers/{{ paper.id }}">
 				<div class="top_container">
 					<div class="paper_icon">
@@ -35,7 +68,7 @@
 					<div class="description">{{ paper.small_description }}</div>
 				</div>
 			</a>
-		</div>
+		</div> -->
 		{% endfor %}
 	</div>
 </div>

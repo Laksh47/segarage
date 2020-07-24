@@ -2,24 +2,53 @@
 {% block title %}
 
 <div class="text-center">
-	<h2>SE Tool Garage</h2>
-	<p >Find the software engineering tools you need</p>
+	<h1>SE Tool Garage</h1>
+	<p>Find the software engineering tools you need</p>
+	
 	<div class="searchbar-wrap inline">
 		<form action="{{ url_for('search') }}" method="post" name="search">
 			{{ g.search_form.hidden_tag() }}
 			{{ g.search_form.q(size=20, class_='form-control searchbar inline-middle', placeholder="Search Here") }}
 		</form>
 	</div>
+
+	<div>
+		<span class="modal_btn_useragreement"> Terms of use </span><br>
+	</div>
 </div>
 
 {% endblock %}
 {% block content %}
-<h3>Welcome to SE Tool Garage !</h3>
-<p>{{ greeting }}</p>
-
-<div>
-	<span class="modal_btn_useragreement"> Terms of use </span><br>
+{% for paper in papers |sort(reverse=true, attribute="created_at")%}
+<div class="specific_paper">
+	<a class="paper_link" href="/papers/{{ paper.id }}">
+		<div class="paper_image">
+			<img class="icon" src="{{ url_for('static',filename='assets/IconWhite.png') }}"
+				alt="{{ url_for('static',filename='assets/IconDefault.png') }}">
+		</div>
+		<div class="paper_info">
+			<div class="top">
+				<div class="title">
+					{{ paper.paper_name }}
+				</div>
+				<div class="name_year">
+					<div>
+						{{ paper.author_name }}
+					</div>
+					<div>
+						{{ paper.year }}
+					</div>
+				</div>
+			</div>
+			<div class="bot">
+				{{ paper.small_description }}
+			</div>
+		</div>
+	</a>
 </div>
+{% endfor %}
+
+
 
 
 <!-- The Modal -->
