@@ -6,7 +6,7 @@
   <div class="row">
     <div class="col-lg-9">
       <div class="media">
-        <div class="media-left media-middle"><img class="media-object" src="{{ url_for('static', filename='assets/13.svg') }}"></div>
+        <div class="media-left media-middle"><img class="media-object" src="{{ url_for('static',filename='assets/{}.svg'.format(icondict[paper.category])) }}" alt="{{ url_for('static',filename='assets/36.png') }}"></div>
         <div class="media-body"><h3 class="media-header">{{ paper.paper_name }}</h3></div>
       </div>
       <div class="info-author">Author: {{ paper.author_name }}</div>
