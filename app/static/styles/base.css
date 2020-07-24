@@ -410,40 +410,40 @@ td li {
 /* Table in specific paper page */
 
 /* Styles elements in the preview jumbotron */
-.paper-top .icon {
-  width:100px; 
-  height:100px; 
-  float:left; 
+.paper-top .media-object {
+  width:110px; 
+  height:110px; 
   margin-right:20px;
 }
 
-.paper-top .row {
-  margin-top:50px;
+.paper-top .col-lg-3 {
+  margin-top:60px;
+  font-size:25px;
 }
 
-.paper-top .col-lg-4 {
-  margin-top:50px;
-  font-size:22px;
+.paper-top .col-lg-3 img{
+  padding-right:10px;
+  height:45px;
+  width:45px
 }
 
-.paper-top .col-lg-8 .info-author {
+.paper-top .col-lg-9 .info-author {
   font-size:20px;
-  padding-top:20px;
+  padding-top:30px;
 }
 
-.paper-top .col-lg-8 .info-year {
+.paper-top .col-lg-9 .info-year {
   font-size:20px;
 }
 
 .paper-top h3{
-  font-size:36px;
-  margin-bottom:25px;
+  font-size:33px;
 }
 
 /* Styles elements outside the preview jumbotron */
 .main-body h2, .sidebar h2 {
   margin-top:0;
-  padding-top: 10px;
+  padding-top: 20px;
   padding-bottom: 20px;
   border-bottom: 1px solid #c4c4c4;
 }
@@ -507,7 +507,13 @@ td li {
   color:white;
 }
 
-.cite_button:hover, .paper-top a:hover {
+.form-group.required label:after {
+  content: ' *';
+  color: red;
+  vertical-align: middle;
+}
+
+.cite_button:hover, .paper-top a:hover, .feedback_button:hover{
   color: #f3f3f3;
   text-decoration: underline;
 }
