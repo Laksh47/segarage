@@ -58,7 +58,7 @@ body {
   width: 49.5%;
 }
 
-/* unsure what this affects, may delete */
+/* Old specifc papers page styling */
 /* th, td {
   border: 1px solid;
   padding: 5px;
@@ -82,7 +82,6 @@ td li {
 .searchbar-wrap {
   text-align: right;
 } */
-
 
 /* Plus sign css */
 .circle {
@@ -122,13 +121,16 @@ td li {
 
 /* AJAX form */
 
+/*
 .feedback_form_wrap {
   margin: 25px auto 0 auto;
   width: 70%;
 }
+*/
 
 .feedback_form_wrap h3 {
   text-align: center;
+  font-size:36px;
 }
 
 .form_submission_msg {
@@ -141,11 +143,10 @@ td li {
 .feedback_form {
   background-color: white;
   padding: 30px;
-  margin: 10px 0;
 }
 
 .feedback_form .form-control {
-  width: 100%;
+  width: 95%;
 }
 
 .loading {
@@ -155,6 +156,12 @@ td li {
 
 .loading img {
   width: 10%;
+}
+
+.form-group.required label:after {
+  content: ' *';
+  color: red;
+  vertical-align: middle;
 }
 
 /* Paper browsing app store UI */
@@ -414,8 +421,6 @@ td li {
   color: #414142;
 }
 
-
-
 /* Specific paper page */
 
 /* Styles elements in the preview jumbotron */
@@ -468,6 +473,7 @@ td li {
 
 .paper_info {
   font-size: 20px;
+  background: #eee;
 }
 
 .terms {
@@ -517,17 +523,24 @@ td li {
   cursor: pointer;
 }
 
+/* back to Search */
 .paper-top a {
   color:white;
 }
 
-.form-group.required label:after {
-  content: ' *';
-  color: red;
-  vertical-align: middle;
-}
-
+/* Styling sidebar links */
 .cite_button:hover, .paper-top a:hover, .feedback_button:hover{
   color: #f3f3f3;
   text-decoration: underline;
+}
+
+/* Request upload form */
+
+.request-wrap {
+  padding: 20px;
+}
+
+.request-wrap .form-group{
+  font-size:25px;
+  padding-bottom:10px;
 }
