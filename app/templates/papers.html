@@ -8,25 +8,55 @@
 <div class="papers row">
 	<div class="col-lg-2">
 		{{ pagination.links }}
+		<h3> Sort By: </h3>
+		<form class="custom-select" style="width:200px;" action="{{ url_for('papers') }}">
+			<!-- <select name="sort_generic">
+				<option value="updated_at">Recent</option>
+				<option value="author_name">Author</option>
+				<option value="year">Year</option>
+			</select> -->
 
-		<h3> Categories: </h3>
-		<form>
-			<input type="radio" name="sort_option" value="Empirical software engineering"> Empirical software engineering <br>
-			<input type="radio" name="sort_option" value="option2"> Option2 <br>
-			<input type="radio" name="sort_option" value="option3"> Option3 <br>
-			<input type="submit" value="Submit">
+			<input type="radio" name="sort_generic" value="updated_at"> Recent <br>
+			<input type="radio" name="sort_generic" value="author_name"> author_name <br>
+			<input type="radio" name="sort_generic" value="year"> Year <br>
+			<p>
+			</p>
+			<input type="radio" name="sort_category" value="Empirical software engineering"> Empirical software
+			engineering <br>
+			<input type="radio" name="sort_category" value="option2"> Option2 <br>
+			<input type="radio" name="sort_category" value="option3"> Option3 <br>
+			<input type="submit">
 		</form>
-		sort_options: {{sort_options}}
-	</div>
 
-	<div class="col-lg-10">
-		{% for paper in papers|sort(reverse=true, attribute="year")%}
-		<!-- Design 2 -->
-		<div class="specific_paper">
-			
+
+	</div>
+	<script>
+		$(document).ready(function () {
+			$('input[type=radio][name=sort_category]').change(function () {
+				// var elements = document.getElementsByClassName(this.value);
+				// elements.parentNode.removeChild(elements)
+				// var element = document.getElementById(this.value);
+				// element.parentNode.removeChild(element);
+				// var text = '{ "employees" : [' +
+				// 	'{ "firstName":"John" , "lastName":"Doe" },' +
+				// 	'{ "firstName":"Anna" , "lastName":"Smith" },' +
+				// 	'{ "firstName":"Peter" , "lastName":"Jones" } ]}';
+				// var obj = JSON.parse(text);
+				// $.post("papers", obj);
+
+
+				$("#specific_papers").load(location.href + " #specific_papers>*");
+			});
+		});
+	</script>
+
+	<div class="col-lg-10" id="specific_papers">
+		{% for paper in papers %}
+		<div class="specific_paper {{paper.category}}">
 			<a class="paper_link" href="/papers/{{ paper.id }}">
 				<div class="paper_image">
-					<img class="icon" src="{{ url_for('static',filename='assets/{}.svg'.format(icondict[paper.category])) }}"
+					<img class="icon"
+						src="{{ url_for('static',filename='assets/{}.png'.format(icondict[paper.category])) }}"
 						onerror="this.src='static/assets/36.png'; ">
 				</div>
 				<div class="paper_info">
@@ -49,26 +79,6 @@
 				</div>
 			</a>
 		</div>
-		<!-- Design 1 -->
-		<!-- <div class="specific_paper">
-			<a class="paper_link" href="/papers/{{ paper.id }}">
-				<div class="top_container">
-					<div class="paper_icon">
-						<img class="icon"src="{{ url_for('static',filename='assets/IconWhite.png') }}" alt="{{ url_for('static',filename='assets/IconDefault.png') }}">
-					</div>
-					<div class="paper_text">
-						<div class="title">{{ paper.paper_name }}</div>
-						<div class="name_year">
-							<div>{{ paper.author_name }}</div>
-							<div>{{ paper.year }}</div>
-						</div>
-					</div>
-				</div>
-				<div class="paper_text">
-					<div class="description">{{ paper.small_description }}</div>
-				</div>
-			</a>
-		</div> -->
 		{% endfor %}
 	</div>
 </div>
