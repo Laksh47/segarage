@@ -9,7 +9,7 @@ from .forms import requestToolUpload, toolUpload, searchPapers, endorsePaper, ed
 from .models import Paper, Tag, File, Comment
 from .utils import *
 
-from sqlalchemy import func
+from sqlalchemy import func, desc
 from os import path
 
 from werkzeug.utils import secure_filename
@@ -211,16 +211,33 @@ def downloads(id, filename):
 
 
 ### Browsing through papers and looking up a specific paper
-@app.route('/papers', methods=['GET'])
+@app.route('/papers', methods=['GET', 'POST'])
 def papers():
   
   """
   Lists all the uploaded paper with pagination
   """
 
+  sort_generic = None
+  sort_category = None
+
   page, per_page, offset = get_page_args(per_page_parameter="PER_PAGE")
 
-  paginated_papers = Paper.query.limit(per_page).offset(offset)
+  if request.args.get('sort_generic'):
+    sort_generic = request.args.get('sort_generic')
+    if sort_generic == "author_name":
+      paginated_papers = Paper.query.order_by(sort_generic)
+    else:
+      paginated_papers = Paper.query.order_by(desc(sort_generic))
+
+  if request.args.get('sort_category'):
+    sort_generic = request.args.get('sort_category')
+    paginated_papers = Paper.query.from_self().filter_by(category=sort_generic)
+
+  if paginated_papers:
+    paginated_papers = paginated_papers.limit(per_page).offset(offset)
+  else:
+    paginated_papers = Paper.query.limit(per_page).offset(offset)
 
   count = db.session.query(func.count(Paper.id)).scalar()
 
@@ -228,7 +245,8 @@ def papers():
 
   return render_template('papers.html', papers=paginated_papers, pagination=pagination, per_page=per_page, icondict=icondict)
 
-@app.route('/papers/<id>', methods=['GET'])
+
+@app.route('/papers/<id>', methods=['GET', 'POST'])
 def specific_paper(id):
   """
   Renders the individual paper given paper id
@@ -254,7 +272,7 @@ def specific_paper(id):
   comments = query_obj.all()
   upvotes = query_obj.filter(Comment.upvoted==1).count()
 
-  return render_template('specific_paper.html', paper=paper, form=endorse_form, edit_button=edit_button, tags=tags_obj_to_str(paper.tags, ", "), comments=comments, upvotes=upvotes)
+  return render_template('specific_paper.html', paper=paper, form=endorse_form, edit_button=edit_button, tags=tags_obj_to_str(paper.tags, ", "), comments=comments, upvotes=upvotes, icondict=icondict)
 
 
 
