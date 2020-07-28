@@ -6,49 +6,50 @@ body {
 }
 
 /* Navbar */
-.navbar .container-fluid{
-  background-color:black;
+
+.navbar .container-fluid {
+  background-color: black;
 }
 
 .navbar .navbar-brand {
-    margin: 0;
-    padding: 0;
+  margin: 0;
+  padding: 0;
 }
 
 .navbar .navbar-brand img {
-    padding-left:3rem;
-    height:50px;
-    max-height: 100%;
+  padding-left: 3rem;
+  height: 50px;
+  max-height: 100%;
 }
 
-.navbar .navbar-brand img:hover{
-  opacity:0.75;
+.navbar .navbar-brand img:hover {
+  opacity: 0.75;
 }
 
-.nav-search{
-  width:30%; 
-  margin: auto; 
-  position: absolute; 
-  top: 0; 
-  left: 0; 
-  right: 0; 
+.nav-search {
+  width: 30%;
+  margin: auto;
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
   bottom: 0;
 }
 
 /* Unselected */
-.navbar .nav-item .nav-link{
-  color:white;
-  font-size:16px;
-  padding-right:3rem;
-  padding-left:3rem;
+
+.navbar .nav-item .nav-link {
+  color: white;
+  font-size: 16px;
+  padding-right: 3rem;
+  padding-left: 3rem;
 }
 
 /* Selected and Hover */
-.navbar .nav-item .nav-link:hover,
-.navbar .nav-item.active{
-  background-color:grey;
-}
 
+.navbar .nav-item .nav-link:hover, .navbar .nav-item.active {
+  background-color: grey;
+}
 
 /* overall css */
 
@@ -58,7 +59,8 @@ body {
   width: 49.5%;
 }
 
-/* Old specifc papers page styling */
+/* unsure what this affects, may delete */
+
 /* th, td {
   border: 1px solid;
   padding: 5px;
@@ -84,6 +86,7 @@ td li {
 } */
 
 /* Plus sign css */
+
 .circle {
   border-radius: 50%;
   width: 25px;
@@ -94,6 +97,7 @@ td li {
   vertical-align: sub;
   cursor: pointer;
 }
+
 .circle::after {
   content: " ";
   position: absolute;
@@ -106,6 +110,7 @@ td li {
   right: 5px;
   z-index: 9;
 }
+
 .circle::before {
   content: " ";
   position: absolute;
@@ -121,16 +126,13 @@ td li {
 
 /* AJAX form */
 
-/*
 .feedback_form_wrap {
   margin: 25px auto 0 auto;
   width: 70%;
 }
-*/
 
 .feedback_form_wrap h3 {
   text-align: center;
-  font-size:36px;
 }
 
 .form_submission_msg {
@@ -143,10 +145,11 @@ td li {
 .feedback_form {
   background-color: white;
   padding: 30px;
+  margin: 10px 0;
 }
 
 .feedback_form .form-control {
-  width: 95%;
+  width: 100%;
 }
 
 .loading {
@@ -156,12 +159,6 @@ td li {
 
 .loading img {
   width: 10%;
-}
-
-.form-group.required label:after {
-  content: ' *';
-  color: red;
-  vertical-align: middle;
 }
 
 /* Paper browsing app store UI */
@@ -178,7 +175,7 @@ td li {
   padding: 10px;
   font-size: 14px;
   color: #333;
-  font-family: Menlo,Monaco,Consolas,"Courier New",monospace;
+  font-family: Menlo, Monaco, Consolas, "Courier New", monospace;
   background-color: #f5f5f5;
   border: 1px solid #ccc;
   border-radius: 4px;
@@ -192,6 +189,7 @@ td li {
 .modal_text p {
   margin-bottom: 3px;
 }
+
 .modal_text p.tab {
   margin-left: 50px;
 }
@@ -206,21 +204,32 @@ td li {
 }
 
 /* The Modal (background) */
+
 .modal {
-  display: none; /* Hidden by default */
-  position: fixed; /* Stay in place */
-  z-index: 1; /* Sit on top */
-  padding-top: 80px; /* Location of the box */
+  display: none;
+  /* Hidden by default */
+  position: fixed;
+  /* Stay in place */
+  z-index: 1;
+  /* Sit on top */
+  padding-top: 40px;
+  /* Location of the box */
   left: 0;
   top: 0;
-  width: 100%; /* Full width */
-  height: 100%; /* Full height */
-  overflow: auto; /* Enable scroll if needed */
-  background-color: rgb(0,0,0); /* Fallback color */
-  background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+  width: 100%;
+  /* Full width */
+  height: 100%;
+  /* Full height */
+  overflow: auto;
+  /* Enable scroll if needed */
+  background-color: rgb(0, 0, 0);
+  /* Fallback color */
+  background-color: rgba(0, 0, 0, 0.4);
+  /* Black w/ opacity */
 }
 
 /* Modal Content */
+
 .modal_content {
   background-color: #fefefe;
   margin: auto;
@@ -235,6 +244,7 @@ td li {
 }
 
 /* The Close Button */
+
 .close {
   color: #000;
   float: right;
@@ -244,15 +254,14 @@ td li {
   margin-top: 3px;
 }
 
-.close:hover,
-.close:focus {
+.close:hover, .close:focus {
   color: #000;
   text-decoration: none;
   cursor: pointer;
 }
 
-
 /* Counts CSS */
+
 .counts {
   text-align: right;
 }
@@ -273,57 +282,45 @@ td li {
   margin-bottom: 10px;
 }
 
-
 /* Mobile CSS */
-@media (max-width: 45em) {
 
+@media (max-width: 45em) {
   .or {
     font-size: 16px;
   }
-
   .inline-middle {
     width: auto;
     display: block;
     text-align: center;
   }
-
   .searchbar.inline-middle {
     display: inline-block;
     width: 60%;
   }
-
   .form-control {
     width: 90%;
   }
-
   .footer {
     text-align: center;
   }
-
   .counts {
     text-align: center;
   }
-
   .custom_column {
     margin: 0 20px 10px 20px;
   }
-
   /*
   tr> td:first-child {
     display: none;
   }
   */
-
   td {
     text-align: left;
   }
-
   .feedback_form_wrap {
     width: 90%;
   }
-
 }
-
 
 /* .specific_paper:hover {
   color: white;
@@ -332,17 +329,23 @@ td li {
 } */
 
 /* Jumbotron/title block */
+
+.page-content {
+  padding-top: 24px;
+}
+
 .preview {
   background-color: #1f2283;
   color: white;
-  padding-top: 100px;
-  padding-bottom: 60px;
+  padding-top: 50px;
+  padding-bottom: 50px;
   margin: 0;
   text-align: center;
+  position: relative;
 }
 
-
 /* Paper browsing app store UI */
+
 .papers {
   display: flex;
   flex-flow: row wrap;
@@ -350,7 +353,39 @@ td li {
 
 /* Affects the container */
 
+/* Sorting "navbar" */
+.sort-nav {
+  position: relative;
+  margin-top: 40px;
+}
+.select-sort {
+  display: inline-block;
+  position: absolute;
+  top: 50%;
+  margin-top: -10px;
+  color: #000000;
+}
+
+/* Flask paginate CSS */
+
+.pagination {
+  margin: 5px;
+  float: left;
+}
+
+.pagination ul {
+  padding: 0;
+  margin: 5px 0;
+}
+
+.pagination ul li {
+  display: inline-block;
+  margin: 0px 10px;
+  font-size: 20px;
+}
+
 /* Design 2 */
+
 .specific_paper {
   border: 2px solid #eeeeee;
   border-radius: 0;
@@ -374,15 +409,15 @@ td li {
   width: 120px;
   position: relative;
 }
+
 .specific_paper img {
   height: 100px;
-  margin: auto; 
-  position: absolute; 
-  top: 0; 
-  left: 0; 
-  right: 0; 
+  margin: auto;
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
   bottom: 0;
-
 }
 
 .paper_info {
@@ -390,8 +425,9 @@ td li {
   background-color: #e0e0e0;
   margin-top: 25px;
 }
+
 .paper_info .top {
-  margin-left:98px;
+  margin-left: 98px;
   padding: 10px;
   /* border: 2px solid #e0e0e0; */
   border-bottom: 1px;
@@ -400,18 +436,19 @@ td li {
 .paper_info .title {
   font-weight: bold;
 }
+
 .paper_info .name_year {
   color: #626262;
 }
 
 .paper_info .bot {
-  padding: 10px 0 10px 10px;
+  padding: 10px;
   color: #000;
 }
 
 /* Text color and hovering */
 
-.paper_info:hover .top, .paper_info:hover .bot{
+.paper_info:hover .top, .paper_info:hover .bot {
   color: #1a1b1a;
   border-color: #030959;
   text-decoration: none;
@@ -421,47 +458,44 @@ td li {
   color: #414142;
 }
 
-/* Specific paper page */
+/* Table in specific paper page */
 
 /* Styles elements in the preview jumbotron */
 
-.paper-top {
-  text-align:left;
-}
-
 .paper-top .media-object {
-  width:110px; 
-  height:110px; 
-  margin-right:20px;
+  width: 110px;
+  height: 110px;
+  margin-right: 20px;
 }
 
 .paper-top .col-lg-3 {
-  margin-top:60px;
-  font-size:25px;
+  margin-top: 60px;
+  font-size: 25px;
 }
 
-.paper-top .col-lg-3 img{
-  padding-right:10px;
-  height:45px;
-  width:45px
+.paper-top .col-lg-3 img {
+  padding-right: 10px;
+  height: 45px;
+  width: 45px
 }
 
 .paper-top .col-lg-9 .info-author {
-  font-size:20px;
-  padding-top:30px;
+  font-size: 20px;
+  padding-top: 30px;
 }
 
 .paper-top .col-lg-9 .info-year {
-  font-size:20px;
+  font-size: 20px;
 }
 
-.paper-top h3{
-  font-size:33px;
+.paper-top h3 {
+  font-size: 33px;
 }
 
 /* Styles elements outside the preview jumbotron */
+
 .main-body h2, .sidebar h2 {
-  margin-top:0;
+  margin-top: 0;
   padding-top: 20px;
   padding-bottom: 20px;
   border-bottom: 1px solid #c4c4c4;
@@ -473,7 +507,6 @@ td li {
 
 .paper_info {
   font-size: 20px;
-  background: #eee;
 }
 
 .terms {
@@ -488,6 +521,7 @@ td li {
 }
 
 /*Previous comments css */
+
 .comments {
   background-color: white;
   padding: 20px;
@@ -519,28 +553,22 @@ td li {
 }
 
 /* Cite this Paper */
+
 .cite_button {
   cursor: pointer;
 }
 
-/* back to Search */
 .paper-top a {
-  color:white;
+  color: white;
 }
 
-/* Styling sidebar links */
-.cite_button:hover, .paper-top a:hover, .feedback_button:hover{
+.form-group.required label:after {
+  content: ' *';
+  color: red;
+  vertical-align: middle;
+}
+
+.cite_button:hover, .paper-top a:hover, .feedback_button:hover {
   color: #f3f3f3;
   text-decoration: underline;
-}
-
-/* Request upload form */
-
-.request-wrap {
-  padding: 20px;
-}
-
-.request-wrap .form-group{
-  font-size:25px;
-  padding-bottom:10px;
 }
