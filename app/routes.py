@@ -220,30 +220,33 @@ def papers():
 
   sort_generic = None
   sort_category = None
+  paginated_papers = None
 
   page, per_page, offset = get_page_args(per_page_parameter="PER_PAGE")
 
   if request.args.get('sort_generic'):
     sort_generic = request.args.get('sort_generic')
-    if sort_generic == "author_name":
+    if sort_generic == "author_name" or sort_generic == "paper_name":
       paginated_papers = Paper.query.order_by(sort_generic)
     else:
       paginated_papers = Paper.query.order_by(desc(sort_generic))
 
   if request.args.get('sort_category'):
-    sort_generic = request.args.get('sort_category')
-    paginated_papers = Paper.query.from_self().filter_by(category=sort_generic)
+    sort_category = request.args.get('sort_category')
+    if sort_category != 'Any':
+      paginated_papers = Paper.query.filter_by(category=sort_category)
 
-  if paginated_papers:
-    paginated_papers = paginated_papers.limit(per_page).offset(offset)
-  else:
+  if paginated_papers is None:
     paginated_papers = Paper.query.limit(per_page).offset(offset)
+  else:
+    paginated_papers = paginated_papers.limit(per_page).offset(offset)
+
 
   count = db.session.query(func.count(Paper.id)).scalar()
 
   pagination = Pagination(page=page, per_page=per_page, total=count, record_name='papers',format_total=True, format_number=True)
 
-  return render_template('papers.html', papers=paginated_papers, pagination=pagination, per_page=per_page, icondict=icondict)
+  return render_template('papers.html', papers=paginated_papers, pagination=pagination, per_page=per_page, icondict=icondict, sort_generic=sort_generic, sort_category=sort_category)
 
 
 @app.route('/papers/<id>', methods=['GET', 'POST'])
