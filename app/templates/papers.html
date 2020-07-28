@@ -2,55 +2,102 @@
 {% block title %}
 <h1>Browse Papers</h1>
 {{ pagination.info }}
+<div class="col-sm-12 sort-nav">
+	<div class="pagination">
+		{{ pagination.links }}
+	</div>
+	<form class="select-sort" action="{{ url_for('papers') }}">
+		<select class="sort_generic" name="sort_generic" id="sort_generic">
+			<option value="" disabled selected>Sort By:</option>
+			<option value="updated_at">Recent</option>
+			<option value="author_name">Author Name</option>
+			<option value="year">Date</option>
+			<option value="paper_name">A-Z</option>
+		</select>
+		<select class="sort_category" name="sort_category" id='sort_category'>
+			<option value="" disabled selected>Category:</option>
+			<option value="Any">Any</option>
+			<option value="Agile software development">Agile software development</option>
+			<option value="Apps and app store analysis">Apps and app store analysis</option>
+			<option value="Autonomic and (self-)adaptive systems">Autonomic and (self-)adaptive systems</option>
+			<option value="Cloud computing">Cloud computing</option>
+			<option value="Component-based software engineering">Component-based software engineering</option>
+			<option value="Configuration management and deployment">Configuration management and deployment</option>
+			<option value="Crowd sourced software engineering">Crowd sourced software engineering</option>
+			<option value="Cyber physical systems">Cyber physical systems</option>
+			<option value="Debugging, fault localization, and repair">Debugging, fault localization, and repair</option>
+			<option value="Dependability, safety, and reliability">Dependability, safety, and reliability</option>
+			<option value="Distributed and collaborative software engineering">Distributed and collaborativesoftware engineering</option>
+			<option value="Embedded software">Embedded software</option>
+			<option value="Empirical software engineering">Empirical software engineering</option>
+			<option value="End-user software engineering">End-user software engineering</option>
+			<option value="Formal methods">Formal methods</option>
+			<option value="Green and sustainable technologies">Green and sustainable technologies</option>
+			<option value="Human and social aspects of software engineering">Human and social aspects of softwareengineering</option>
+			<option value="Human-computer interaction">Human-computer interaction</option>
+			<option value="Middleware, frameworks, and APIs">Middleware, frameworks, and APIs</option>
+			<option value="Mining software engineering repositories">Mining software engineering repositories</option>
+			<option value="Mobile applications">Mobile applications</option>
+			<option value="Model-driven engineering">Model-driven engineering</option>
+			<option value="Parallel, distributed, and concurrent systems">Parallel, distributed, and concurrentsystems</option>
+			<option value="Performance">Performance</option>
+			<option value="Program analysis">Program analysis</option>
+			<option value="Program comprehension">Program comprehension</option>
+			<option value="Program synthesis">Program synthesis</option>
+			<option value="Programming languages">Programming languages</option>
+			<option value="Recommendation systems">Recommendation systems</option>
+			<option value="Refactoring">Refactoring</option>
+			<option value="Requirements engineering">Requirements engineering</option>
+			<option value="Reverse engineering">Reverse engineering</option>
+			<option value="Search-based software engineering">Search-based software engineering</option>
+			<option value="Security, privacy and trust">Security, privacy and trust</option>
+			<option value="Software architecture">Software architecture</option>
+			<option value="Software economics and metrics">Software economics and metrics</option>
+			<option value="Software evolution and maintenance">Software evolution and maintenance</option>
+			<option value="Software modeling and design">Software modeling and design</option>
+			<option value="Software performance">Software performance</option>
+			<option value="Software process">Software process</option>
+			<option value="Software product lines">Software product lines</option>
+			<option value="Software reuse">Software reuse</option>
+			<option value="Software services">Software services</option>
+			<option value="Software testing">Software testing</option>
+			<option value="Software visualization">Software visualization</option>
+			<option value="Specification and modeling languages">Specification and modeling languages</option>
+			<option value="Tools and environments">Tools and environments</option>
+			<option value="Traceability">Traceability</option>
+			<option value="Ubiquitous/pervasive software systems">Ubiquitous/pervasive software systems</option>
+			<option value="Validation and verification">Validation and verification</option>
+			<option value="Other">Other</option>
+		</select>
+	</form>
+</div>
 {% endblock %}
 {% block content %}
-
+<meta id="sort-option" data-name="{{sort_category}}" data-other="{{sort_generic}}">
 <div class="papers row">
-	<div class="col-lg-2">
-		{{ pagination.links }}
-		<h3> Sort By: </h3>
-		<form class="custom-select" style="width:200px;" action="{{ url_for('papers') }}">
-			<!-- <select name="sort_generic">
-				<option value="updated_at">Recent</option>
-				<option value="author_name">Author</option>
-				<option value="year">Year</option>
-			</select> -->
-
-			<input type="radio" name="sort_generic" value="updated_at"> Recent <br>
-			<input type="radio" name="sort_generic" value="author_name"> author_name <br>
-			<input type="radio" name="sort_generic" value="year"> Year <br>
-			<p>
-			</p>
-			<input type="radio" name="sort_category" value="Empirical software engineering"> Empirical software
-			engineering <br>
-			<input type="radio" name="sort_category" value="option2"> Option2 <br>
-			<input type="radio" name="sort_category" value="option3"> Option3 <br>
-			<input type="submit">
-		</form>
-
-
-	</div>
 	<script>
 		$(document).ready(function () {
-			$('input[type=radio][name=sort_category]').change(function () {
-				// var elements = document.getElementsByClassName(this.value);
-				// elements.parentNode.removeChild(elements)
-				// var element = document.getElementById(this.value);
-				// element.parentNode.removeChild(element);
-				// var text = '{ "employees" : [' +
-				// 	'{ "firstName":"John" , "lastName":"Doe" },' +
-				// 	'{ "firstName":"Anna" , "lastName":"Smith" },' +
-				// 	'{ "firstName":"Peter" , "lastName":"Jones" } ]}';
-				// var obj = JSON.parse(text);
-				// $.post("papers", obj);
+			var sort_option = $('#sort-option').data().other;
+			if (sort_option !== 'None') {
+				$('#sort_generic').val(sort_option).change();
+			}
 
+			var sort_option2 = $('#sort-option').data().name;
+			console.log(sort_option2)
+			if (sort_option2 !== 'None') {
+				$('#sort_category').val(sort_option2).change();
+			}
 
-				$("#specific_papers").load(location.href + " #specific_papers>*");
+			$('select').change(function () {
+				console.log(this.value);
+				this.form.submit();
+
+				// $("#specific_papers").load(location.href + " #specific_papers>*");
 			});
 		});
 	</script>
 
-	<div class="col-lg-10" id="specific_papers">
+	<div class="col-lg-12" id="specific_papers">
 		{% for paper in papers %}
 		<div class="specific_paper {{paper.category}}">
 			<a class="paper_link" href="/papers/{{ paper.id }}">
