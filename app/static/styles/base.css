@@ -297,6 +297,17 @@ td li {
     display: inline-block;
     width: 60%;
   }
+  
+  .top-search {
+    visibility: hidden;
+    display: none;
+  }
+
+  .navbar .navbar-brand img {
+    padding-left:0;
+    height:50px;
+    max-height: 100%;
+  }
   .form-control {
     width: 90%;
   }
