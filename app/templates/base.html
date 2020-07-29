@@ -36,13 +36,15 @@
               <a class="nav-link" href="{{ url_for('papers') }}">Papers</a>
             </li> 
           </ul>
-          {%- if request.path != "/index" and request.path != "/" %}
-          <div class="searchbar-wrap inline">
-            <form action="{{ url_for('search') }}" method="post" name="search">
-              {{ g.search_form.hidden_tag() }}
-              {{ g.search_form.q(size=20, class_='form-control nav-search', placeholder="Search Here") }}
-            </form>
-          {% endif %}
+          <div class="top-search">
+            {%- if request.path != "/index" and request.path != "/" %}
+            <div class="searchbar-wrap inline">
+              <form action="{{ url_for('search') }}" method="post" name="search">
+                {{ g.search_form.hidden_tag() }}
+                {{ g.search_form.q(size=20, class_='form-control nav-search', placeholder="Search Here") }}
+              </form>
+            </div>
+            {% endif %}
           </div>
         </div>
       </nav>
