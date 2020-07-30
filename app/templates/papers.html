@@ -2,97 +2,312 @@
 {% block title %}
 <h1>Browse Papers</h1>
 {{ pagination.info }}
-<div class="col-sm-12 sort-nav">
+<div class="col-sm-12 sort_nav">
 	<div class="pagination">
 		{{ pagination.links }}
 	</div>
-	<form class="select-sort" action="{{ url_for('papers') }}">
-		<select class="sort_generic" name="sort_generic" id="sort_generic">
+	<form class="sort_form" action="{{ url_for('papers') }}">
+		<div class="modal" id="sort_modal">
+			<div class="modal_content">
+				<div class="scrollable">
+					<div class="sort-modal">
+						<div class="col-lg-4">
+							<div>
+								<input type="radio" name="sort_category" value="Any">
+								<label for="Any">Any</label><br>
+							</div>
+							<div>
+								<input type="radio" name="sort_category" value="Agile software development">
+								<label for="Agile software development">Agile software development</label><br>
+							</div>
+							<div>
+								<input type="radio" name="sort_category" value="Apps and app store analysis">
+								<label for="Apps and app store analysis">Apps and app store analysis</label><br>
+							</div>
+							<div>
+								<input type="radio" name="sort_category"
+									value="Autonomic and (self-)adaptive systems">
+								<label for="Autonomic and (self-)adaptive systems">Autonomic and (self-)adaptive
+									systems</label><br>
+							</div>
+							<div>
+								<input type="radio" name="sort_category" value="Cloud computing">
+								<label for="Cloud computing">Cloud computing</label><br>
+							</div>
+							<div>
+								<input type="radio" name="sort_category"
+									value="Component-based software engineering">
+								<label for="Component-based software engineering">Component-based software
+									engineering</label><br>
+							</div>
+							<div>
+								<input type="radio" name="sort_category"
+									value="Configuration management and deployment">
+								<label for="Configuration management and deployment">Configuration management and
+									deployment</label><br>
+							</div>
+							<div>
+								<input type="radio" name="sort_category" value="Crowd sourced software engineering">
+								<label for="Crowd sourced software engineering">Crowd sourced software
+									engineering</label><br>
+							</div>
+							<div>
+								<input type="radio" name="sort_category" value="Cyber physical systems">
+								<label for="Cyber physical systems">Cyber physical systems</label><br>
+							</div>
+							<div>
+								<input type="radio" name="sort_category" value="Debugging">
+								<label for="Debugging">Debugging</label><br>
+							</div>
+							<div>
+								<input type="radio" name="sort_category"
+									value="Dependability, safety, and reliability">
+								<label for="Dependability, safety, and reliability">Dependability, safety, and
+									reliability</label><br>
+							</div>
+							<div>
+								<input type="radio" name="sort_category"
+									value="Distributed and collaborative software engineering">
+								<label for="Distributed and collaborative software engineering">Distributed and
+									collaborative software engineering</label><br>
+							</div>
+							<div>
+								<input type="radio" name="sort_category" value="Embedded software">
+								<label for="Embedded software">Embedded software</label><br>
+							</div>
+							<div>
+								<input type="radio" name="sort_category" value="Empirical software engineering">
+								<label for="Empirical software engineering">Empirical software
+									engineering</label><br>
+							</div>
+							<div>
+								<input type="radio" name="sort_category" value="End-user software engineering">
+								<label for="End-user software engineering">End-user software engineering</label><br>
+							</div>
+							<div>
+								<input type="radio" name="sort_category" value="Formal methods">
+								<label for="Formal methods">Formal methods</label><br>
+							</div>
+							<div>
+								<input type="radio" name="sort_category" value="Green and sustainable technologies">
+								<label for="Green and sustainable technologies">Green and sustainable
+									technologies</label><br>
+							</div>
+							<div>
+								<input type="radio" name="sort_category"
+									value="Human and social aspects of software engineering">
+								<label for="Human and social aspects of software engineering">Human and social
+									aspects
+									of
+									software engineering</label><br>
+							</div>
+						</div>
+						<div class="col-lg-4">
+							<div>
+								<input type="radio" name="sort_category" value="Human-computer interaction">
+								<label for="Human-computer interaction">Human-computer interaction</label><br>
+							</div>
+							<div>
+								<input type="radio" name="sort_category" value="Middleware, frameworks, and APIs">
+								<label for="Middleware, frameworks, and APIs">Middleware, frameworks, and
+									APIs</label><br>
+							</div>
+							<div>
+								<input type="radio" name="sort_category"
+									value="Mining software engineering repositories">
+								<label for="Mining software engineering repositories">Mining software engineering
+									repositories</label><br>
+							</div>
+							<div>
+								<input type="radio" name="sort_category" value="Mobile applications">
+								<label for="Mobile applications">Mobile applications</label><br>
+							</div>
+							<div>
+								<input type="radio" name="sort_category" value="Model-driven engineering">
+								<label for="Model-driven engineering">Model-driven engineering</label><br>
+							</div>
+							<div>
+								<input type="radio" name="sort_category"
+									value="Parallel, distributed, and concurrent systems">
+								<label for="Parallel, distributed, and concurrent systems">Parallel, distributed,
+									and
+									concurrent systems</label><br>
+							</div>
+							<div>
+								<input type="radio" name="sort_category" value="Performance">
+								<label for="Performance">Performance</label><br>
+							</div>
+							<div>
+								<input type="radio" name="sort_category" value="Program analysis">
+								<label for="Program analysis">Program analysis</label><br>
+							</div>
+							<div>
+								<input type="radio" name="sort_category" value="Program comprehension">
+								<label for="Program comprehension">Program comprehension</label><br>
+							</div>
+							<div>
+								<input type="radio" name="sort_category" value="Program synthesis">
+								<label for="Program synthesis">Program synthesis</label><br>
+							</div>
+							<div>
+								<input type="radio" name="sort_category" value="Programming languages">
+								<label for="Programming languages">Programming languages</label><br>
+							</div>
+							<div>
+								<input type="radio" name="sort_category" value="Recommendation systems">
+								<label for="Recommendation systems">Recommendation systems</label><br>
+							</div>
+							<div>
+								<input type="radio" name="sort_category" value="Refactoring">
+								<label for="Refactoring">Refactoring</label><br>
+							</div>
+							<div>
+								<input type="radio" name="sort_category" value="Requirements engineering">
+								<label for="Requirements engineering">Requirements engineering</label><br>
+							</div>
+							<div>
+								<input type="radio" name="sort_category" value="Reverse engineering">
+								<label for="Reverse engineering">Reverse engineering</label><br>
+							</div>
+							<div>
+								<input type="radio" name="sort_category" value="Search-based software engineering">
+								<label for="Search-based software engineering">Search-based software
+									engineering</label><br>
+							</div>
+							<div>
+								<input type="radio" name="sort_category" value="Security, privacy and trust">
+								<label for="Security, privacy and trust">Security, privacy and trust</label><br>
+							</div>
+						</div>
+						<div class="col-lg-4">
+							<div>
+								<input type="radio" name="sort_category" value="Software architecture">
+								<label for="Software architecture">Software architecture</label><br>
+							</div>
+							<div>
+								<input type="radio" name="sort_category" value="Software economics and metrics">
+								<label for="Software economics and metrics">Software economics and
+									metrics</label><br>
+							</div>
+							<div>
+								<input type="radio" name="sort_category" value="Software evolution and maintenance">
+								<label for="Software evolution and maintenance">Software evolution and
+									maintenance</label><br>
+							</div>
+							<div>
+								<input type="radio" name="sort_category" value="Software modeling and design">
+								<label for="Software modeling and design">Software modeling and design</label><br>
+							</div>
+							<div>
+								<input type="radio" name="sort_category" value="Software performance">
+								<label for="Software performance">Software performance</label><br>
+							</div>
+							<div>
+								<input type="radio" name="sort_category" value="Software process">
+								<label for="Software process">Software process</label><br>
+							</div>
+							<div>
+								<input type="radio" name="sort_category" value="Software product lines">
+								<label for="Software product lines">Software product lines</label><br>
+							</div>
+							<div>
+								<input type="radio" name="sort_category" value="Software reuse">
+								<label for="Software reuse">Software reuse</label><br>
+							</div>
+							<div>
+								<input type="radio" name="sort_category" value="Software services">
+								<label for="Software services">Software services</label><br>
+							</div>
+							<div>
+								<input type="radio" name="sort_category" value="Software testing">
+								<label for="Software testing">Software testing</label><br>
+							</div>
+							<div>
+								<input type="radio" name="sort_category" value="Software visualization">
+								<label for="Software visualization">Software visualization</label><br>
+							</div>
+							<div>
+								<input type="radio" name="sort_category"
+									value="Specification and modeling languages">
+								<label for="Specification and modeling languages">Specification and modeling
+									languages</label><br>
+							</div>
+							<div>
+								<input type="radio" name="sort_category" value="Tools and environments">
+								<label for="Tools and environments">Tools and environments</label><br>
+							</div>
+							<div>
+								<input type="radio" name="sort_category" value="Traceability">
+								<label for="Traceability">Traceability</label><br>
+							</div>
+							<div>
+								<input type="radio" name="sort_category"
+									value="Ubiquitous/pervasive software systems">
+								<label for="Ubiquitous/pervasive software systems">Ubiquitous/pervasive software
+									systems</label><br>
+							</div>
+							<div>
+								<input type="radio" name="sort_category" value="Validation and verification">
+								<label for="Validation and verification">Validation and verification</label><br>
+							</div>
+							<div>
+								<input type="radio" name="sort_category" value="Other">
+								<label for="Other">Other</label><br>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<span class="btn btn-default modal_btn_sort sort_category"> Filter </span><br>
+		<select class="btn btn-default sort_generic" name="sort_generic" id="sort_generic">
 			<option value="" disabled selected>Sort By:</option>
 			<option value="updated_at">Recent</option>
 			<option value="author_name">Author Name</option>
 			<option value="year">Date</option>
 			<option value="paper_name">A-Z</option>
 		</select>
-		<select class="sort_category" name="sort_category" id='sort_category'>
-			<option value="" disabled selected>Category:</option>
-			<option value="Any">Any</option>
-			<option value="Agile software development">Agile software development</option>
-			<option value="Apps and app store analysis">Apps and app store analysis</option>
-			<option value="Autonomic and (self-)adaptive systems">Autonomic and (self-)adaptive systems</option>
-			<option value="Cloud computing">Cloud computing</option>
-			<option value="Component-based software engineering">Component-based software engineering</option>
-			<option value="Configuration management and deployment">Configuration management and deployment</option>
-			<option value="Crowd sourced software engineering">Crowd sourced software engineering</option>
-			<option value="Cyber physical systems">Cyber physical systems</option>
-			<option value="Debugging, fault localization, and repair">Debugging, fault localization, and repair</option>
-			<option value="Dependability, safety, and reliability">Dependability, safety, and reliability</option>
-			<option value="Distributed and collaborative software engineering">Distributed and collaborativesoftware engineering</option>
-			<option value="Embedded software">Embedded software</option>
-			<option value="Empirical software engineering">Empirical software engineering</option>
-			<option value="End-user software engineering">End-user software engineering</option>
-			<option value="Formal methods">Formal methods</option>
-			<option value="Green and sustainable technologies">Green and sustainable technologies</option>
-			<option value="Human and social aspects of software engineering">Human and social aspects of softwareengineering</option>
-			<option value="Human-computer interaction">Human-computer interaction</option>
-			<option value="Middleware, frameworks, and APIs">Middleware, frameworks, and APIs</option>
-			<option value="Mining software engineering repositories">Mining software engineering repositories</option>
-			<option value="Mobile applications">Mobile applications</option>
-			<option value="Model-driven engineering">Model-driven engineering</option>
-			<option value="Parallel, distributed, and concurrent systems">Parallel, distributed, and concurrentsystems</option>
-			<option value="Performance">Performance</option>
-			<option value="Program analysis">Program analysis</option>
-			<option value="Program comprehension">Program comprehension</option>
-			<option value="Program synthesis">Program synthesis</option>
-			<option value="Programming languages">Programming languages</option>
-			<option value="Recommendation systems">Recommendation systems</option>
-			<option value="Refactoring">Refactoring</option>
-			<option value="Requirements engineering">Requirements engineering</option>
-			<option value="Reverse engineering">Reverse engineering</option>
-			<option value="Search-based software engineering">Search-based software engineering</option>
-			<option value="Security, privacy and trust">Security, privacy and trust</option>
-			<option value="Software architecture">Software architecture</option>
-			<option value="Software economics and metrics">Software economics and metrics</option>
-			<option value="Software evolution and maintenance">Software evolution and maintenance</option>
-			<option value="Software modeling and design">Software modeling and design</option>
-			<option value="Software performance">Software performance</option>
-			<option value="Software process">Software process</option>
-			<option value="Software product lines">Software product lines</option>
-			<option value="Software reuse">Software reuse</option>
-			<option value="Software services">Software services</option>
-			<option value="Software testing">Software testing</option>
-			<option value="Software visualization">Software visualization</option>
-			<option value="Specification and modeling languages">Specification and modeling languages</option>
-			<option value="Tools and environments">Tools and environments</option>
-			<option value="Traceability">Traceability</option>
-			<option value="Ubiquitous/pervasive software systems">Ubiquitous/pervasive software systems</option>
-			<option value="Validation and verification">Validation and verification</option>
-			<option value="Other">Other</option>
-		</select>
 	</form>
+
 </div>
+
+
 {% endblock %}
 {% block content %}
 <meta id="sort-option" data-name="{{sort_category}}" data-other="{{sort_generic}}">
 <div class="papers row">
 	<script>
 		$(document).ready(function () {
+
 			var sort_option = $('#sort-option').data().other;
 			if (sort_option !== 'None') {
 				$('#sort_generic').val(sort_option).change();
 			}
-
 			var sort_option2 = $('#sort-option').data().name;
+
 			console.log(sort_option2)
-			if (sort_option2 !== 'None') {
-				$('#sort_category').val(sort_option2).change();
-			}
+			console.log(sort_option)
+			$('body').on('click', '.modal_btn_sort', function () {
+				$('#sort_modal').show();
+				$("input[name=sort_category][value='" + sort_option2 + "']").prop('checked', true);
+			});
 
 			$('select').change(function () {
-				console.log(this.value);
+				$('#sort_modal').show();
+				$("input[name=sort_category][value='" + sort_option2 + "']").prop('checked', true);
 				this.form.submit();
-
+			});
+			$('input').change(function () {
+				this.form.submit();
 				// $("#specific_papers").load(location.href + " #specific_papers>*");
+			});
+			$('span.close').on('click', function () {
+				$('.modal').hide();
+			});
+			$(window).on('click', function (event) {
+				if (event.target.className == "modal") {
+					$('.modal').hide();
+				}
 			});
 		});
 	</script>
@@ -129,8 +344,4 @@
 		{% endfor %}
 	</div>
 </div>
-
-
-
-
 {% endblock %}

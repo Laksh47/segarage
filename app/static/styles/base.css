@@ -181,6 +181,24 @@ td li {
   border-radius: 4px;
 }
 
+.sort-modal {
+  color: #000;
+  text-align: left;
+  overflow: hidden;
+  font-size: 12px;
+  /* display: flex;
+  flex-wrap: wrap;
+  text-align: left; */
+}
+
+.sort-modal input {
+  margin: 4px;
+}
+
+/* .sort-modal div {
+  min-width: 33.33333%;
+} */
+
 .modal_msg {
   margin-bottom: 15px;
   font-size: 25px;
@@ -236,11 +254,7 @@ td li {
   padding: 20px;
   border: 1px solid #888;
   width: 80%;
-}
-
-.modal_btn_useragreement {
-  text-decoration: underline;
-  cursor: pointer;
+  overflow: hidden;
 }
 
 /* The Close Button */
@@ -282,34 +296,6 @@ td li {
   margin-bottom: 10px;
 }
 
-/* Mobile css for navbar */
-@media (max-width: 770px) {
-  .navbar .navbar-brand img {
-    padding-left:5px;
-    padding-top:5px;
-    height:50px;
-    max-height: 100%;
-  }
-
-  .navbar-nav>li, .navbar-nav{
-    float: left !important;
-  }
-  
-  .navbar-nav.navbar-right:last-child{
-    margin-right: -15px !important;
-  }
-  
-  .navbar-right{
-    float: right !important;
-  }
-
-  .navbar .nav-item .nav-link{
-    font-size:14px;
-    padding-left:1.5rem;
-    padding-right:1.5rem;
-  }
-}
-
 /* Mobile CSS */
 
 @media (max-width: 45em) {
@@ -324,18 +310,6 @@ td li {
   .searchbar.inline-middle {
     display: inline-block;
     width: 60%;
-  }
-  
-  /* hides searchbar in navbar */
-  .top-search {
-    visibility: hidden;
-    display: none;
-  }
-
-  .navbar .navbar-brand img {
-    padding-left:0;
-    height:50px;
-    max-height: 100%;
   }
   .form-control {
     width: 90%;
@@ -394,16 +368,28 @@ td li {
 /* Affects the container */
 
 /* Sorting "navbar" */
-.sort-nav {
-  position: relative;
+
+.sort_nav {
   margin-top: 40px;
+  /* display: flex; */
+  text-align: center;
 }
-.select-sort {
-  display: inline-block;
-  position: absolute;
-  top: 50%;
-  margin-top: -10px;
-  color: #000000;
+
+.sort_form {
+  height: 48px;
+  margin: 5px;
+  float: right;
+  display: flex;
+  align-items: center;
+}
+
+.sort_generic {
+  height: 34px;
+  margin-left: 10px;
+}
+
+.sort_category {
+
 }
 
 /* Flask paginate CSS */
@@ -422,6 +408,10 @@ td li {
   display: inline-block;
   margin: 0px 10px;
   font-size: 20px;
+}
+
+.pagination ul li a {
+  color: #fff;
 }
 
 /* Design 2 */
