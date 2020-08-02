@@ -360,7 +360,7 @@ def search():
   pagination = Pagination(href=href, page=page, per_page=per_page, total=total, record_name='papers',format_total=True, format_number=True)
   # print(pagination.__dict__)
 
-  return render_template('papers.html', papers=paginated_papers, pagination=pagination, per_page=per_page)
+  return render_template('papers.html', papers=paginated_papers, pagination=pagination, per_page=per_page, categories=CATEGORY_LIST)
 
 
 
