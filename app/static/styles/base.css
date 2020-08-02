@@ -183,21 +183,46 @@ td li {
 
 .sort-modal {
   color: #000;
+  display: grid;
+  grid-template-columns: 33.3333% 33.3333% 33.3333%;
   text-align: left;
-  overflow: hidden;
-  font-size: 12px;
-  /* display: flex;
-  flex-wrap: wrap;
-  text-align: left; */
+}
+
+@media (max-width: 1440px) {
+  .sort-modal {
+    color: #000;
+    display: grid;
+    grid-template-columns: 50% 50%;
+    text-align: left;
+  }
+}
+
+@media (max-width: 1000px) {
+  .sort-modal {
+    color: #000;
+    display: grid;
+    grid-template-columns: 100%;
+    text-align: left;
+  }
+}
+
+.column {
+  margin-top: 17px;
 }
 
 .sort-modal input {
   margin: 4px;
 }
 
-/* .sort-modal div {
-  min-width: 33.33333%;
-} */
+.sort-modal label {
+  margin-top: 3px;
+  margin-bottom: 2px;
+}
+
+.sort-modal div {
+  display: inline;
+  position: relative;
+}
 
 .modal_msg {
   margin-bottom: 15px;
@@ -386,10 +411,6 @@ td li {
 .sort_generic {
   height: 34px;
   margin-left: 10px;
-}
-
-.sort_category {
-
 }
 
 /* Flask paginate CSS */
