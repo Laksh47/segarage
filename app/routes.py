@@ -8,6 +8,7 @@ from app import app, db, s3
 from .forms import requestToolUpload, toolUpload, searchPapers, endorsePaper, editButton, toolUpdate
 from .models import Paper, Tag, File, Comment
 from .utils import *
+from .constants import CATEGORY_LIST
 
 from sqlalchemy import func, desc
 from os import path
@@ -242,11 +243,12 @@ def papers():
     paginated_papers = paginated_papers.limit(per_page).offset(offset)
 
 
+
   count = db.session.query(func.count(Paper.id)).scalar()
 
   pagination = Pagination(page=page, per_page=per_page, total=count, record_name='papers',format_total=True, format_number=True)
 
-  return render_template('papers.html', papers=paginated_papers, pagination=pagination, per_page=per_page, icondict=icondict, sort_generic=sort_generic, sort_category=sort_category)
+  return render_template('papers.html', papers=paginated_papers, pagination=pagination, per_page=per_page, icondict=icondict, sort_generic=sort_generic, sort_category=sort_category, categories=CATEGORY_LIST)
 
 
 @app.route('/papers/<id>', methods=['GET', 'POST'])
