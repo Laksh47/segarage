@@ -11,7 +11,17 @@
 			<div class="modal_content">
 				<div class="scrollable">
 					<div class="sort-modal">
-						<div class="col-lg-4">
+						<div>
+							<input type="radio" name="sort_category" value="Any">
+							<label for="Any">Any</label><br>
+						</div>
+						{% for category in categories %}
+						<div>
+							<input type="radio" name="sort_category" value="{{category}}">
+							<label for="{{category}}">{{category}}</label><br>
+						</div>
+						{% endfor %}
+						<!-- <div class="col-lg-4 column">
 							<div>
 								<input type="radio" name="sort_category" value="Any">
 								<label for="Any">Any</label><br>
@@ -102,7 +112,7 @@
 									software engineering</label><br>
 							</div>
 						</div>
-						<div class="col-lg-4">
+						<div class="col-lg-4 column">
 							<div>
 								<input type="radio" name="sort_category" value="Human-computer interaction">
 								<label for="Human-computer interaction">Human-computer interaction</label><br>
@@ -179,7 +189,7 @@
 								<label for="Security, privacy and trust">Security, privacy and trust</label><br>
 							</div>
 						</div>
-						<div class="col-lg-4">
+						<div class="col-lg-4 column">
 							<div>
 								<input type="radio" name="sort_category" value="Software architecture">
 								<label for="Software architecture">Software architecture</label><br>
@@ -254,7 +264,7 @@
 								<input type="radio" name="sort_category" value="Other">
 								<label for="Other">Other</label><br>
 							</div>
-						</div>
+						</div> -->
 					</div>
 				</div>
 			</div>
