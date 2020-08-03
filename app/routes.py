@@ -192,7 +192,7 @@ def papers():
 
   count = db.session.query(func.count(Paper.id)).scalar()
 
-  pagination = Pagination(page=page, per_page=1, total=count, record_name='papers',format_total=True, format_number=True, show_single_page=True)
+  pagination = Pagination(page=page, per_page=per_page, total=count, record_name='papers',format_total=True, format_number=True, show_single_page=True)
 
   return render_template('papers.html', papers=paginated_papers, pagination=pagination, per_page=per_page, icondict=icondict, sort_generic=sort_generic, sort_category=sort_category, categories=CATEGORY_LIST)
 
