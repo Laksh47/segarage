@@ -1,24 +1,113 @@
 {% extends "base.html" %}
-
-{% block content %}
-
-<h3> Browse papers </h3>
-
+{% block title %}
+<h1>Browse Papers</h1>
 {{ pagination.info }}
-{{ pagination.links }}
-<div class="papers">
-	{% for paper in papers %}
-	<div class="specific_paper">
-		<a class="paper_link" href="/papers/{{ paper.id }}">
-			<div>{{ paper.paper_name }}</div>
-			<div>{{ paper.author_name }}</div>
-			<div>{{ paper.year }}</div>
-
-		</a>
+<div class="col-sm-12 sort_nav">
+	<div class="pagination">
+		{{ pagination.links }}
 	</div>
-	{% endfor %}
+	<form class="sort_form" action="{{ url_for('papers') }}">
+		<div class="modal" id="sort_modal">
+			<div class="modal_content">
+				<div class="scrollable">
+					<div class="sort-modal">
+						<div>
+							<input type="radio" name="sort_category" value="Any">
+							<label for="Any">Any</label><br>
+						</div>
+						{% for category in categories %}
+						<div>
+							<input type="radio" name="sort_category" value="{{category}}">
+							<label for="{{category}}">{{category}}</label><br>
+						</div>
+						{% endfor %}
+					</div>
+				</div>
+			</div>
+		</div>
+		<span class="btn btn-default modal_btn_sort sort_category"> Filter </span><br>
+		<select class="btn btn-default sort_generic" name="sort_generic" id="sort_generic">
+			<option value="" disabled selected>Sort By:</option>
+			<option value="updated_at">Recent</option>
+			<option value="author_name">Author Name</option>
+			<option value="year">Date</option>
+			<option value="paper_name">A-Z</option>
+		</select>
+	</form>
+
 </div>
 
-{{ pagination.links }}
 
+{% endblock %}
+{% block content %}
+<meta id="sort-option" data-name="{{sort_category}}" data-other="{{sort_generic}}">
+<div class="papers row">
+	<script>
+		$(document).ready(function () {
+
+			var sort_option = $('#sort-option').data().other;
+			if (sort_option !== 'None') {
+				$('#sort_generic').val(sort_option).change();
+			}
+			var sort_option2 = $('#sort-option').data().name;
+
+			console.log(sort_option2)
+			console.log(sort_option)
+			$('body').on('click', '.modal_btn_sort', function () {
+				$('#sort_modal').show();
+				$("input[name=sort_category][value='" + sort_option2 + "']").prop('checked', true);
+			});
+
+			$('select').change(function () {
+				//$('#sort_modal').show();
+				$("input[name=sort_category][value='" + sort_option2 + "']").prop('checked', true);
+				this.form.submit();
+			});
+			$('input').change(function () {
+				this.form.submit();
+				// $("#specific_papers").load(location.href + " #specific_papers>*");
+			});
+			$('span.close').on('click', function () {
+				$('.modal').hide();
+			});
+			$(window).on('click', function (event) {
+				if (event.target.className == "modal") {
+					$('.modal').hide();
+				}
+			});
+		});
+	</script>
+
+	<div class="col-lg-12" id="specific_papers">
+		{% for paper in papers %}
+		<div class="specific_paper {{paper.category}}">
+			<a class="paper_link" href="/papers/{{ paper.id }}">
+				<div class="paper_image">
+					<img class="icon"
+						src="{{ url_for('static',filename='assets/{}.png'.format(icondict[paper.category])) }}"
+						onerror="this.src='static/assets/36.png'; ">
+				</div>
+				<div class="paper_info">
+					<div class="top">
+						<div class="title">
+							{{ paper.paper_name }}
+						</div>
+						<div class="name_year">
+							<div>
+								{{ paper.author_name }}
+							</div>
+							<div>
+								{{ paper.year }}
+							</div>
+						</div>
+					</div>
+					<div class="bot">
+						{{ paper.small_description }}
+					</div>
+				</div>
+			</a>
+		</div>
+		{% endfor %}
+	</div>
+</div>
 {% endblock %}
