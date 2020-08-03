@@ -49,7 +49,6 @@ body {
   background-color:grey;
 }
 
-
 /* overall css */
 
 .inline-middle {
@@ -61,9 +60,7 @@ body {
 h2 {
   margin-bottom: 30px;
 }
-
-/* unsure what this affects, may delete */
-/* th, td {
+th, td {
   border: 1px solid;
   padding: 5px;
 }
@@ -71,6 +68,7 @@ td li {
   list-style: none;
   margin: 5px;
 }
+
 .wrap-file input[type=file] {
   display: inline-block;
   vertical-align: super;
@@ -84,7 +82,17 @@ td li {
 } */
 
 
+.wrap-file .custom_dropdown {
+  display: inline-block;
+  vertical-align: super;
+}
+
+.searchbar-wrap {
+  text-align: right;
+} */
+
 /* Plus sign css */
+
 .circle {
   border-radius: 50%;
   width: 25px;
@@ -95,6 +103,7 @@ td li {
   vertical-align: sub;
   cursor: pointer;
 }
+
 .circle::after {
   content: " ";
   position: absolute;
@@ -107,6 +116,7 @@ td li {
   right: 5px;
   z-index: 9;
 }
+
 .circle::before {
   content: " ";
   position: absolute;
@@ -230,6 +240,7 @@ td li {
 .modal_text p {
   margin-bottom: 3px;
 }
+
 .modal_text p.tab {
   margin-left: 50px;
 }
@@ -244,35 +255,40 @@ td li {
 }
 
 /* The Modal (background) */
+
 .modal {
+
   display: none; /* Hidden by default */
   position: fixed; /* Stay in place */
   z-index: 1; /* Sit on top */
   padding-top: 80px; /* Location of the box */
   left: 0;
   top: 0;
-  width: 100%; /* Full width */
-  height: 100%; /* Full height */
-  overflow: auto; /* Enable scroll if needed */
-  background-color: rgb(0,0,0); /* Fallback color */
-  background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+  width: 100%;
+  /* Full width */
+  height: 100%;
+  /* Full height */
+  overflow: auto;
+  /* Enable scroll if needed */
+  background-color: rgb(0, 0, 0);
+  /* Fallback color */
+  background-color: rgba(0, 0, 0, 0.4);
+  /* Black w/ opacity */
 }
 
 /* Modal Content */
+
 .modal_content {
   background-color: #fefefe;
   margin: auto;
   padding: 20px;
   border: 1px solid #888;
   width: 80%;
-}
-
-.modal_btn_useragreement {
-  text-decoration: underline;
-  cursor: pointer;
+  overflow: hidden;
 }
 
 /* The Close Button */
+
 .close {
   color: #000;
   float: right;
@@ -282,14 +298,14 @@ td li {
   margin-top: 3px;
 }
 
-.close:hover,
-.close:focus {
+.close:hover, .close:focus {
   color: #000;
   text-decoration: none;
   cursor: pointer;
 }
 
 /* Counts CSS */
+
 .counts {
   text-align: right;
 }
@@ -346,8 +362,8 @@ td li {
 }
 
 /* Mobile CSS */
-@media (max-width: 45em) {
 
+@media (max-width: 45em) {
   .or {
     font-size: 16px;
   }
@@ -362,11 +378,16 @@ td li {
     display: block;
   }
 
+  .inline-middle {
+    width: auto;
+    display: block;
+    text-align: center;
+  }
+  
   .searchbar.inline-middle {
     display: inline-block;
     width: 60%;
   }
-
   .form-control {
     width: 90%;
   }
@@ -376,26 +397,24 @@ td li {
   }
 
   .media-body .counts {
+  .footer {
     text-align: center;
     visibility: hidden;
     display: none;
-  }
-
+  } 
+    
   .paper_info .counts {
     text-align: center;
     visibility: visible;
     display: inline;
   }
-
   .custom_column {
     margin: 0 20px 10px 20px;
   }
-
   /*
   tr> td:first-child {
     display: none;
-  }
-  
+  }  
 
   td {
     text-align: left;
@@ -407,9 +426,13 @@ td li {
     width: 90%;
   }
   */
-
 }
 
+/* .specific_paper:hover {
+  color: white;
+  border: 3px solid #f4f5f7;
+  font-size: 22px;
+} */
 
 /* .specific_paper:hover {
   color: white;
@@ -502,6 +525,7 @@ td li {
   width: 120px;
   position: relative;
 }
+  
 .specific_paper img {
   height: 100px;
   margin: auto; 
@@ -510,7 +534,6 @@ td li {
   left: 0; 
   right: 0; 
   bottom: 0;
-
 }
 
 .paper_info {
@@ -528,6 +551,7 @@ td li {
 .paper_info .title {
   font-weight: bold;
 }
+  
 .paper_info .name_year {
   color: #626262;
 }
@@ -548,8 +572,6 @@ td li {
 .specific_paper a.paper_link {
   color: #414142;
 }
-
-
 
 /* Table in specific paper page */
 
@@ -607,7 +629,6 @@ td li {
   font-size: 15px;
   margin: 5px 0 0 5px;
 }
-
 .edit_button {
   text-align: center;
   margin-top: 10px;
@@ -650,7 +671,7 @@ td li {
   cursor: pointer;
 }
 
-.cite_button_modal .citation {
+ .cite_button_modal .citation {
   padding:30px;
 }
 

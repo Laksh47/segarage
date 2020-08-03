@@ -196,7 +196,6 @@ def papers():
 
   return render_template('papers.html', papers=paginated_papers, pagination=pagination, per_page=per_page, icondict=icondict, sort_generic=sort_generic, sort_category=sort_category, categories=CATEGORY_LIST)
 
-
 @app.route('/papers/<id>', methods=['GET', 'POST'])
 def specific_paper(id):
   """

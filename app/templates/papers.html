@@ -59,7 +59,7 @@
 			});
 
 			$('select').change(function () {
-				//$('#sort_modal').show();
+				$('#sort_modal').show();
 				$("input[name=sort_category][value='" + sort_option2 + "']").prop('checked', true);
 				this.form.submit();
 			});
@@ -111,3 +111,4 @@
 	</div>
 </div>
 {% endblock %}
+
