@@ -8,66 +8,12 @@ from app import app, db, s3
 from .forms import requestToolUpload, toolUpload, searchPapers, endorsePaper, editButton, toolUpdate
 from .models import Paper, Tag, File, Comment
 from .utils import *
-from .constants import CATEGORY_LIST
+from .constants import CATEGORY_LIST, icondict
 
 from sqlalchemy import func, desc
 from os import path
 
 from werkzeug.utils import secure_filename
-
-icondict = {
-  "Agile software development" : 1,
-  "Apps and app store analysis" : 2,
-  "Autonomic and (self-)adaptive systems" : 3,
-  "Cloud computing" : 4,
-  "Component-based software engineering" : 5,
-  "Configuration management and deployment" : 6,
-  "Crowd sourced software engineering" : 7,
-  "Cyber physical systems" : 8,
-  "Debugging, fault localization, and repair" : 9,
-  "Dependability, safety, and reliability" : 10,
-  "Distributed and collaborative software engineering" : 11,	
-  "Embedded software" : 12,
-  "Empirical software engineering" : 13,	
-  "End-user software engineering" : 14,
-  "Formal methods" : 15,	
-  "Green and sustainable technologies" : 16,
-  "Human and social aspects of software engineering" : 17,	
-  "Human-computer interaction" : 18,
-  "Middleware, frameworks, and APIs" : 19,	
-  "Mining software engineering repositories" : 20,
-  "Mobile applications" : 21,	
-  "Model-driven engineering" : 22,
-  "Parallel, distributed, and concurrent systems" : 23,	
-  "Performance" : 24,
-  "Program analysis" : 25,	
-  "Program comprehension" : 25,
-  "Program synthesis" : 25,	
-  "Programming languages" : 25,
-  "Recommendation systems" : 26,	
-  "Refactoring" : 27,
-  "Requirements engineering" : 28,	
-  "Reverse engineering" : 29,
-  "Search-based software engineering" : 30,	
-  "Security, privacy and trust" : 31,
-  "Software architecture" : 32,	
-  "Software economics and metrics" : 32,
-  "Software evolution and maintenance" : 32,	
-  "Software modeling and design" : 32,
-  "Software performance" : 32,	
-  "Software process" : 32,
-  "Software product lines" : 32,	
-  "Software reuse" : 32,
-  "Software services" : 32,	
-  "Software testing" : 32,
-  "Software visualization" : 32,	
-  "Specification and modeling languages" : 25,
-  "Tools and environments" : 3,	
-  "Traceability" : 34,
-  "Ubiquitous/pervasive software systems" : 35,
-  "Validation and verification" : 31,
-  "Other" : 36
-}
 
 @app.before_request
 def before_request():
@@ -246,10 +192,9 @@ def papers():
 
   count = db.session.query(func.count(Paper.id)).scalar()
 
-  pagination = Pagination(page=page, per_page=per_page, total=count, record_name='papers',format_total=True, format_number=True)
+  pagination = Pagination(page=page, per_page=1, total=count, record_name='papers',format_total=True, format_number=True, show_single_page=True)
 
   return render_template('papers.html', papers=paginated_papers, pagination=pagination, per_page=per_page, icondict=icondict, sort_generic=sort_generic, sort_category=sort_category, categories=CATEGORY_LIST)
-
 
 @app.route('/papers/<id>', methods=['GET', 'POST'])
 def specific_paper(id):

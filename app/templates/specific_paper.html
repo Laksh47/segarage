@@ -6,11 +6,44 @@
   <div class="row">
     <div class="col-lg-9">
       <div class="media">
-        <div class="media-left media-middle"><img class="media-object" src="{{ url_for('static',filename='assets/{}.png'.format(icondict[paper.category])) }}"></div>
+        <div class="media-left media-middle"><img class="media-object" src="{{ url_for('static',filename='assets/{}.svg'.format(icondict[paper.category])) }}" alt="{{ url_for('static',filename='assets/36.png') }}"></div>
         <div class="media-body"><h3 class="media-header">{{ paper.paper_name }}</h3></div>
       </div>
-      <div class="info-author">Author: {{ paper.author_name }}</div>
-      <div class="info-year">Year: {{ paper.year }}</div>
+      <div class="media">
+        <div class="media-left info">
+          <div>{{ paper.author_name }}</div>
+          <div>{{ paper.year }}</div>
+        </div>
+        <!-- Desktop Counts -->
+        <div class="media-body">
+          <div class="counts">
+            <div class="custom_column">
+              <div class="count">
+                {{ paper.download_count }}
+              </div>
+              <div class="">
+                Downloads
+              </div>
+            </div>
+            <div class="custom_column">
+              <div class="count">
+                {{ paper.view_count }}
+              </div>
+              <div class="">
+                Views
+              </div>
+            </div>
+            <div class="custom_column">
+              <div class="count">
+                {{ upvotes }}
+              </div>
+              <div class="">
+                Upvotes
+              </div>
+            </div>
+          </div> 
+        </div>
+      </div>
     </div>
     <div class="col-lg-3">
       <div><a href="{{ url_for('papers') }}">
@@ -31,8 +64,10 @@
 
 {% block content %}
 
+<!-- Start Paper Information -->
 <div class="paper_info">
-  <!-- OLD VIEWS, DOWNLOADS AND UPVOTES
+
+  <!-- Mobile Counts -->
   <div class="counts">
     <div class="custom_column">
       <div class="count">
@@ -58,9 +93,8 @@
         Upvotes
       </div>
     </div>
-
-  </div> -->
-
+  </div> 
+  
   <div class="container-fluid">
     <div class="row">
       <div class="col-lg-8 main-body">
@@ -91,10 +125,12 @@
           <a href="{{paper.link_to_archive | check_protocol_prefix }}" target="_blank">{{ paper.link_to_archive | check_protocol_prefix }}</a>
           {% endif %}
         </div>
+        <!-- Seems to display all artifacts on only one paper
         <div>{% for file in paper.files %} {% if file != 'None' %}
           {{ file.filetype }}: <a href="/downloads/{{ paper.id }}/{{file.filename}}">{{ file.filename }}</a>
            {% endif %} {% endfor %}
         </div>
+        -->
         <div>Categories: <a href="/search?q={{paper.category}}">
           {{ paper.category }}
         </a></div>
@@ -103,103 +139,8 @@
       </div>
     </div>
   </div>
+  <!-- End Paper Information -->
 
-  <!-- THE OLD TABLE
-  <table>
-    <tr>
-      <td>Author email: </td>
-      <td> {{ paper.author_email }} </td>
-    </tr>
-    <tr>
-      <td>Tool name: </td>
-      <td>{{ paper.tool_name }}</td>
-    </tr>
-    <tr>
-      <td>Description:</td>
-      <td>{{ paper.description }}</td>
-    </tr>
-    comment this out 
-      <tr>
-    <td>Link to archive:</td>
-    <td>
-      {% if paper.link_to_archive == 'Not provided' or paper.link_to_archive == None %}
-        <a>Not provided by authors</a>
-      {% else %}
-        <a href="{{paper.link_to_archive | check_protocol_prefix }}" target="_blank">{{ paper.link_to_archive | check_protocol_prefix }}</a>
-      {% endif %}
-    </td>
-  </tr> Comment this out ^^
-    <tr>
-      <td>Bibtex:</td>
-      <td class="preserve-line-breaks">{{ paper.bibtex }}</td>
-    </tr>
-    <tr>
-      <td>Link to public pdf:</td>
-      <td>
-        {% if paper.link_to_pdf == 'Not provided' or paper.link_to_pdf == None %}
-        <a>Not provided by authors</a>
-        {% else %}
-        <a href="{{ paper.link_to_pdf | check_protocol_prefix }}" target="_blank">{{ paper.link_to_pdf | check_protocol_prefix }}</a>
-        {% endif %}
-      </td>
-    </tr>
-    <tr>
-      <td>Link to tool webpage:</td>
-      <td>
-        {% if paper.link_to_tool_webpage == 'Not provided' or paper.link_to_tool_webpage == None %}
-        <a>Not provided by authors</a>
-        {% else %}
-        <a href="{{ paper.link_to_tool_webpage | check_protocol_prefix }}" target="_blank">{{ paper.link_to_tool_webpage | check_protocol_prefix }}</a>
-        {% endif %}
-      </td>
-    </tr>
-    <tr>
-      <td>Link to demo:</td>
-      <td>
-        {% if paper.link_to_demo == 'Not provided' or paper.link_to_demo == None %}
-        <a>Not provided by authors</a>
-        {% else %}
-        <a href="{{ paper.link_to_demo | check_protocol_prefix }}" target="_blank">{{ paper.link_to_demo | check_protocol_prefix }}</a>
-        {% endif %}
-      </td>
-    </tr>
-    <tr>
-      <td>Category:</td>
-      <td>
-        <a href="/search?q={{paper.category}}">
-          {{ paper.category }}
-        </a>
-      </td>
-    </tr>
-    <tr>
-      <td>Tags:</td>
-      <td>
-
-        {{ tags }}
-
-      </td>
-    </tr>
-    <tr>
-      <td>Artifacts:</td>
-      <td>
-        <ul>
-          {% for file in paper.files %}
-          {% if file != 'None' %}
-          <li>{{ file.filetype }}: <a href="/downloads/{{ paper.id }}/{{file.filename}}">{{ file.filename }}</a></li>
-          {% endif %}
-          {% endfor %}
-        </ul>
-      </td>
-    </tr>
-    <tr>
-      <td>Year and Conference:</td>
-      <td>
-        {{ paper.year }}, {{ paper.conference }}
-      </td>
-    </tr>
-  </table>
-  -->
-  
   <div class="terms">
     <span class="modal_btn_useragreement" style="padding-left:10px;"> Terms of use </span>
   </div>
@@ -216,15 +157,17 @@
   <div class="modal_content">
     <span class="close">&times;</span>
     <div class="modal_msg">
-      Bibtex:<br><br>
-      {{ paper.bibtex }}
+      <div class="citation">
+        BibTeX:<br><br>
+        {{ paper.bibtex }}
+      </div>
     </div>
   </div>
 </div>  
 
-<!-- The Modal -->
+<!-- The Edit Modal -->
 <div class="modal edit_button_modal">
-  <!-- Modal content -->
+  <!-- Edit Modal content -->
   <div class="modal_content">
     <span class="close">&times;</span>
     <div class="modal_msg">
@@ -449,3 +392,4 @@
 </script>
 
 {% endblock %}
+

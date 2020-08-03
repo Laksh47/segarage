@@ -6,49 +6,47 @@ body {
 }
 
 /* Navbar */
-
-.navbar .container-fluid {
-  background-color: black;
+.navbar .container-fluid{
+  background-color:black;
 }
 
 .navbar .navbar-brand {
-  margin: 0;
-  padding: 0;
+    margin: 0;
+    padding: 0;
 }
 
 .navbar .navbar-brand img {
-  padding-left: 3rem;
-  height: 50px;
-  max-height: 100%;
+    padding-left:3rem;
+    height:50px;
+    max-height: 100%;
 }
 
-.navbar .navbar-brand img:hover {
-  opacity: 0.75;
+.navbar .navbar-brand img:hover{
+  opacity:0.75;
 }
 
-.nav-search {
-  width: 30%;
-  margin: auto;
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
+.nav-search{
+  width:30%; 
+  margin: auto; 
+  position: absolute; 
+  top: 0; 
+  left: 0; 
+  right: 0; 
   bottom: 0;
 }
 
 /* Unselected */
-
-.navbar .nav-item .nav-link {
-  color: white;
-  font-size: 16px;
-  padding-right: 3rem;
-  padding-left: 3rem;
+.navbar .nav-item .nav-link{
+  color:white;
+  font-size:16px;
+  padding-right:3rem;
+  padding-left:3rem;
 }
 
 /* Selected and Hover */
-
-.navbar .nav-item .nav-link:hover, .navbar .nav-item.active {
-  background-color: grey;
+.navbar .nav-item .nav-link:hover,
+.navbar .nav-item.active{
+  background-color:grey;
 }
 
 /* overall css */
@@ -59,13 +57,13 @@ body {
   width: 49.5%;
 }
 
-/* unsure what this affects, may delete */
-
-/* th, td {
+h2 {
+  margin-bottom: 30px;
+}
+th, td {
   border: 1px solid;
   padding: 5px;
 }
-
 td li {
   list-style: none;
   margin: 5px;
@@ -75,6 +73,14 @@ td li {
   display: inline-block;
   vertical-align: super;
 }
+.wrap-file .custom_dropdown {
+  display: inline-block;
+  vertical-align: super;
+}
+.searchbar-wrap {
+  text-align: right;
+} */
+
 
 .wrap-file .custom_dropdown {
   display: inline-block;
@@ -126,13 +132,16 @@ td li {
 
 /* AJAX form */
 
+/*
 .feedback_form_wrap {
   margin: 25px auto 0 auto;
   width: 70%;
 }
+*/
 
-.feedback_form_wrap h3 {
+.feedback_button_modal h3 {
   text-align: center;
+  font-size:36px;
 }
 
 .form_submission_msg {
@@ -144,12 +153,11 @@ td li {
 
 .feedback_form {
   background-color: white;
-  padding: 30px;
-  margin: 10px 0;
+  padding-left:30px;
 }
 
 .feedback_form .form-control {
-  width: 100%;
+  width: 95%;
 }
 
 .loading {
@@ -175,7 +183,7 @@ td li {
   padding: 10px;
   font-size: 14px;
   color: #333;
-  font-family: Menlo, Monaco, Consolas, "Courier New", monospace;
+  font-family: Menlo,Monaco,Consolas,"Courier New",monospace;
   background-color: #f5f5f5;
   border: 1px solid #ccc;
   border-radius: 4px;
@@ -249,14 +257,11 @@ td li {
 /* The Modal (background) */
 
 .modal {
-  display: none;
-  /* Hidden by default */
-  position: fixed;
-  /* Stay in place */
-  z-index: 1;
-  /* Sit on top */
-  padding-top: 40px;
-  /* Location of the box */
+
+  display: none; /* Hidden by default */
+  position: fixed; /* Stay in place */
+  z-index: 1; /* Sit on top */
+  padding-top: 80px; /* Location of the box */
   left: 0;
   top: 0;
   width: 100%;
@@ -321,17 +326,64 @@ td li {
   margin-bottom: 10px;
 }
 
+/* Mobile counts */
+.paper_info .counts {
+  text-align: center;
+  visibility: hidden;
+  display: none;
+}
+
+@media (max-width: 770px) {
+  /* Mobile css for navbar */
+  .navbar .navbar-brand img {
+    padding-left:5px;
+    padding-top:5px;
+    height:50px;
+    max-height: 100%;
+  }
+
+  .navbar-nav>li, .navbar-nav{
+    float: left !important;
+  }
+  
+  .navbar-nav.navbar-right:last-child{
+    margin-right: -15px !important;
+  }
+  
+  .navbar-right{
+    float: right !important;
+  }
+
+  .navbar .nav-item .nav-link{
+    font-size:14px;
+    padding-left:1.5rem;
+    padding-right:1.5rem;
+  }
+}
+
 /* Mobile CSS */
 
 @media (max-width: 45em) {
   .or {
     font-size: 16px;
   }
+
+  .top-search {
+    visibility: hidden;
+    display: none;
+  }
+
+  .inline-middle {
+    width: auto;
+    display: block;
+  }
+
   .inline-middle {
     width: auto;
     display: block;
     text-align: center;
   }
+  
   .searchbar.inline-middle {
     display: inline-block;
     width: 60%;
@@ -339,11 +391,22 @@ td li {
   .form-control {
     width: 90%;
   }
+
   .footer {
     text-align: center;
   }
-  .counts {
+
+  .media-body .counts {
+  .footer {
     text-align: center;
+    visibility: hidden;
+    display: none;
+  } 
+    
+  .paper_info .counts {
+    text-align: center;
+    visibility: visible;
+    display: inline;
   }
   .custom_column {
     margin: 0 20px 10px 20px;
@@ -351,14 +414,18 @@ td li {
   /*
   tr> td:first-child {
     display: none;
-  }
-  */
+  }  
+
   td {
     text-align: left;
   }
+  */
+
+  /*
   .feedback_form_wrap {
     width: 90%;
   }
+  */
 }
 
 /* .specific_paper:hover {
@@ -367,30 +434,28 @@ td li {
   font-size: 22px;
 } */
 
+/* .specific_paper:hover {
+  color: white;
+  border: 3px solid #f4f5f7;
+  font-size: 22px;
+} */
+
 /* Jumbotron/title block */
-
-.page-content {
-  padding-top: 24px;
-}
-
 .preview {
   background-color: #1f2283;
   color: white;
-  padding-top: 50px;
-  padding-bottom: 50px;
+  padding-top: 100px;
+  padding-bottom: 60px;
   margin: 0;
   text-align: center;
-  position: relative;
 }
 
-/* Paper browsing app store UI */
 
+/* Paper browsing app store UI */
 .papers {
   display: flex;
   flex-flow: row wrap;
 }
-
-/* Affects the container */
 
 /* Sorting "navbar" */
 
@@ -433,10 +498,10 @@ td li {
 
 .pagination ul li a {
   color: #fff;
+  cursor: pointer;
 }
 
 /* Design 2 */
-
 .specific_paper {
   border: 2px solid #eeeeee;
   border-radius: 0;
@@ -460,26 +525,25 @@ td li {
   width: 120px;
   position: relative;
 }
-
+  
 .specific_paper img {
   height: 100px;
-  margin: auto;
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
+  margin: auto; 
+  position: absolute; 
+  top: 0; 
+  left: 0; 
+  right: 0; 
   bottom: 0;
 }
 
 .paper_info {
   margin-left: 35px;
-  background-color: #e0e0e0;
   margin-top: 25px;
 }
-
 .paper_info .top {
-  margin-left: 98px;
+  margin-left:98px;
   padding: 10px;
+  background-color: #ddd;
   /* border: 2px solid #e0e0e0; */
   border-bottom: 1px;
 }
@@ -487,19 +551,19 @@ td li {
 .paper_info .title {
   font-weight: bold;
 }
-
+  
 .paper_info .name_year {
   color: #626262;
 }
 
 .paper_info .bot {
-  padding: 10px;
+  padding: 10px 0 10px 10px;
   color: #000;
 }
 
 /* Text color and hovering */
 
-.paper_info:hover .top, .paper_info:hover .bot {
+.paper_info:hover .top, .paper_info:hover .bot{
   color: #1a1b1a;
   border-color: #030959;
   text-decoration: none;
@@ -512,41 +576,41 @@ td li {
 /* Table in specific paper page */
 
 /* Styles elements in the preview jumbotron */
-
+.paper-top {
+  text-align:left;
+}
 .paper-top .media-object {
-  width: 110px;
-  height: 110px;
-  margin-right: 20px;
+  width:110px; 
+  height:110px; 
+  margin-right:20px;
 }
 
 .paper-top .col-lg-3 {
-  margin-top: 60px;
-  font-size: 25px;
+  margin-top:20px;
+  font-size:25px;
 }
 
-.paper-top .col-lg-3 img {
-  padding-right: 10px;
-  height: 45px;
-  width: 45px
+.paper-top .col-lg-3 img{
+  padding-right:10px;
+  height:45px;
+  width:45px
 }
 
-.paper-top .col-lg-9 .info-author {
-  font-size: 20px;
-  padding-top: 30px;
+.paper-top .media .info{
+  font-size:20px;
 }
 
-.paper-top .col-lg-9 .info-year {
-  font-size: 20px;
+.paper-top .media-left div {
+  width:320px;
 }
 
-.paper-top h3 {
-  font-size: 33px;
+.paper-top h3{
+  font-size:33px;
 }
 
 /* Styles elements outside the preview jumbotron */
-
 .main-body h2, .sidebar h2 {
-  margin-top: 0;
+  margin-top:0;
   padding-top: 20px;
   padding-bottom: 20px;
   border-bottom: 1px solid #c4c4c4;
@@ -558,13 +622,13 @@ td li {
 
 .paper_info {
   font-size: 20px;
+  background: #eee;
 }
 
 .terms {
   font-size: 15px;
   margin: 5px 0 0 5px;
 }
-
 .edit_button {
   text-align: center;
   margin-top: 10px;
@@ -572,7 +636,6 @@ td li {
 }
 
 /*Previous comments css */
-
 .comments {
   background-color: white;
   padding: 20px;
@@ -604,13 +667,16 @@ td li {
 }
 
 /* Cite this Paper */
-
 .cite_button {
   cursor: pointer;
 }
 
+ .cite_button_modal .citation {
+  padding:30px;
+}
+
 .paper-top a {
-  color: white;
+  color:white;
 }
 
 .form-group.required label:after {
@@ -619,7 +685,18 @@ td li {
   vertical-align: middle;
 }
 
-.cite_button:hover, .paper-top a:hover, .feedback_button:hover {
+.cite_button:hover, .paper-top a:hover, .feedback_button:hover{
   color: #f3f3f3;
   text-decoration: underline;
+}
+
+/* Request upload page */
+
+.request-wrap {
+  padding: 50px;
+}
+
+.request-wrap .form-group{
+  font-size:25px;
+  padding-bottom:10px;
 }

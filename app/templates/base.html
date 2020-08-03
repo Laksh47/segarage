@@ -22,13 +22,13 @@
     <body>
       <nav class="navbar navbar-static-top navbar-fixed-top">
         <div class="container-fluid">
-          <div class="navbar-header">
+          <div class="navbar-header pull-left">
             <a role="presentation" {%- if request.path == "/index" %} class="active navbar-brand"{% endif %} class="navbar-brand" href="{{ url_for('index') }}">
               <img src="{{ url_for('static',filename='assets/LogoWhite.png') }}"></a>
             </a> 
           </div>  
           
-          <ul class="nav navbar-nav navbar-right">
+          <ul class="nav navbar-nav navbar-right pull-right">
             <li {%- if request.path == "/request_upload" %} class="active nav-item" {% else %} class="nav-item" {% endif %}>
               <a class="nav-link" href="{{ url_for('request_upload') }}">Request Upload</a>
             </li>
@@ -56,7 +56,7 @@
     </div>
   </div>
 
-  <div class="jumbotron jumbotron-fluid">
+  <div class="jumbotron jumbotron-fluid" style="padding-top:20px;">
     {% with messages = get_flashed_messages() %}
     {% if messages %}
     {% for message in messages %}
@@ -73,7 +73,7 @@
     </div>
   </div>
 
-  <footer class="footer" style="text-align:center; padding-bottom:10px;">
+  <footer class="footer" style="text-align:center; padding-bottom:20px;">
     <p>&copy; University of Waterloo | Lakshmanan Arumugam, Vikram N.Subramanian, Yin Lin, Mei Nagappan. | For any queries, please contact <a
       href="mailto:segarage@uwaterloo.ca"> segarage@uwaterloo.ca </a></p>
   </footer>
