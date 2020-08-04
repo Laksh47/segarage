@@ -167,28 +167,25 @@ def papers():
 
   sort_generic = None
   sort_category = None
-  paginated_papers = None
+  paginated_papers = Paper.query
 
   page, per_page, offset = get_page_args(per_page_parameter="PER_PAGE")
+
+  
 
   if request.args.get('sort_generic'):
     sort_generic = request.args.get('sort_generic')
     if sort_generic == "author_name" or sort_generic == "paper_name":
-      paginated_papers = Paper.query.order_by(sort_generic)
+      paginated_papers = paginated_papers.order_by(sort_generic)
     else:
-      paginated_papers = Paper.query.order_by(desc(sort_generic))
+      paginated_papers = paginated_papers.order_by(desc(sort_generic))
 
   if request.args.get('sort_category'):
     sort_category = request.args.get('sort_category')
     if sort_category != 'Any':
-      paginated_papers = Paper.query.filter_by(category=sort_category)
+      paginated_papers = paginated_papers.filter_by(category=sort_category)
 
-  if paginated_papers is None:
-    paginated_papers = Paper.query.limit(per_page).offset(offset)
-  else:
-    paginated_papers = paginated_papers.limit(per_page).offset(offset)
-
-
+  paginated_papers = paginated_papers.limit(per_page).offset(offset)
 
   count = db.session.query(func.count(Paper.id)).scalar()
 
