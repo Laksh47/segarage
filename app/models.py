@@ -102,7 +102,7 @@ class Paper(SearchableMixin, db.Model):
     year = db.Column(db.String(4))
     conference = db.Column(db.String(200))
     category = db.Column(db.String(150))
-    
+    small_description = db.Column(db.Text)
 
     files = db.relationship("File")
     tags = db.relationship("Tag", secondary=paper_tag_association)
