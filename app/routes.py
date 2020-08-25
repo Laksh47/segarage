@@ -31,7 +31,7 @@ def index():
 
   pagination = Pagination(page=page, per_page=per_page, total=count, record_name='papers',format_total=True, format_number=True)
 
-  return render_template('index.html', papers=paginated_papers, icondict=icondict)
+  return render_template('500.html', papers=paginated_papers, icondict=icondict)
 
 
 
