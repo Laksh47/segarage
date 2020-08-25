@@ -72,7 +72,7 @@ icondict = {
   "Apps and app store analysis" : 2,
   "Automated program repair" : 43,
   "Autonomic and (self-)adaptive systems" : 3,
-  "Clones and change" : 38;
+  "Clones and change" : 38,
   "Cloud computing" : 4,
   "Code summarization" : 40,
   "Component-based software engineering" : 5,
