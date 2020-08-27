@@ -20,11 +20,11 @@
 {% endblock %}
 {% block content %}
 <h2>Recent Papers</h2>
-{% for paper in papers |sort(reverse=true, attribute="created_at")%}
+{% for paper in papers)%}
 <div class="specific_paper">
 	<a class="paper_link" href="/papers/{{ paper.id }}">
 		<div class="paper_image">
-			<img class="icon" src="{{ url_for('static',filename='assets/{}.svg'.format(icondict[paper.category])) }}"
+			<img class="icon" src="{{ url_for('static',filename='assets/{}.png'.format(icondict[paper.category])) }}"
 				onerror="this.src='static/assets/36.png'; ">
 		</div>
 		<div class="paper_info">
