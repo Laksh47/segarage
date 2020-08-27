@@ -15,45 +15,67 @@
       <link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='styles/jquery.tagsinput.min.css') }}" />
 
       <meta name="viewport" content = "width=device-width, initial-scale=1.0">
-
+      <link rel="icon" type="image/png" href="{{ url_for('static',filename='assets/IconDefault.png') }}">
     </head>
+
+    <!-- navbar -->
     <body>
-      <div class="container">
-        <div class="header clearfix">
-          <nav class="clearfix">
-            <ul class="nav nav-pills inline-middle">
-              <li role="presentation" {%- if request.path == "/index" %} class="active" {% endif %}><a href="{{ url_for('index') }}">Home</a></li>
-              <li role="presentation" {%- if request.path == "/request_upload" %} class="active" {% endif %}><a href="{{ url_for('request_upload') }}">Request Upload</a></li>
-              <li role="presentation" {%- if request.path == "/papers" %} class="active" {% endif %}><a href="{{ url_for('papers') }}">Papers</a></li>
-            </ul>
-            <div class="searchbar-wrap inline-middle">
+      <nav class="navbar navbar-static-top navbar-fixed-top">
+        <div class="container-fluid">
+          <div class="navbar-header pull-left">
+            <a role="presentation" {%- if request.path == "/index" %} class="active navbar-brand"{% endif %} class="navbar-brand" href="{{ url_for('index') }}">
+              <img src="{{ url_for('static',filename='assets/LogoWhite.png') }}"></a>
+            </a> 
+          </div>  
+          
+          <ul class="nav navbar-nav navbar-right pull-right">
+            <li {%- if request.path == "/request_upload" %} class="active nav-item" {% else %} class="nav-item" {% endif %}>
+              <a class="nav-link" href="{{ url_for('request_upload') }}">Request Upload</a>
+            </li>
+            <li {% if request.path == "/papers" %} class="active nav-item" {% else %} class="nav-item" {% endif %}>
+              <a class="nav-link" href="{{ url_for('papers') }}">Papers</a>
+            </li> 
+          </ul>
+          <div class="top-search">
+            {%- if request.path != "/index" and request.path != "/" %}
+            <div class="searchbar-wrap inline">
               <form action="{{ url_for('search') }}" method="post" name="search">
-                  {{ g.search_form.hidden_tag() }}
-                  {{ g.search_form.q(size=20, class_='form-control searchbar inline-middle') }}
-                  {{ g.search_form.search_button(class_='btn btn-success') }}
+                {{ g.search_form.hidden_tag() }}
+                {{ g.search_form.q(size=20, class_='form-control nav-search', placeholder="Search Here") }}
               </form>
             </div>
-          </nav>
+            {% endif %}
+          </div>
         </div>
+      </nav>
 
-        {% with messages = get_flashed_messages() %}
-        {% if messages %}
-            {% for message in messages %}
-              <div class="alert alert-info">
-                <strong>{{ message }} </strong>
-              </div>
-            {% endfor %}
-        {% endif %}
-        {% endwith %}
-        
-        <!-- <h1>Welcome to SE Garage</h1> -->
-        <div class="jumbotron">
-          {% block content %}{% endblock %}
-        </div>
+  <!-- Page title -->
+  <div class="jumbotron jumbotron-fluid preview">
+    <div class="container">
+      {% block title %}{% endblock %}
+    </div>
+  </div>
 
-        <footer class="footer">
-            <p>&copy; University of Waterloo</p> <p>Lakshmanan Arumugam, Vikram N.Subramanian, Yin Lin, Mei Nagappan.</p> For any queries, please contact <a href="mailto:segarage@uwaterloo.ca"> segarage@uwaterloo.ca </a>
-        </footer>
-      </div>
-    </body>
+  <div class="jumbotron jumbotron-fluid" style="padding-top:20px;">
+    {% with messages = get_flashed_messages() %}
+    {% if messages %}
+    {% for message in messages %}
+    <div class="alert alert-info">
+      <strong>{{ message }} </strong>
+    </div>
+    {% endfor %}
+    {% endif %}
+    {% endwith %}
+
+    <!-- page content -->
+    <div class="container">
+      {% block content %}{% endblock %}
+    </div>
+  </div>
+
+  <footer class="footer" style="text-align:center; padding-bottom:20px;">
+    <p>&copy; University of Waterloo | Lakshmanan Arumugam, Vikram N.Subramanian, Yin Lin, Mei Nagappan. | For any queries, please contact <a
+      href="mailto:segarage@uwaterloo.ca"> segarage@uwaterloo.ca </a></p>
+  </footer>
+</body>
 </html>

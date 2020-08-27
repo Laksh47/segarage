@@ -1,7 +1,9 @@
 {% extends "base.html" %}
 
+{% block title %}
+<h1>SE Garage Upload Tool</h1>
+{% endblock %}
 {% block content %}
-    <h3>SE Garage, upload tool</h3>
     <form action="" id="upload_form" method="post" enctype="multipart/form-data" novalidate>
         {{ form.hidden_tag() }}
         <div class="form-group">

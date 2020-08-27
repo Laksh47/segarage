@@ -1,78 +1,85 @@
 /* Bootstrap styles overridden here */
 
-.nav.nav-pills.pull-left {
-  font-size: 18px;
-  margin: 5px 0;
-}
-
-.nav-pills>li+li {
-  margin-left: 5px;
-}
-
-label {
-  font-size: 20px;
-  font-weight: 400;
-}
-
-form {
-  margin: 0;
-}
-
-.form-control {
-  width: 50%;
-}
-
-textarea.form-control {
-  min-height: 175px;
-}
-
-.form-group.required label:after {
-  content: ' *';
-  color: red;
-  vertical-align: middle;
-}
-
-ul.nav.nav-pills.inline-middle a {
-  background-color: #c1c0c0;
-  color: white;
-}
-
-ul.nav.nav-pills.inline-middle .active a, ul.nav.nav-pills.inline-middle a:hover {
-  background-color: black;
-}
-
-/* Flask paginate CSS */
-.pagination-page-info {
-  padding: .6em;
-  padding-left: 0;
-  width: 40em;
-  margin: .5em;
-  margin-left: 0;
-  font-size: 18px;
-  padding-bottom: 0;
-  margin-bottom: 0;
-}
-
-.pagination-page-info b {
+body {
+  background-color: white;
   color: black;
-  background: #b7c5d6;
-  padding-left: 2px;
-  padding: .1em .25em;
-  font-size: 18px;
 }
 
-.pagination ul {
-  padding: 0;
-  margin: 5px 0;
+/* Navbar */
+.navbar .container-fluid{
+  background-color:black;
 }
 
-.pagination ul li {
+.navbar .navbar-brand {
+    margin: 0;
+    padding: 0;
+}
+
+.navbar .navbar-brand img {
+    padding-left:3rem;
+    height:50px;
+    max-height: 100%;
+}
+
+.navbar .navbar-brand img:hover{
+  opacity:0.75;
+}
+
+.nav-search{
+  width:30%; 
+  margin: auto; 
+  position: absolute; 
+  top: 0; 
+  left: 0; 
+  right: 0; 
+  bottom: 0;
+}
+
+/* Unselected */
+.navbar .nav-item .nav-link{
+  color:white;
+  font-size:16px;
+  padding-right:3rem;
+  padding-left:3rem;
+}
+
+/* Selected and Hover */
+.navbar .nav-item .nav-link:hover,
+.navbar .nav-item.active{
+  background-color:grey;
+}
+
+/* overall css */
+
+.inline-middle {
   display: inline-block;
-  margin: 0px 10px;
-  font-size: 20px;
+  vertical-align: middle;
+  width: 49.5%;
+}
+
+h2 {
+  margin-bottom: 30px;
+}
+th, td {
+  border: 1px solid;
+  padding: 5px;
+}
+td li {
+  list-style: none;
+  margin: 5px;
+}
+
+.wrap-file input[type=file] {
+  display: inline-block;
+  vertical-align: super;
+}
+.wrap-file .custom_dropdown {
+  display: inline-block;
+  vertical-align: super;
 }
 
 /* Plus sign css */
+
 .circle {
   border-radius: 50%;
   width: 25px;
@@ -83,6 +90,7 @@ ul.nav.nav-pills.inline-middle .active a, ul.nav.nav-pills.inline-middle a:hover
   vertical-align: sub;
   cursor: pointer;
 }
+
 .circle::after {
   content: " ";
   position: absolute;
@@ -95,6 +103,7 @@ ul.nav.nav-pills.inline-middle .active a, ul.nav.nav-pills.inline-middle a:hover
   right: 5px;
   z-index: 9;
 }
+
 .circle::before {
   content: " ";
   position: absolute;
@@ -108,56 +117,18 @@ ul.nav.nav-pills.inline-middle .active a, ul.nav.nav-pills.inline-middle a:hover
   z-index: 9;
 }
 
-/* overall css */
-.header {
-  padding: 5px 0px 5px 0px;
-  font-size: 16px;
-}
-
-.footer {
-  margin: 20px 0 50px 0;
-}
-
-.inline-middle {
-  display: inline-block;
-  vertical-align: middle;
-  width: 49.5%;
-}
-
-th, td {
-  border: 1px solid;
-  padding: 5px;
-}
-
-td li {
-  list-style: none;
-  margin: 5px;
-}
-
-.wrap-file input[type=file] {
-  display: inline-block;
-  vertical-align: super;
-}
-
-.wrap-file .custom_dropdown {
-  display: inline-block;
-  vertical-align: super;
-}
-
-.searchbar-wrap {
-  text-align: right;
-}
-
-
 /* AJAX form */
 
+/*
 .feedback_form_wrap {
   margin: 25px auto 0 auto;
   width: 70%;
 }
+*/
 
-.feedback_form_wrap h3 {
+.feedback_button_modal h3 {
   text-align: center;
+  font-size:36px;
 }
 
 .form_submission_msg {
@@ -169,12 +140,11 @@ td li {
 
 .feedback_form {
   background-color: white;
-  padding: 30px;
-  margin: 10px 0px;
+  padding-left:30px;
 }
 
 .feedback_form .form-control {
-  width: 100%;
+  width: 95%;
 }
 
 .loading {
@@ -187,94 +157,6 @@ td li {
 }
 
 /* Paper browsing app store UI */
-.papers {
-  display: flex;
-  flex-flow: row wrap;
-}
-
-.specific_paper {
-  border: 2px solid #d1dae2;
-  border-radius: 5px;
-  padding: 15px;
-  font-size: 20px;
-  cursor: pointer;
-  flex-grow: 1;
-  margin: 7px 7px 7px 0;
-  min-width: 300px;
-  min-height: 75px;
-  background-color: #d1dae2;
-}
-
-.specific_paper div {
-  text-overflow: ellipsis;
-  overflow: hidden;
-  width: 100%;
-}
-
-.specific_paper a.paper_link {
-  color: #545353;
-}
-
-.specific_paper a.paper_link:hover {
-  text-decoration: none;
-}
-
-.specific_paper:hover, .specific_paper:hover a.paper_link {
-  color: #1a1b1a;
-  border-color: black;
-}
-
-/* Table in specific paper page */
-.paper_info {
-  font-size: 20px;
-}
-
-.paper_info h3 {
-  text-align: center;
-  margin-bottom: 25px;
-}
-
-.terms {
-  font-size: 15px;
-  margin: 5px 0 0 5px;
-}
-
-.edit_button {
-  text-align: center;
-  margin-top: 10px;
-  margin-bottom: 50px;
-}
-
-.paper_info table {
-  table-layout: fixed;
-  width: 100%;
-}
-
-.paper_info td {
-  text-overflow: ellipsis;
-  overflow: hidden;
-}
-
-td.preserve-line-breaks {
-  white-space: pre-wrap;
-}
-
-.paper_info table, .paper_info th, .paper_info td {
-  border: 1px solid #ddd;
-  border-radius: 5px;
-  padding: 15px;
-  font-size: 18px;
-  line-height: 28px;
-}
-
-.paper_info table ul {
-  padding: 0;
-  margin: 0;
-}
-
-.paper_info table {
-  margin: 0px auto;
-}
 
 /* Modal CSS */
 
@@ -294,6 +176,49 @@ td.preserve-line-breaks {
   border-radius: 4px;
 }
 
+.sort-modal {
+  color: #000;
+  display: grid;
+  grid-template-columns: 33.3333% 33.3333% 33.3333%;
+  text-align: left;
+}
+
+@media (max-width: 1440px) {
+  .sort-modal {
+    color: #000;
+    display: grid;
+    grid-template-columns: 50% 50%;
+    text-align: left;
+  }
+}
+
+@media (max-width: 1000px) {
+  .sort-modal {
+    color: #000;
+    display: grid;
+    grid-template-columns: 100%;
+    text-align: left;
+  }
+}
+
+.column {
+  margin-top: 17px;
+}
+
+.sort-modal input {
+  margin: 4px;
+}
+
+.sort-modal label {
+  margin-top: 3px;
+  margin-bottom: 2px;
+}
+
+.sort-modal div {
+  display: inline;
+  position: relative;
+}
+
 .modal_msg {
   margin-bottom: 15px;
   font-size: 25px;
@@ -302,6 +227,7 @@ td.preserve-line-breaks {
 .modal_text p {
   margin-bottom: 3px;
 }
+
 .modal_text p.tab {
   margin-left: 50px;
 }
@@ -316,35 +242,40 @@ td.preserve-line-breaks {
 }
 
 /* The Modal (background) */
+
 .modal {
+
   display: none; /* Hidden by default */
   position: fixed; /* Stay in place */
   z-index: 1; /* Sit on top */
-  padding-top: 40px; /* Location of the box */
+  padding-top: 80px; /* Location of the box */
   left: 0;
   top: 0;
-  width: 100%; /* Full width */
-  height: 100%; /* Full height */
-  overflow: auto; /* Enable scroll if needed */
-  background-color: rgb(0,0,0); /* Fallback color */
-  background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+  width: 100%;
+  /* Full width */
+  height: 100%;
+  /* Full height */
+  overflow: auto;
+  /* Enable scroll if needed */
+  background-color: rgb(0, 0, 0);
+  /* Fallback color */
+  background-color: rgba(0, 0, 0, 0.4);
+  /* Black w/ opacity */
 }
 
 /* Modal Content */
+
 .modal_content {
   background-color: #fefefe;
   margin: auto;
   padding: 20px;
   border: 1px solid #888;
   width: 80%;
-}
-
-.modal_btn_useragreement {
-  text-decoration: underline;
-  cursor: pointer;
+  overflow: hidden;
 }
 
 /* The Close Button */
+
 .close {
   color: #000;
   float: right;
@@ -354,15 +285,14 @@ td.preserve-line-breaks {
   margin-top: 3px;
 }
 
-.close:hover,
-.close:focus {
+.close:hover, .close:focus {
   color: #000;
   text-decoration: none;
   cursor: pointer;
 }
 
-
 /* Counts CSS */
+
 .counts {
   text-align: right;
 }
@@ -370,14 +300,322 @@ td.preserve-line-breaks {
 .custom_column {
   display: inline-block;
   text-align: center;
-  margin: 0px 20px;
+  margin: 0 20px;
 }
 
 .custom_column .count {
   font-size: 25px;
 }
 
-/* Comments */
+.or {
+  font-size: 20px;
+  color: #040404;
+  margin-bottom: 10px;
+}
+
+/* Mobile counts */
+.paper_info .counts {
+  text-align: center;
+  visibility: hidden;
+  display: none;
+}
+
+@media (max-width: 770px) {
+  /* Mobile css for navbar */
+  .navbar .navbar-brand img {
+    padding-left:5px;
+    padding-top:5px;
+    height:50px;
+    max-height: 100%;
+  }
+
+  .navbar-nav>li, .navbar-nav{
+    float: left !important;
+  }
+  
+  .navbar-nav.navbar-right:last-child{
+    margin-right: -15px !important;
+  }
+  
+  .navbar-right{
+    float: right !important;
+  }
+
+  .navbar .nav-item .nav-link{
+    font-size:14px;
+    padding-left:1.5rem;
+    padding-right:1.5rem;
+  }
+}
+
+/* Mobile CSS */
+
+@media (max-width: 45em) {
+  .or {
+    font-size: 16px;
+  }
+
+  .top-search {
+    visibility: hidden;
+    display: none;
+  }
+
+  .inline-middle {
+    width: auto;
+    display: block;
+  }
+
+  .inline-middle {
+    width: auto;
+    display: block;
+    text-align: center;
+  }
+  
+  .searchbar.inline-middle {
+    display: inline-block;
+    width: 60%;
+  }
+  .form-control {
+    width: 90%;
+  }
+
+  .footer {
+    text-align: center;
+  } 
+    
+  .paper_info .counts {
+    text-align: center;
+    visibility: visible;
+    display: inline;
+  }
+  .custom_column {
+    margin: 0 20px 10px 20px;
+  }
+  /*
+  tr> td:first-child {
+    display: none;
+  }  
+
+  td {
+    text-align: left;
+  }
+  */
+
+  /*
+  .feedback_form_wrap {
+    width: 90%;
+  }
+  */
+}
+
+/* .specific_paper:hover {
+  color: white;
+  border: 3px solid #f4f5f7;
+  font-size: 22px;
+} */
+
+/* .specific_paper:hover {
+  color: white;
+  border: 3px solid #f4f5f7;
+  font-size: 22px;
+} */
+
+/* Jumbotron/title block */
+.preview {
+  background-color: #1f2283;
+  color: white;
+  padding-top: 100px;
+  padding-bottom: 60px;
+  margin: 0;
+  text-align: center;
+}
+
+
+/* Paper browsing app store UI */
+.papers {
+  display: flex;
+  flex-flow: row wrap;
+}
+
+/* Sorting "navbar" */
+
+.sort_nav {
+  margin-top: 40px;
+  /* display: flex; */
+  text-align: center;
+}
+
+.sort_form {
+  height: 48px;
+  margin: 5px;
+  float: right;
+  display: flex;
+  align-items: center;
+}
+
+.sort_generic {
+  height: 34px;
+  margin-left: 10px;
+}
+
+/* Flask paginate CSS */
+
+.pagination {
+  margin: 5px;
+  float: left;
+}
+
+.pagination ul {
+  padding: 0;
+  margin: 5px 0;
+}
+
+.pagination ul li {
+  display: inline-block;
+  margin: 0px 10px;
+  font-size: 20px;
+}
+
+.pagination ul li a {
+  color: #fff;
+  cursor: pointer;
+}
+
+/* Design 2 */
+.specific_paper {
+  border: 2px solid #eeeeee;
+  border-radius: 0;
+  font-size: 20px;
+  cursor: pointer;
+  flex-grow: 1;
+  margin: 7px 7px 7px 0;
+  min-width: 300px;
+  min-height: 75px;
+  background-color: #eeeeee;
+  position: relative;
+  z-index: 0;
+}
+
+.specific_paper .paper_image {
+  float: left;
+  background-color: #1f2283;
+  color: #fff;
+  padding: 10px;
+  height: 120px;
+  width: 120px;
+  position: relative;
+}
+  
+.specific_paper img {
+  height: 100px;
+  margin: auto; 
+  position: absolute; 
+  top: 0; 
+  left: 0; 
+  right: 0; 
+  bottom: 0;
+}
+
+.paper_info {
+  margin-left: 35px;
+  margin-top: 25px;
+}
+.paper_info .top {
+  margin-left:98px;
+  padding: 10px;
+  background-color: #ddd;
+  /* border: 2px solid #e0e0e0; */
+  border-bottom: 1px;
+}
+
+.paper_info .title {
+  font-weight: bold;
+}
+  
+.paper_info .name_year {
+  color: #626262;
+}
+
+.paper_info .bot {
+  padding: 10px 0 10px 10px;
+  color: #000;
+}
+
+/* Text color and hovering */
+
+.paper_info:hover .top, .paper_info:hover .bot{
+  color: #1a1b1a;
+  border-color: #030959;
+  text-decoration: none;
+}
+
+.specific_paper a.paper_link {
+  color: #414142;
+}
+
+/* Table in specific paper page */
+
+/* Styles elements in the preview jumbotron */
+.paper-top {
+  text-align:left;
+}
+.paper-top .media-object {
+  width:110px; 
+  height:110px; 
+  margin-right:20px;
+}
+
+.paper-top .col-lg-3 {
+  margin-top:20px;
+  font-size:25px;
+}
+
+.paper-top .col-lg-3 img{
+  padding-right:10px;
+  height:45px;
+  width:45px
+}
+
+.paper-top .media .info{
+  font-size:20px;
+}
+
+.paper-top .media-left div {
+  width:320px;
+}
+
+.paper-top h3{
+  font-size:33px;
+}
+
+/* Styles elements outside the preview jumbotron */
+.main-body h2, .sidebar h2 {
+  margin-top:0;
+  padding-top: 20px;
+  padding-bottom: 20px;
+  border-bottom: 1px solid #c4c4c4;
+}
+
+.main-body {
+  padding-right: 7rem;
+}
+
+.paper_info {
+  font-size: 20px;
+  background: #eee;
+}
+
+.terms {
+  font-size: 15px;
+  margin: 5px 0 0 5px;
+}
+.edit_button {
+  text-align: center;
+  margin-top: 10px;
+  margin-bottom: 50px;
+}
+
+/*Previous comments css */
 .comments {
   background-color: white;
   padding: 20px;
@@ -408,115 +646,37 @@ td.preserve-line-breaks {
   width: 29%;
 }
 
-/*.scrollable {
-  overflow-y: scroll;
-  height: 400px;
-}*/
-
-.or {
-  font-size: 20px;
-  color: #040404;
-  margin-bottom: 10px;
+/* Cite this Paper */
+.cite_button {
+  cursor: pointer;
 }
 
-
-/* Mobile CSS */
-@media (max-width: 45em) {
-
-  .or {
-    font-size: 16px;
-  }
-
-  .inline-middle {
-    width: auto;
-    display: block;
-    text-align: center;
-  }
-
-  .nav-pills>li, .nav-pills>li+li {
-    float: none;
-    width: 95%;
-    text-align: left;
-    margin: 10px auto;
-  }
-
-  .searchbar.inline-middle {
-    display: inline-block;
-    width: 60%;
-  }
-
-  .form-control {
-    width: 90%;
-  }
-
-  .specific_paper {
-    min-width: 275px;
-  }
-
-  .footer {
-    text-align: center;
-  }
-
-  .counts {
-    text-align: center;
-  }
-
-  .custom_column {
-    margin: 0px 20px 10px 20px;
-  }
-
-  /*
-  tr> td:first-child {
-    display: none;
-  }
-  */
-
-  td {
-    text-align: left;
-  }
-
-  .feedback_form_wrap {
-    width: 90%;
-  }
-
+ .cite_button_modal .citation {
+  padding:30px;
 }
 
-
-/* New Theme tryout
-
-body {
-  background-color: black;
-  color: white;
+.paper-top a {
+  color:white;
 }
 
-.jumbotron {
-  background-color: #3c3939;
+.form-group.required label:after {
+  content: ' *';
+  color: red;
+  vertical-align: middle;
 }
 
-ul.nav.nav-pills.inline-middle a {
-  background-color: #3c3939;
+.cite_button:hover, .paper-top a:hover, .feedback_button:hover{
+  color: #f3f3f3;
+  text-decoration: underline;
 }
 
-ul.nav.nav-pills.inline-middle .active a, ul.nav.nav-pills.inline-middle a:hover {
-  background-color: #7b2929;
+/* Request upload page */
+
+.request-wrap {
+  padding: 50px;
 }
 
-.specific_paper {
-  background-color: #3c3939;
+.request-wrap .form-group{
+  font-size:25px;
+  padding-bottom:10px;
 }
-
-.specific_paper a.paper_link {
-  color: #dcd9d9;
-  border-color: #f4f5f7;
-}
-
-.specific_paper:hover {
-  color: white;
-  border: 3px solid #f4f5f7;
-  font-size: 22px;
-}
-
-.specific_paper:hover a.paper_link {
-  color: white;
-}
-*/
