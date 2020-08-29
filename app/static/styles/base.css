@@ -486,7 +486,6 @@ td li {
   border: 2px solid #eeeeee;
   border-radius: 0;
   font-size: 20px;
-  cursor: pointer;
   flex-grow: 1;
   margin: 7px 7px 7px 0;
   min-width: 300px;
@@ -504,6 +503,7 @@ td li {
   height: 120px;
   width: 120px;
   position: relative;
+  cursor: pointer;
 }
   
 .specific_paper img {
@@ -519,6 +519,8 @@ td li {
 .paper_info {
   margin-left: 35px;
   margin-top: 25px;
+  text-decoration: none;
+  cursor: pointer;
 }
 .paper_info .top {
   margin-left:98px;
@@ -526,9 +528,10 @@ td li {
   background-color: #ddd;
   /* border: 2px solid #e0e0e0; */
   border-bottom: 1px;
+  min-height: 104px;
 }
 
-.paper_info .title {
+.paper_info .title, .paper_info .title:hover {
   font-weight: bold;
 }
   
@@ -539,14 +542,15 @@ td li {
 .paper_info .bot {
   padding: 10px 0 10px 10px;
   color: #000;
+  background-color: #ddd;
 }
 
 /* Text color and hovering */
 
-.paper_info:hover .top, .paper_info:hover .bot{
+.paper_info:hover .top, .paper_info:hover .bot {
   color: #1a1b1a;
   border-color: #030959;
-  text-decoration: none;
+  text-decoration: underline;
 }
 
 .specific_paper a.paper_link {
