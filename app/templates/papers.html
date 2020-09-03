@@ -79,8 +79,8 @@
 	</script>
 
 	<div class="col-lg-12" id="specific_papers">
-		{% for paper in papers %}
-		<div class="specific_paper {{paper.category}}">
+		{% for paper in papers%}
+		<div class="specific_paper">
 			<a class="paper_link" href="/papers/{{ paper.id }}">
 				<div class="paper_image">
 					<img class="icon"
@@ -94,10 +94,14 @@
 						</div>
 						<div class="name_year">
 							<div>
-								{{ paper.author_name }}
+								{{ paper.author_name }} | {{ paper.year }}
 							</div>
-							<div>
-								{{ paper.year }}
+							<div class="tags">
+								{% for tag in paper.tags %}
+								<a href="/search?q={{tag.tagname}}">
+									{{ tag.tagname }}
+								</a>
+								{% endfor %}
 							</div>
 						</div>
 					</div>
@@ -111,4 +115,3 @@
 	</div>
 </div>
 {% endblock %}
-

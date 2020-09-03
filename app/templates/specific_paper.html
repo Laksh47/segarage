@@ -6,8 +6,12 @@
   <div class="row">
     <div class="col-lg-9">
       <div class="media">
-        <div class="media-left media-middle"><img class="media-object" src="{{ url_for('static',filename='assets/{}.svg'.format(icondict[paper.category])) }}" alt="{{ url_for('static',filename='assets/36.png') }}"></div>
-        <div class="media-body"><h3 class="media-header">{{ paper.paper_name }}</h3></div>
+        <div class="media-left media-middle"><img class="media-object"
+            src="{{ url_for('static',filename='assets/{}.svg'.format(icondict[paper.category])) }}"
+            alt="{{ url_for('static',filename='assets/36.png') }}"></div>
+        <div class="media-body">
+          <h3 class="media-header">{{ paper.paper_name }}</h3>
+        </div>
       </div>
       <div class="media">
         <div class="media-left info">
@@ -41,19 +45,20 @@
                 Upvotes
               </div>
             </div>
-          </div> 
+          </div>
         </div>
       </div>
     </div>
     <div class="col-lg-3">
       <div><a href="{{ url_for('papers') }}">
-        <img src="{{ url_for('static', filename='assets/search.svg') }}">Back to Search
-      </a></div>
+          <img src="{{ url_for('static', filename='assets/search.svg') }}">Back to Search
+        </a></div>
       <div>
         <span class="cite_button"><img src="{{ url_for('static', filename='assets/cite.svg') }}">Cite this Paper </span>
       </div>
       <div>
-        <span class="feedback_button"><img src="{{ url_for('static', filename='assets/feedback.svg') }}">Give Feedback </span>
+        <span class="feedback_button"><img src="{{ url_for('static', filename='assets/feedback.svg') }}">Give Feedback
+        </span>
       </div>
     </div>
   </div>
@@ -93,8 +98,8 @@
         Upvotes
       </div>
     </div>
-  </div> 
-  
+  </div>
+
   <div class="container-fluid">
     <div class="row">
       <div class="col-lg-8 main-body">
@@ -107,22 +112,26 @@
         <div>Tool: {{ paper.tool_name }}</div>
         <div>PDF: {% if paper.link_to_pdf == 'Not provided' or paper.link_to_pdf == None %}
           <a>Not provided by authors</a>{% else %}
-          <a href="{{ paper.link_to_pdf | check_protocol_prefix }}" target="_blank">{{ paper.link_to_pdf | check_protocol_prefix }}</a>
+          <a href="{{ paper.link_to_pdf | check_protocol_prefix }}"
+            target="_blank">{{ paper.link_to_pdf | check_protocol_prefix }}</a>
           {% endif %}
         </div>
         <div>Tool Link: {% if paper.link_to_tool_webpage == 'Not provided' or paper.link_to_tool_webpage == None %}
           <a>Not provided by authors</a>{% else %}
-          <a href="{{ paper.link_to_tool_webpage | check_protocol_prefix }}" target="_blank">{{ paper.link_to_tool_webpage | check_protocol_prefix }}</a>
+          <a href="{{ paper.link_to_tool_webpage | check_protocol_prefix }}"
+            target="_blank">{{ paper.link_to_tool_webpage | check_protocol_prefix }}</a>
           {% endif %}
         </div>
         <div>Demo: {% if paper.link_to_demo == 'Not provided' or paper.link_to_demo == None %}
           <a>Not provided by authors</a>{% else %}
-          <a href="{{ paper.link_to_demo | check_protocol_prefix }}" target="_blank">{{ paper.link_to_demo | check_protocol_prefix }}</a>
+          <a href="{{ paper.link_to_demo | check_protocol_prefix }}"
+            target="_blank">{{ paper.link_to_demo | check_protocol_prefix }}</a>
           {% endif %}
         </div>
         <div>Archive: {% if paper.link_to_archive == 'Not provided' or paper.link_to_archive == None %}
           <a>Not provided by authors</a> {% else %}
-          <a href="{{paper.link_to_archive | check_protocol_prefix }}" target="_blank">{{ paper.link_to_archive | check_protocol_prefix }}</a>
+          <a href="{{paper.link_to_archive | check_protocol_prefix }}"
+            target="_blank">{{ paper.link_to_archive | check_protocol_prefix }}</a>
           {% endif %}
         </div>
         <!-- Seems to display all artifacts on only one paper
@@ -132,10 +141,15 @@
         </div>
         -->
         <div>Categories: <a href="/search?q={{paper.category}}">
-          {{ paper.category }}
-        </a></div>
+            {{ paper.category }}
+          </a></div>
         <div>Conference: {{ paper.year }}, {{ paper.conference }}</div>
-        <div>Tags: {{ tags }}</div>
+        <div>Tags:
+          {% for tag in paper.tags %}
+          <a href="/search?q={{tag.tagname}}">
+            {{ tag.tagname }}
+          </a>
+          {% endfor %}</div>
       </div>
     </div>
   </div>
@@ -163,7 +177,7 @@
       </div>
     </div>
   </div>
-</div>  
+</div>
 
 <!-- The Edit Modal -->
 <div class="modal edit_button_modal">
@@ -181,7 +195,7 @@
       </div>
     </form>
   </div>
-</div>  
+</div>
 
 <!-- The Modal -->
 <div class="modal useragreement_modal" id="useragreement_modal">
@@ -289,13 +303,13 @@
           {% endfor %}
         </div>
         <div class="form-group">{{ form.submit(class_='btn btn-success') }}</div>
-      
+
         <div class="loading">
           <img src="{{ url_for('static',filename='assets/roll.gif') }}" />
         </div>
       </form>
     </div>
-  </div>  
+  </div>
 </div>
 
 <script>
@@ -392,4 +406,3 @@
 </script>
 
 {% endblock %}
-

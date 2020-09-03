@@ -4,7 +4,7 @@
 <div class="text-center">
 	<h1>SE Tool Garage</h1>
 	<p>Find the software engineering tools you need</p>
-	
+
 	<div class="searchbar-wrap inline">
 		<form action="{{ url_for('search') }}" method="post" name="search">
 			{{ g.search_form.hidden_tag() }}
@@ -20,11 +20,11 @@
 {% endblock %}
 {% block content %}
 <h2>Recent Papers</h2>
-{% for paper in papers |sort(reverse=true, attribute="created_at")%}
+{% for paper in papers%}
 <div class="specific_paper">
 	<a class="paper_link" href="/papers/{{ paper.id }}">
 		<div class="paper_image">
-			<img class="icon" src="{{ url_for('static',filename='assets/{}.svg'.format(icondict[paper.category])) }}"
+			<img class="icon" src="{{ url_for('static',filename='assets/{}.png'.format(icondict[paper.category])) }}"
 				onerror="this.src='static/assets/36.png'; ">
 		</div>
 		<div class="paper_info">
@@ -34,10 +34,14 @@
 				</div>
 				<div class="name_year">
 					<div>
-						{{ paper.author_name }}
+						{{ paper.author_name }} | {{ paper.year }}
 					</div>
-					<div>
-						{{ paper.year }}
+					<div class="tags">
+						{% for tag in paper.tags %}
+						<a href="/search?q={{tag.tagname}}">
+							{{ tag.tagname }}
+						</a>
+						{% endfor %}
 					</div>
 				</div>
 			</div>
@@ -118,4 +122,3 @@
 	});
 </script>
 {% endblock %}
-
