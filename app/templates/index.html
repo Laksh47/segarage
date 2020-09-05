@@ -27,27 +27,27 @@
 			<img class="icon" src="{{ url_for('static',filename='assets/{}.png'.format(icondict[paper.category])) }}"
 				onerror="this.src='static/assets/36.png'; ">
 		</div>
-		<div class="paper_info">
+		<div class="list_paper_info">
 			<div class="top">
 				<div class="title">
 					{{ paper.paper_name }}
 				</div>
 				<div class="name_year">
-					<div>
-						{{ paper.author_name }} | {{ paper.year }}
-					</div>
-					<div class="tags">
-						{% for tag in paper.tags %}
-						<a href="/search?q={{tag.tagname}}">
-							{{ tag.tagname }}
-						</a>
-						{% endfor %}
-					</div>
+					{{ paper.author_name }} | {{ paper.year }}
+				</div>
+				<div>
+					{% for tag in paper.tags %}
+					<a class="tags" href="/search?q={{tag.tagname}}">
+						{{ tag.tagname }}
+					</a>
+					{% endfor %}
 				</div>
 			</div>
-			<div class="bot">
-				{{ paper.small_description }}
-			</div>
+			<a class="paper_link" href="/papers/{{ paper.id }}">
+				<div class="bot">
+					{{ paper.small_description }}
+				</div>
+			</a>
 		</div>
 	</a>
 </div>
