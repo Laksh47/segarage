@@ -146,9 +146,9 @@
         <div>Conference: {{ paper.year }}, {{ paper.conference }}</div>
         <div>Tags:
           {% for tag in paper.tags %}
-          {{paper.tags.length.type}}
+          {{tagcommas(tag, paper.tags)}}
           <a href="/search?q={{tag.tagname}}">
-            {{ tag.tagname }}  
+            {{ tag.tagname }}
           </a>
           {% endfor %}</div>
       </div>
