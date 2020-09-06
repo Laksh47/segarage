@@ -25,12 +25,12 @@ def before_request():
 def index():
   page, per_page, offset = get_page_args(per_page_parameter="PER_PAGE")
 
-  paginated_papers = Paper.query.limit(per_page).offset(offset)
+  paginated_papers = Paper.query.order_by(desc("created_at")).limit(per_page).offset(offset)
 
   count = db.session.query(func.count(Paper.id)).scalar()
 
   pagination = Pagination(page=page, per_page=per_page, total=count, record_name='papers',format_total=True, format_number=True)
-
+  
   return render_template('index.html', papers=paginated_papers, icondict=icondict)
 
 

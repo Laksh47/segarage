@@ -11,6 +11,13 @@ import re
 from .constants import CATEGORY_LIST, ALLOWED_EXTENSIONS_FILES, FILETYPE_CHOICES
 
 
+def tagcommas(tag, tags):
+  if not tag == tags[0]:
+    return ","
+  return ""
+app.jinja_env.globals.update(tagcommas=tagcommas)
+
+
 def allowed_files(filename):
   """
   Checks if the file extension matches the list of allowed extensions

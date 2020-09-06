@@ -8,7 +8,7 @@
       <div class="media">
         <div class="media-left media-middle"><img class="media-object"
             src="{{ url_for('static',filename='assets/{}.svg'.format(icondict[paper.category])) }}"
-            alt="{{ url_for('static',filename='assets/36.png') }}"></div>
+            onerror="this.src='{{ url_for('static',filename='assets/36.png') }}'; "></div>
         <div class="media-body">
           <h3 class="media-header">{{ paper.paper_name }}</h3>
         </div>
@@ -146,6 +146,7 @@
         <div>Conference: {{ paper.year }}, {{ paper.conference }}</div>
         <div>Tags:
           {% for tag in paper.tags %}
+          {{tagcommas(tag, paper.tags)}}
           <a href="/search?q={{tag.tagname}}">
             {{ tag.tagname }}
           </a>
